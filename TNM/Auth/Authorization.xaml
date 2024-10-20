@@ -1,0 +1,25 @@
+﻿<Window x:Class="TNM.Auth.Authorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:TNM.Auth"
+        mc:Ignorable="d"
+        Height="500" Width="450" Background="Black" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="HeaderRow" Height="*"/>
+            <RowDefinition Name="BodyRow" Height="60"/>
+            <RowDefinition Name="BodyRow1" Height="70"/>
+            <RowDefinition Name="BodyRow2" Height="70"/>
+            <RowDefinition Name="FooterRow" Height="*"/>
+        </Grid.RowDefinitions>
+        <ui:TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="TNM" FontSize="25" Foreground="#AD0057" FontWeight="Bold"/>
+        <ui:TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="20" Foreground="#9F9F9F"/>
+        <ui:TextBox Grid.Row="2" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="25"/>
+        <ui:PasswordBox Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="25"/>
+        <ui:Button Grid.Row="4" HorizontalAlignment="Center" Width="250" Height="70" VerticalAlignment="Center" Content="Войти" Foreground="White"/>
+        <!--<ui:TextBox Grid.Row="0" >Логин</ui:TextBox>-->
+    </Grid>
+</Window>
