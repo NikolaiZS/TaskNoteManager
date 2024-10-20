@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
 namespace TNM
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+    public class ViewModel {
+        public ISeries[] Series { get; set; }  
+            = new ISeries[] { 
+                new LineSeries<double> {
+                    Values = new double[] { 1, 2, 3, 4, 5, 6 },
+                    Fill = null
+            }
+        };
     }
 }
