@@ -127,8 +127,50 @@
     <Compile Include="Auth\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ControlExample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GalleryNavigationPresenter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PageControlDocumentation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TermsOfUseContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TypographyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Navigation\NavigationViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ControlExample.xaml.cs">
+      <DependentUpon>ControlExample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GalleryNavigationPresenter.xaml.cs">
+      <DependentUpon>GalleryNavigationPresenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PageControlDocumentation.xaml.cs">
+      <DependentUpon>PageControlDocumentation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TermsOfUseContentDialog.xaml.cs">
+      <DependentUpon>TermsOfUseContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TypographyControl.xaml.cs">
+      <DependentUpon>TypographyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Navigation\NavigationViewPage.xaml.cs">
+      <DependentUpon>NavigationViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
