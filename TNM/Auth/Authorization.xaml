@@ -6,27 +6,24 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:TNM.Auth"
         mc:Ignorable="d"
-        Height="500"
+        Height="400"
         Width="400"
         Background="Black"
         WindowStartupLocation="CenterScreen" 
         Topmost="True" 
         WindowStyle="None"
-        MinHeight="500"
+        MinHeight="410"
         >
-    <Grid>
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Name="HeaderRow" Height="35"/>
-            <RowDefinition Name="BodyRow" Height="*"/>
-            <RowDefinition Name="BodyRow1" Height="60"/>
-            <RowDefinition Name="BodyRow2" Height="70"/>
-            <RowDefinition Name="BodyRow3" Height="70"/>
-            <RowDefinition Name="FooterRow" Height="*"/>
+            <RowDefinition Name="BodyRow" Height="0.08*"/>
+            <RowDefinition Name="BodyRow1" Height="0.05*"/>
+            <RowDefinition Name="BodyRow2" Height="0.05*"/>
+            <RowDefinition Name="BodyRow3" Height="0.05*"/>
+            <RowDefinition Name="FooterRow" Height="0.12*"/>
         </Grid.RowDefinitions>
-        <!-- Title Bar Row -->
         <DockPanel Background="#333333" Height="35" MouseDown="TitleBar_MouseDown">
-            <ui:TextBlock Text="TNM" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0"/>
-            <!-- Window Control Buttons -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <ui:Button Width="40" Height="30" Click="Minimize_Click">
                     <ui:SymbolIcon Symbol="ArrowMinimize20"/>
@@ -40,9 +37,7 @@
             </StackPanel>
         </DockPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <!-- Text Block for "TNM" -->
             <ui:TextBlock Foreground="MediumVioletRed" Text="TNM" FontSize="48" FontWeight="Bold"/>
-            <!-- Icon next to the TextBlock with scaling applied using Viewbox -->
             <Viewbox Width="50" Height="50" Margin="0,6,0,0">
                 <ui:SymbolIcon Symbol="CalendarRtl48" Filled="True">
                     <ui:SymbolIcon.Foreground>
@@ -54,25 +49,18 @@
                 </ui:SymbolIcon>
             </Viewbox>
         </StackPanel>
-
         <ui:TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="15" Foreground="#a59b99"/>
         <ui:TextBox Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите логин               "/>
         <ui:PasswordBox Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите пароль     "/>
         <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,10,0,0">
             <Viewbox>
-                <ui:TextBlock>
-                    Войти
-                </ui:TextBlock>
+                <ui:TextBlock Text="Войти"/>
             </Viewbox>
         </ui:Button>
         <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,72,0,0">
             <Viewbox>
-                <ui:TextBlock>
-                    Регистрация
-                </ui:TextBlock>
+                <ui:TextBlock Text="Регистрация"/>
             </Viewbox>
         </ui:Button>
-        <!--<ui:NavigationView Grid.Row="1" x:Name="RootNavigation"></ui:NavigationView>-->
-        <!--<ui:TextBox Grid.Row="0" >Логин</ui:TextBox>-->
     </Grid>
 </ui:FluentWindow>
