@@ -73,12 +73,50 @@ namespace TNM.Auth
             return new ImageBrush(bitmap);
         }
 
-        
+        public bool AuthenticateUser(string username, string password)
+        {
+            using (var context = new TaskNoteManagementDBEntities())
+            {
+                // Используем синхронный метод SingleOrDefault
+                var user = context.Users.SingleOrDefault(u => u.Username == username);
 
+                if (user == null)
+                    return false;
+
+                // Хешируем пароль для проверки
+                string hashedPassword = HashPassword(password);
+                return hashedPassword == user.PasswordHash;
+            }
+        }
+
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                    builder.Append(b.ToString("x2"));
+                return builder.ToString();
+            }
+        }
 
         private void enterLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+            string username = loginBox.Text;
+            string password = passwordBox.Password;
+
+            bool isAuthenticated = AuthenticateUser(username, password);
+
+            if (isAuthenticated)
+            {
+                MessageBox.Show("Успешный вход");
+                // Логика после успешного входа
+            }
+            else
+            {
+                MessageBox.Show("Неверное имя пользователя или пароль");
+            }
         }
 
         private void goToReg_Click(object sender, RoutedEventArgs e)

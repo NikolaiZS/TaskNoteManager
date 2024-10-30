@@ -85,7 +85,7 @@ namespace TNM.Auth
         }
 
         // Метод для регистрации нового пользователя
-        public void RegisterUser(string username, string password)
+        public void RegisterUser(string username, string password,string email)
         {
             using (var context = new TaskNoteManagementDBEntities())
             {
@@ -101,6 +101,7 @@ namespace TNM.Auth
                 {
                     Username = username,
                     PasswordHash = HashPassword(password), // Хэшируем пароль
+                    Email = email,
                     Role = "User", // Назначаем роль по умолчанию
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
@@ -129,10 +130,13 @@ namespace TNM.Auth
             }
         }
 
-        private void registrationButton_Click(object sender, RoutedEventArgs e)
+        
+
+        private void Reg_Click(object sender, RoutedEventArgs e)
         {
             string username = loginBox.Text;
-            string password = passwordBox.Password; // если это PasswordBox
+            string password = passwordBox.Password;
+            string email = emailBox.Text;
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -140,7 +144,7 @@ namespace TNM.Auth
                 return;
             }
 
-            RegisterUser(username, password);
+            RegisterUser(username, password,email);
         }
     }
 }
