@@ -1,4 +1,4 @@
-﻿<Window x:Class="TNM.Auth.Authorization"
+﻿<ui:FluentWindow x:Class="TNM.Auth.Authorization"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,20 +9,56 @@
         Height="500"
         Width="400"
         Background="Black"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" 
+        Topmost="True" WindowStyle="None"
+        >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Name="HeaderRow" Height="*"/>
-            <RowDefinition Name="BodyRow" Height="60"/>
-            <RowDefinition Name="BodyRow1" Height="70"/>
+            <RowDefinition Name="HeaderRow" Height="35"/>
+            <RowDefinition Name="BodyRow" Height="*"/>
+            <RowDefinition Name="BodyRow1" Height="60"/>
             <RowDefinition Name="BodyRow2" Height="70"/>
+            <RowDefinition Name="BodyRow3" Height="70"/>
             <RowDefinition Name="FooterRow" Height="*"/>
         </Grid.RowDefinitions>
-        <ui:TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="TNM" FontSize="25" Foreground="#AD0057" FontWeight="Bold"/>
-        <ui:TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="20" Foreground="#FFFFFF"/>
-        <ui:TextBox Grid.Row="2" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите логин               "/>
-        <ui:PasswordBox Grid.Row="3" HorizontalAlignment="Center" Width="200" Height="40" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите пароль     "/>
-        <ui:Button Grid.Row="4" HorizontalAlignment="Center" Width="250" Height="70" VerticalAlignment="Center" Content="Войти" Foreground="White" FontWeight="Bold"/>
+        <!-- Title Bar Row -->
+        <DockPanel Background="#333333" Height="35" MouseDown="TitleBar_MouseDown">
+            <ui:TextBlock Text="TNM" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0"/>
+            <!-- Window Control Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <ui:Button Width="40" Height="30" Click="Minimize_Click">
+                    <ui:SymbolIcon Symbol="ArrowMinimize20"/>
+                </ui:Button>
+                <ui:Button Width="40" Height="30" Click="Maximize_Click" Margin="1,0,0,0">
+                    <ui:SymbolIcon Symbol="FullScreenMaximize20"/>
+                </ui:Button>
+                <ui:Button Foreground="red" Width="40" Height="30" Click="Close_Click" Margin="1,0,1,0">
+                    <ui:SymbolIcon Symbol="ArrowExit20"/>
+                </ui:Button>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- Text Block for "TNM" -->
+            <ui:TextBlock Foreground="MediumVioletRed" Text="TNM" FontSize="48" FontWeight="Bold"/>
+
+            <!-- Icon next to the TextBlock with scaling applied using Viewbox -->
+            <Viewbox Width="50" Height="50" Margin="0,6,0,0">
+                <ui:SymbolIcon Symbol="CalendarRtl48" Filled="True">
+                    <ui:SymbolIcon.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#c71585" Offset="0.0"/>
+                            <GradientStop Color="#3C00FF" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </ui:SymbolIcon.Foreground>
+                </ui:SymbolIcon>
+            </Viewbox>
+        </StackPanel>
+
+        <ui:TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="15" Foreground="#a59b99"/>
+        <ui:TextBox Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите логин               "/>
+        <ui:PasswordBox Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите пароль     "/>
+        <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Center" Content="Войти" Foreground="White" FontWeight="Bold"/>
+        <!--<ui:NavigationView Grid.Row="1" x:Name="RootNavigation"></ui:NavigationView>-->
         <!--<ui:TextBox Grid.Row="0" >Логин</ui:TextBox>-->
     </Grid>
-</Window>
+</ui:FluentWindow>

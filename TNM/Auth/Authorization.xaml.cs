@@ -11,25 +11,38 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wpf.Ui;
 
 namespace TNM.Auth
 {
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml
     /// </summary>
-    public partial class Authorization : Window
+    public partial class Authorization
     {
         public Authorization()
         {
             InitializeComponent();
-            Loaded += (sender, args) =>
-            {
-                Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
-                    this,                                    
-                    Wpf.Ui.Controls.WindowBackdropType.Auto, 
-                    true                                     
-                );
-            };
+        }
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TitleBar_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
+                this.DragMove();
         }
     }
 }
