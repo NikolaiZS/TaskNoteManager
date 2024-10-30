@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca03cf945bb54078803e770df19f01fe" Name="Diagram1">
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.Attachments" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.Comments" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.Projects" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.TaskHistory" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.Tasks" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.TaskStatuses" Width="1.5" PointX="8.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskNoteManagementDBModel.Users" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__Attachmen__TaskI__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__Comments__TaskId__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__Comments__UserId__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__Tasks__ProjectId__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__TaskHisto__Chang__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__TaskHisto__TaskI__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__Tasks__AssignedU__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskNoteManagementDBModel.FK__Tasks__CreatedUs__571DF1D5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

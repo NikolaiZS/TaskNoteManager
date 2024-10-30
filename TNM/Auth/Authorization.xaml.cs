@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,8 @@ namespace TNM.Auth
         public Authorization()
         {
             InitializeComponent();
+            string login = loginBox.Text;
+            string password = passwordBox.Text;
             MainGrid.Background = GeneratePerlinNoiseBackground(800, 800, 0.0005);
         }
         private void Minimize_Click(object sender, RoutedEventArgs e)
@@ -68,6 +71,21 @@ namespace TNM.Auth
 
             bitmap.WritePixels(new Int32Rect(0, 0, width, height), noise, width, 0);
             return new ImageBrush(bitmap);
+        }
+
+        
+
+
+        private void enterLogin_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void goToReg_Click(object sender, RoutedEventArgs e)
+        {
+            var reg = new Registration();
+            reg.Show();
+            this.Close();
         }
     }
     public class PerlinNoise

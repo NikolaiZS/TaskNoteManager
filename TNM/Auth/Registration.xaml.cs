@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -68,6 +69,78 @@ namespace TNM.Auth
 
             bitmap.WritePixels(new Int32Rect(0, 0, width, height), noise, width, 0);
             return new ImageBrush(bitmap);
+        }
+
+        // Метод для хэширования пароля
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                    builder.Append(b.ToString("x2"));
+                return builder.ToString();
+            }
+        }
+
+        // Метод для регистрации нового пользователя
+        public void RegisterUser(string username, string password)
+        {
+            using (var context = new TaskNoteManagementDBEntities())
+            {
+                // Проверка, нет ли уже пользователя с таким именем
+                if (context.Users.Any(u => u.Username == username))
+                {
+                    MessageBox.Show("Пользователь с таким именем уже существует.");
+                    return;
+                }
+
+                // Создаем нового пользователя
+                var newUser = new Users
+                {
+                    Username = username,
+                    PasswordHash = HashPassword(password), // Хэшируем пароль
+                    Role = "User", // Назначаем роль по умолчанию
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                // Добавляем пользователя в контекст и сохраняем изменения в базе данных
+                try
+                {
+                    context.Users.Add(newUser);
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            MessageBox.Show($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                        }
+                    }
+                    MessageBox.Show("Ошибка при валидации данных. Проверьте введенные значения.");
+                }
+
+
+                MessageBox.Show("Пользователь успешно зарегистрирован.");
+            }
+        }
+
+        private void registrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            string username = loginBox.Text;
+            string password = passwordBox.Password; // если это PasswordBox
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Введите имя пользователя и пароль.");
+                return;
+            }
+
+            RegisterUser(username, password);
         }
     }
 }

@@ -50,14 +50,14 @@
             </Viewbox>
         </StackPanel>
         <ui:TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="15" Foreground="#a59b99"/>
-        <ui:TextBox Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите логин               "/>
-        <ui:PasswordBox Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите пароль     "/>
-        <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,10,0,0">
+        <ui:TextBox x:Name="loginBox" Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите логин               "/>
+        <ui:PasswordBox x:Name="passwordBox" Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите пароль     "/>
+        <ui:Button x:Name="enterLogin" Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,10,0,0" Click="enterLogin_Click">
             <Viewbox>
                 <ui:TextBlock Text="Войти"/>
             </Viewbox>
         </ui:Button>
-        <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,72,0,0">
+        <ui:Button x:Name="goToReg" Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,72,0,0" Click="goToReg_Click">
             <Viewbox>
                 <ui:TextBlock Text="Регистрация"/>
             </Viewbox>
