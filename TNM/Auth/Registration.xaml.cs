@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wpf.Ui;
@@ -23,7 +24,7 @@ namespace TNM.Auth
         public Registration()
         {
             InitializeComponent();
-            MainGrid.Background = GeneratePerlinNoiseBackground(800, 800, 0.0005);
+            MainGrid.Background = GenerateAnimatedGradientBackground();
         }
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
@@ -45,29 +46,43 @@ namespace TNM.Auth
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
         }
-        private static ImageBrush GeneratePerlinNoiseBackground(int width, int height, double scale)
+        public static LinearGradientBrush GenerateAnimatedGradientBackground()
         {
-            var bitmap = new WriteableBitmap(width, height, 96, 96, PixelFormats.Gray8, null);
-            var noise = new byte[width * height];
-
-            // Generate a new random seed for each run
-            var randomSeed = new Random().Next();
-            var perlin = new PerlinNoise(randomSeed);
-
-            for (int y = 0; y < height; y++)
+            var gradientBrush = new LinearGradientBrush
             {
-                for (int x = 0; x < width; x++)
-                {
-                    double perlinValue = perlin.Noise(x * scale, y * scale);
+                StartPoint = new Point(0, 0),
+                EndPoint = new Point(1, 1),
+                GradientStops = new GradientStopCollection
+        {
+            new GradientStop(Color.FromRgb(15, 15, 25), 0.0),
+            new GradientStop(Color.FromRgb(20, 20, 30), 0.5),
+            new GradientStop(Color.FromRgb(10, 10, 20), 1.0)
+        }
+            };
+            var startPointAnimation = new PointAnimation
+            {
+                From = new Point(0, 0),
+                To = new Point(1, 1),
+                Duration = new Duration(TimeSpan.FromSeconds(8)),
+                RepeatBehavior = RepeatBehavior.Forever,
+                AutoReverse = true,
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
 
-                    // Adjust to grey-to-black transition
-                    byte colorValue = (byte)(50 * (perlinValue + 0.4));
-                    noise[y * width + x] = colorValue;
-                }
-            }
+            var endPointAnimation = new PointAnimation
+            {
+                From = new Point(1, 1),
+                To = new Point(0, 0),
+                Duration = new Duration(TimeSpan.FromSeconds(8)),
+                RepeatBehavior = RepeatBehavior.Forever,
+                AutoReverse = true,
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
 
-            bitmap.WritePixels(new Int32Rect(0, 0, width, height), noise, width, 0);
-            return new ImageBrush(bitmap);
+            gradientBrush.BeginAnimation(LinearGradientBrush.StartPointProperty, startPointAnimation);
+            gradientBrush.BeginAnimation(LinearGradientBrush.EndPointProperty, endPointAnimation);
+
+            return gradientBrush;
         }
     }
 }

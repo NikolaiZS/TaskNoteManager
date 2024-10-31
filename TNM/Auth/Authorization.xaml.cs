@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wpf.Ui;
+using System.Windows.Media.Animation;
 
 namespace TNM.Auth
 {
@@ -23,7 +24,7 @@ namespace TNM.Auth
         public Authorization()
         {
             InitializeComponent();
-            MainGrid.Background = GeneratePerlinNoiseBackground(800, 800, 0.0005);
+            MainGrid.Background = GenerateAnimatedGradientBackground();
         }
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
@@ -45,88 +46,43 @@ namespace TNM.Auth
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
         }
-        private static ImageBrush GeneratePerlinNoiseBackground(int width, int height, double scale)
+        public static LinearGradientBrush GenerateAnimatedGradientBackground()
         {
-            var bitmap = new WriteableBitmap(width, height, 96, 96, PixelFormats.Gray8, null);
-            var noise = new byte[width * height];
-
-            // Generate a new random seed for each run
-            var randomSeed = new Random().Next();
-            var perlin = new PerlinNoise(randomSeed);
-
-            for (int y = 0; y < height; y++)
+            var gradientBrush = new LinearGradientBrush
             {
-                for (int x = 0; x < width; x++)
-                {
-                    double perlinValue = perlin.Noise(x * scale, y * scale);
-
-                    // Adjust to grey-to-black transition
-                    byte colorValue = (byte)(64 * (perlinValue + 0.4));
-                    noise[y * width + x] = colorValue;
-                }
-            }
-
-            bitmap.WritePixels(new Int32Rect(0, 0, width, height), noise, width, 0);
-            return new ImageBrush(bitmap);
-        }
-    }
-    public class PerlinNoise
-    {
-        private int[] permutation;
-
-        public PerlinNoise(int seed = 0)
+                StartPoint = new Point(0, 0),
+                EndPoint = new Point(1, 1),
+                GradientStops = new GradientStopCollection
         {
-            var random = new Random(seed);
-            permutation = new int[512];
-            int[] p = new int[256];
-
-            for (int i = 0; i < 256; i++)
-                p[i] = i;
-
-            for (int i = 255; i >= 0; i--)
+            new GradientStop(Color.FromRgb(15, 15, 25), 0.0),
+            new GradientStop(Color.FromRgb(20, 20, 30), 0.5),
+            new GradientStop(Color.FromRgb(10, 10, 20), 1.0)
+        }
+            };
+            var startPointAnimation = new PointAnimation
             {
-                int swapIndex = random.Next(i + 1);
-                int temp = p[i];
-                p[i] = p[swapIndex];
-                p[swapIndex] = temp;
-            }
+                From = new Point(0, 0),
+                To = new Point(1, 1),
+                Duration = new Duration(TimeSpan.FromSeconds(8)),
+                RepeatBehavior = RepeatBehavior.Forever,
+                AutoReverse = true,
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
 
-            for (int i = 0; i < 512; i++)
-                permutation[i] = p[i % 256];
-        }
+            var endPointAnimation = new PointAnimation
+            {
+                From = new Point(1, 1),
+                To = new Point(0, 0),
+                Duration = new Duration(TimeSpan.FromSeconds(8)),
+                RepeatBehavior = RepeatBehavior.Forever,
+                AutoReverse = true,
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
 
-        private double Fade(double t) => t * t * t * (t * (t * 6 - 15) + 10);
+            gradientBrush.BeginAnimation(LinearGradientBrush.StartPointProperty, startPointAnimation);
+            gradientBrush.BeginAnimation(LinearGradientBrush.EndPointProperty, endPointAnimation);
 
-        private double Lerp(double a, double b, double t) => a + t * (b - a);
-
-        private double Grad(int hash, double x, double y)
-        {
-            int h = hash & 15;
-            double u = h < 8 ? x : y;
-            double v = h < 4 ? y : h == 12 || h == 14 ? x : 0;
-            return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
-        }
-
-        public double Noise(double x, double y)
-        {
-            int X = (int)Math.Floor(x) & 255;
-            int Y = (int)Math.Floor(y) & 255;
-
-            x -= Math.Floor(x);
-            y -= Math.Floor(y);
-
-            double u = Fade(x);
-            double v = Fade(y);
-
-            int a = permutation[X] + Y;
-            int aa = permutation[a];
-            int ab = permutation[a + 1];
-            int b = permutation[X + 1] + Y;
-            int ba = permutation[b];
-            int bb = permutation[b + 1];
-
-            return Lerp(v, Lerp(u, Grad(permutation[aa], x, y), Grad(permutation[ba], x - 1, y)),
-                        Lerp(u, Grad(permutation[ab], x, y - 1), Grad(permutation[bb], x - 1, y - 1)));
+            return gradientBrush;
         }
     }
 }
