@@ -10,10 +10,8 @@
       Width="400"
       Background="Black"
       WindowStartupLocation="CenterScreen" 
-      Topmost="True" 
       WindowStyle="None"
-      MinHeight="410"
-      >
+      MinHeight="410">
   <Grid Name="MainGrid">
       <Grid.RowDefinitions>
           <RowDefinition Name="HeaderRow" Height="35"/>

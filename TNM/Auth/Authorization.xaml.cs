@@ -61,7 +61,7 @@ namespace TNM.Auth
                     double perlinValue = perlin.Noise(x * scale, y * scale);
 
                     // Adjust to grey-to-black transition
-                    byte colorValue = (byte)(50 * (perlinValue + 0.4));
+                    byte colorValue = (byte)(64 * (perlinValue + 0.4));
                     noise[y * width + x] = colorValue;
                 }
             }

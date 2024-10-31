@@ -1,0 +1,53 @@
+﻿<ui:FluentWindow x:Class="TNM.Menu.MainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:local="clr-namespace:TNM.Menu"
+      mc:Ignorable="d" 
+      Height="650" 
+      Width="1000"
+      Background="Black"
+      WindowStartupLocation="CenterScreen" 
+      WindowStyle="None"
+      MinHeight="450"
+      Title="MainMenu">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="HeaderRow" Height="35"/>
+            <RowDefinition Name="BodyRow" Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Background="#333333" Height="35" MouseDown="TitleBar_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <ui:Button Width="40" Height="30" Click="Minimize_Click">
+                    <ui:SymbolIcon Symbol="ArrowMinimize20"/>
+                </ui:Button>
+                <ui:Button Width="40" Height="30" Click="Maximize_Click" Margin="1,0,0,0">
+                    <ui:SymbolIcon Symbol="FullScreenMaximize20"/>
+                </ui:Button>
+                <ui:Button Foreground="red" Width="40" Height="30" Click="Close_Click" Margin="1,0,1,0">
+                    <ui:SymbolIcon Symbol="ArrowExit20"/>
+                </ui:Button>
+            </StackPanel>
+        </DockPanel>
+        <ui:NavigationView Grid.Row="1" IsBackButtonVisible="Auto" PaneTitle="PLACEHOLDER">
+            <ui:NavigationView.AutoSuggestBox>
+                <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
+            </ui:NavigationView.AutoSuggestBox>
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem
+                    Content="Dashboard"
+                    Icon="{ui:SymbolIcon Home24}"/>
+                <ui:NavigationViewItem
+                    Content="Items"
+                    Icon="{ui:SymbolIcon Library24}"/>
+            </ui:NavigationView.MenuItems>
+            <ui:NavigationView.FooterMenuItems>
+                <ui:NavigationViewItem
+                    Content="Settings"
+                    Icon="{ui:SymbolIcon Settings24}"/>
+            </ui:NavigationView.FooterMenuItems>
+        </ui:NavigationView>
+    </Grid>
+</ui:FluentWindow>
