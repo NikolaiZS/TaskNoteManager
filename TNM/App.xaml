@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TNM"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             StartupUri="/Auth/Authorization.xaml">
+             StartupUri="/Menu/MainMenu.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
