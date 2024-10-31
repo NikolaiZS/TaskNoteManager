@@ -59,7 +59,7 @@
                 <ui:TextBlock Text="Зарегистрироваться"/>
             </Viewbox>
       </ui:Button>
-      <ui:Button Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,72,0,0">
+      <ui:Button x:Name="backToAuth" Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,72,0,0" Click="backToAuth_Click">
           <Viewbox>
                 <ui:TextBlock Text="Назад"/>
             </Viewbox>

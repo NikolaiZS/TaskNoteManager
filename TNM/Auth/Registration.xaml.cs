@@ -146,5 +146,12 @@ namespace TNM.Auth
 
             RegisterUser(username, password,email);
         }
+
+        private void backToAuth_Click(object sender, RoutedEventArgs e)
+        {
+            var auth = new Authorization();
+            auth.Show();
+            this.Close();
+        }
     }
 }
