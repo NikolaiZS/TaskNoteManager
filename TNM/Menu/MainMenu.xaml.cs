@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf.Ui.Controls;
+using TNM.Samples;
+using System.Collections.ObjectModel;
 
 namespace TNM.Menu
 {

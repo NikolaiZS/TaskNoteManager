@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:TNM.Menu"
+      xmlns:pages="clr-namespace:TNM.Samples"
       mc:Ignorable="d" 
       Height="650" 
       Width="1000"
@@ -13,40 +14,39 @@
       WindowStyle="None"
       MinHeight="450"
       Title="MainMenu">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Name="HeaderRow" Height="35"/>
+            <RowDefinition Name="HeaderRow" Height="40"/>
             <RowDefinition Name="BodyRow" Height="1.5*"/>
         </Grid.RowDefinitions>
-        <DockPanel Background="#333333" Height="35" MouseDown="TitleBar_MouseDown">
+
+        <!-- Верхняя панель с кнопками -->
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="#333333" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <ui:Button Width="40" Height="30" Click="Minimize_Click">
-                    <ui:SymbolIcon Symbol="ArrowMinimize20"/>
+                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Minimize_Click">
+                    <ui:SymbolIcon Symbol="ArrowMinimize20" FontSize="20"/>
                 </ui:Button>
-                <ui:Button Width="40" Height="30" Click="Maximize_Click" Margin="1,0,0,0">
-                    <ui:SymbolIcon Symbol="FullScreenMaximize20"/>
+                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Maximize_Click">
+                    <ui:SymbolIcon Symbol="FullScreenMaximize20" FontSize="20"/>
                 </ui:Button>
-                <ui:Button Foreground="red" Width="40" Height="30" Click="Close_Click" Margin="1,0,1,0">
-                    <ui:SymbolIcon Symbol="ArrowExit20"/>
+                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Foreground="Red" Click="Close_Click">
+                    <ui:SymbolIcon Symbol="ArrowExit20" FontSize="20"/>
                 </ui:Button>
             </StackPanel>
         </DockPanel>
+
+        <!-- NavigationView с кнопками и областью отображения контента -->
         <ui:NavigationView Grid.Row="1" IsBackButtonVisible="Auto" PaneTitle="PLACEHOLDER">
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem
-                    Content="Dashboard"
-                    Icon="{ui:SymbolIcon Home24}"/>
-                <ui:NavigationViewItem
-                    Content="Items"
-                    Icon="{ui:SymbolIcon Library24}"/>
+                <ui:NavigationViewItem x:Name="DashboardItem" Content="Dashboard" Icon="{ui:SymbolIcon Home24}"/>
+                <ui:NavigationViewItem x:Name="ItemsItem" Content="Items" Icon="{ui:SymbolIcon Library24}"/>
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem
-                    Content="Settings"
-                    Icon="{ui:SymbolIcon Settings24}"/>
+                <ui:NavigationViewItem x:Name="SettingsItem" Content="Settings" Icon="{ui:SymbolIcon Settings24}"/>
             </ui:NavigationView.FooterMenuItems>
         </ui:NavigationView>
     </Grid>
