@@ -13,52 +13,69 @@
         WindowStyle="None"
         MinHeight="410">
     <Grid Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Name="HeaderRow" Height="35"/>
-            <RowDefinition Name="BodyRow" Height="0.08*"/>
-            <RowDefinition Name="BodyRow1" Height="0.05*"/>
-            <RowDefinition Name="BodyRow2" Height="0.05*"/>
-            <RowDefinition Name="BodyRow3" Height="0.05*"/>
-            <RowDefinition Name="FooterRow" Height="0.12*"/>
-        </Grid.RowDefinitions>
-        <DockPanel Background="#333333" Height="35" MouseDown="TitleBar_MouseDown">
+        <!-- Панель заголовка с кнопками управления окнами (не масштабируется) -->
+        <DockPanel Grid.Row="0" Background="#333333" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <ui:Button Width="40" Height="30" Click="Minimize_Click">
-                    <ui:SymbolIcon Symbol="ArrowMinimize20"/>
+                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Minimize_Click">
+                    <ui:SymbolIcon Symbol="ArrowMinimize20" FontSize="20"/>
                 </ui:Button>
-                <ui:Button Width="40" Height="30" Click="Maximize_Click" Margin="1,0,0,0">
-                    <ui:SymbolIcon Symbol="FullScreenMaximize20"/>
+                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Maximize_Click" Margin="1,0,0,0">
+                    <ui:SymbolIcon Symbol="FullScreenMaximize20" FontSize="20"/>
                 </ui:Button>
-                <ui:Button Foreground="red" Width="40" Height="30" Click="Close_Click" Margin="1,0,1,0">
-                    <ui:SymbolIcon Symbol="ArrowExit20"/>
+                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Foreground="Red" Click="Close_Click" Margin="1,0,0,0">
+                    <ui:SymbolIcon Symbol="ArrowExit20" FontSize="20"/>
                 </ui:Button>
             </StackPanel>
         </DockPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ui:TextBlock Foreground="MediumVioletRed" Text="TNM" FontSize="48" FontWeight="Bold"/>
-            <Viewbox Width="50" Height="50" Margin="0,6,0,0">
-                <ui:SymbolIcon Symbol="CalendarRtl48" Filled="True">
-                    <ui:SymbolIcon.Foreground>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#c71585" Offset="0.0"/>
-                            <GradientStop Color="#3C00FF" Offset="1.0"/>
-                        </LinearGradientBrush>
-                    </ui:SymbolIcon.Foreground>
-                </ui:SymbolIcon>
-            </Viewbox>
-        </StackPanel>
-        <ui:TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="15" Foreground="#a59b99"/>
-        <ui:TextBox Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите логин               "/>
-        <ui:PasswordBox Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите пароль     "/>
-        <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,10,0,0">
-            <Viewbox>
-                <ui:TextBlock Text="Войти"/>
-            </Viewbox>
-        </ui:Button>
-        <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="50" VerticalAlignment="Top" Margin="0,72,0,0">
-            <Viewbox>
-                <ui:TextBlock Text="Регистрация"/>
-            </Viewbox>
-        </ui:Button>
+        <Viewbox Grid.Row="1" Stretch="Uniform">
+            <!-- Содержимое окна, которое масштабируется по мере изменения размеров окна -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Name="HeaderRow" Height="22"/>
+                    <RowDefinition Name="BodyRow" Height="0.05*"/>
+                    <RowDefinition Name="BodyRow1" Height="0.05*"/>
+                    <RowDefinition Name="BodyRow2" Height="0.05*"/>
+                    <RowDefinition Name="BodyRow3" Height="0.05*"/>
+                    <RowDefinition Name="FooterRow" Height="0.12*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Логотип и заголовок -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ui:TextBlock Foreground="MediumVioletRed" Text="TNM" FontSize="48" FontWeight="Bold" Margin="0,0,0,0"/>
+                    <Viewbox Width="50" Height="50" Margin="0,6,0,0">
+                        <ui:SymbolIcon Symbol="CalendarRtl48" Filled="True">
+                            <ui:SymbolIcon.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#c71585" Offset="0.0"/>
+                                    <GradientStop Color="#3C00FF" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </ui:SymbolIcon.Foreground>
+                        </ui:SymbolIcon>
+                    </Viewbox>
+                </StackPanel>
+
+                <!-- Текстовая подсказка -->
+                <ui:TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="12" Foreground="#a59b99" Margin="0,0,0,5"/>
+
+                <!-- Поле для логина -->
+                <ui:TextBox Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите логин" Margin="0,5,0,5"/>
+
+                <!-- Поле для пароля -->
+                <ui:PasswordBox Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5"/>
+
+                <!-- Кнопки входа и регистрации -->
+                <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="45" VerticalAlignment="Top" Margin="0,5,0,0">
+                    <Viewbox>
+                        <ui:TextBlock Text="Войти"/>
+                    </Viewbox>
+                </ui:Button>
+
+                <ui:Button Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="45" VerticalAlignment="Top" Margin="0,55,0,5">
+                    <Viewbox>
+                        <ui:TextBlock Text="Регистрация"/>
+                    </Viewbox>
+                </ui:Button>
+            </Grid>
+        </Viewbox>
     </Grid>
 </ui:FluentWindow>
