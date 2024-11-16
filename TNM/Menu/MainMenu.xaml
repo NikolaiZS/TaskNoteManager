@@ -15,7 +15,7 @@
       MinHeight="450"
       Title="MainMenu">
 
-    <Grid>
+    <Grid Cursor="">
         <Grid.RowDefinitions>
             <RowDefinition Name="HeaderRow" Height="40"/>
             <RowDefinition Name="BodyRow" Height="1.5*"/>
@@ -42,11 +42,11 @@
                 <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem x:Name="DashboardItem" Content="Dashboard" Icon="{ui:SymbolIcon Home24}"/>
-                <ui:NavigationViewItem x:Name="ItemsItem" Content="Items" Icon="{ui:SymbolIcon Library24}"/>
+                <ui:NavigationViewItem x:Name="DashboardItem" Content="Dashboard" Icon="{ui:SymbolIcon Home24}" TargetPageType="{x:Type pages:SamplePage1}"/>
+                <ui:NavigationViewItem x:Name="ItemsItem" Content="Items" Icon="{ui:SymbolIcon Library24}" TargetPageType="{x:Type pages:SamplePage2}"/>
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem x:Name="SettingsItem" Content="Settings" Icon="{ui:SymbolIcon Settings24}"/>
+                <ui:NavigationViewItem x:Name="SettingsItem" Content="Settings" Icon="{ui:SymbolIcon Settings24}" TargetPageType="{x:Type pages:SamplePage3}"/>
             </ui:NavigationView.FooterMenuItems>
         </ui:NavigationView>
     </Grid>
