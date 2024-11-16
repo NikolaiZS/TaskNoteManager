@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -83,6 +84,83 @@ namespace TNM.Auth
             gradientBrush.BeginAnimation(LinearGradientBrush.EndPointProperty, endPointAnimation);
 
             return gradientBrush;
+        }
+
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                    builder.Append(b.ToString("x2"));
+                return builder.ToString();
+            }
+        }
+
+        public void RegisterUser(string username, string password, string email)
+        {
+            using (var context = new TaskNoteManagementDBEntities())
+            {
+                if (context.Users.Any(u => u.Username == username))
+                {
+                    assistBox.Text = "Пользователь с таким именем уже существует.";
+                    return;
+                }
+
+                var newUser = new Users
+                {
+                    Username = username,
+                    PasswordHash = HashPassword(password), 
+                    Email = email,
+                    Role = "User",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                try
+                {
+                    context.Users.Add(newUser);
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string errortext = ($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                        }
+                    }
+                    assistBox.Text = "Ошибка при валидации данных. Проверьте введенные значения.";
+                }
+                Authorization auth = new Authorization();
+                auth.Show();
+                this.Close();
+
+            }
+        }
+
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            string username = loginBox.Text;
+            string password = passwordBox.Password;
+            string email = mailBox.Text;
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                assistBox.Text = "Введите имя пользователя и пароль.";
+                return;
+            }
+
+            RegisterUser(username, password, email);
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Authorization auth = new Authorization();
+            auth.Show();
+            this.Close();
         }
     }
 }

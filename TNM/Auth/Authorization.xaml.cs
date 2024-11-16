@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wpf.Ui;
 using System.Windows.Media.Animation;
+using TNM.Menu;
+using System.Security.Cryptography;
 
 namespace TNM.Auth
 {
@@ -45,6 +47,60 @@ namespace TNM.Auth
         {
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            string username = loginBox.Text;
+            string password = passwordBox.Password;
+
+            bool isAuthenticated = AuthenticateUser(username, password);
+
+            if (isAuthenticated)
+            {
+                
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.Show();
+                this.Close();
+            }
+            else
+            {
+                assistBlock.Text = "Неверное имя или пароль";
+            }
+            
+        }
+
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Registration reg = new Registration();
+            reg.Show();
+            this.Close();
+        }
+        public bool AuthenticateUser(string username, string password)
+        {
+            using (var context = new TaskNoteManagementDBEntities())
+            {
+                var user = context.Users.SingleOrDefault(u => u.Username == username);
+
+                if (user == null)
+                    return false;
+
+                string hashedPassword = HashPassword(password);
+                return hashedPassword == user.PasswordHash;
+            }
+        }
+
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                    builder.Append(b.ToString("x2"));
+                return builder.ToString();
+            }
         }
         public static LinearGradientBrush GenerateAnimatedGradientBackground()
         {
@@ -84,5 +140,7 @@ namespace TNM.Auth
 
             return gradientBrush;
         }
+
+        
     }
 }

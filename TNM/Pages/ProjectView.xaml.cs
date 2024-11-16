@@ -24,29 +24,29 @@ namespace TNM.Pages
         public ProjectView()
         {
             InitializeComponent();
-
-            // Пример списка проектов
-            var projects = new List<Project>
-            {
-                new Project { Title = "Проект 1", Description = "Описание проекта 1" },
-                new Project { Title = "Проект 2", Description = "Описание проекта 2" },
-                new Project { Title = "Проект 3", Description = "Описание проекта 3" },
-                new Project { Title = "Проект 4", Description = "Описание проекта 4" },
-                new Project { Title = "Проект 5", Description = "Описание проекта 5" },
-            };
-
-            ProjectList.ItemsSource = projects;
+            LoadProject();
+            
         }
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Test");
         }
-    }
+        private void LoadProject()
+        {
+            using (var context = new TaskNoteManagementDBEntities())
+            {
+                var projects = context.Projects
+                    .Select(p => new { p.ProjectName, p.Description })
+                    .ToList();
 
-    // Класс для хранения данных о проекте
-    public class Project
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-    }
+                // Установите результат как ItemsSource для элемента UI
+                ProjectList.ItemsSource = projects;
+            }
+
+        }
+        private void EditProject_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+    }    
 }

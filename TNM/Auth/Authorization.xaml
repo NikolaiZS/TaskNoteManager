@@ -55,22 +55,22 @@
                 </StackPanel>
 
                 <!-- Текстовая подсказка -->
-                <ui:TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="12" Foreground="#a59b99" Margin="0,0,0,5"/>
+                <ui:TextBlock x:Name="assistBlock" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="12" Foreground="#a59b99" Margin="0,0,0,5"/>
 
                 <!-- Поле для логина -->
-                <ui:TextBox Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите логин               " Margin="0,5,0,0"/>
+                <ui:TextBox x:Name="loginBox" Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите логин               " Margin="0,5,0,0"/>
 
                 <!-- Поле для пароля -->
-                <ui:PasswordBox Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5"/>
+                <ui:PasswordBox x:Name="passwordBox" Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5"/>
 
                 <!-- Кнопки входа и регистрации -->
-                <ui:Button Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,5,0,0">
+                <ui:Button x:Name="LoginButton" Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,5,0,0" Click="LoginButton_Click">
                     <Viewbox>
                         <ui:TextBlock Text="Войти"/>
                     </Viewbox>
                 </ui:Button>
 
-                <ui:Button Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,50,0,5">
+                <ui:Button x:Name="RegistrationButton" Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,50,0,5" Click="RegistrationButton_Click">
                     <Viewbox>
                         <ui:TextBlock Text="Регистрация"/>
                     </Viewbox>

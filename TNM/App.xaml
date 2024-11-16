@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TNM"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:mui="http://schemas.modernwpf.com/2019"
-             StartupUri="/Menu/MainMenu.xaml">
+             StartupUri="/Auth/Authorization.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,7 +12,10 @@
                 <ResourceDictionary Source="Styles/ButtonStyle.xaml"/>
                 <mui:ThemeResources />
                 <mui:XamlControlsResources />
+                
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
