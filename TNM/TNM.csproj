@@ -60,6 +60,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\CreateProject.xaml.cs">
+      <DependentUpon>CreateProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectView.xaml.cs">
+      <DependentUpon>ProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\SamplePage1.xaml.cs">
       <DependentUpon>SamplePage1.xaml</DependentUpon>
     </Compile>
@@ -85,6 +94,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menu\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CreateProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,5 +193,6 @@
       <Version>3.0.5</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

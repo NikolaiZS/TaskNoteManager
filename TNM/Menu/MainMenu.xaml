@@ -5,14 +5,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:TNM.Menu"
-      xmlns:pages="clr-namespace:TNM.Samples"
+      xmlns:pages="clr-namespace:TNM.Pages"
       mc:Ignorable="d" 
       Height="650" 
       Width="1000"
+      MinHeight="500"
+      MinWidth="900"
       Background="Black"
       WindowStartupLocation="CenterScreen" 
       WindowStyle="None"
-      MinHeight="450"
       Title="MainMenu">
 
     <Grid Cursor="">
@@ -37,16 +38,13 @@
         </DockPanel>
 
         <!-- NavigationView с кнопками и областью отображения контента -->
-        <ui:NavigationView Grid.Row="1" IsBackButtonVisible="Auto" PaneTitle="PLACEHOLDER">
-            <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
-            </ui:NavigationView.AutoSuggestBox>
+        <ui:NavigationView Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem x:Name="DashboardItem" Content="Dashboard" Icon="{ui:SymbolIcon Home24}" TargetPageType="{x:Type pages:SamplePage1}"/>
-                <ui:NavigationViewItem x:Name="ItemsItem" Content="Items" Icon="{ui:SymbolIcon Library24}" TargetPageType="{x:Type pages:SamplePage2}"/>
+                <ui:NavigationViewItem x:Name="DashboardItem" Content="Проекты" Icon="{ui:SymbolIcon Home24}" TargetPageType="{x:Type pages:ProjectView}"/>
+                <ui:NavigationViewItem x:Name="ItemsItem" Content="Items" Icon="{ui:SymbolIcon Library24}" TargetPageType="{x:Type pages:CreateProject}"/>
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem x:Name="SettingsItem" Content="Settings" Icon="{ui:SymbolIcon Settings24}" TargetPageType="{x:Type pages:SamplePage3}"/>
+                <ui:NavigationViewItem x:Name="SettingsItem" Content="Settings" Icon="{ui:SymbolIcon Settings24}" TargetPageType="{x:Type pages:Settings}"/>
             </ui:NavigationView.FooterMenuItems>
         </ui:NavigationView>
     </Grid>

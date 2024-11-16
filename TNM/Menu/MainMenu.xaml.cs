@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Wpf.Ui.Controls;
-using TNM.Samples;
+using TNM.Pages;
 using System.Collections.ObjectModel;
 
 namespace TNM.Menu
