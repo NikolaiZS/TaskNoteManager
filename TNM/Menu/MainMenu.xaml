@@ -38,7 +38,7 @@
         </DockPanel>
 
         <!-- NavigationView с кнопками и областью отображения контента -->
-        <ui:NavigationView Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
+        <ui:NavigationView x:Name="NavigationMenu" Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem x:Name="ProjectItem" Content="Проекты" Icon="{ui:SymbolIcon Home24}" TargetPageType="{x:Type pages:ProjectView}"/>
                 <ui:NavigationViewItem x:Name="CreateProjectItem" Content="Создать" Icon="{ui:SymbolIcon Library24}" TargetPageType="{x:Type pages:CreateProject}"/>
