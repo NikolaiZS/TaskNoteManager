@@ -69,15 +69,6 @@
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\SamplePage1.xaml.cs">
-      <DependentUpon>SamplePage1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\SamplePage2.xaml.cs">
-      <DependentUpon>SamplePage2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\SamplePage3.xaml.cs">
-      <DependentUpon>SamplePage3.xaml</DependentUpon>
-    </Compile>
     <Page Include="Auth\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,18 +97,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Samples\SamplePage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Samples\SamplePage2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Samples\SamplePage3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

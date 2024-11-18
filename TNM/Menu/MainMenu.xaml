@@ -41,10 +41,10 @@
         <ui:NavigationView Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem x:Name="DashboardItem" Content="Проекты" Icon="{ui:SymbolIcon Home24}" TargetPageType="{x:Type pages:ProjectView}"/>
-                <ui:NavigationViewItem x:Name="ItemsItem" Content="Items" Icon="{ui:SymbolIcon Library24}" TargetPageType="{x:Type pages:CreateProject}"/>
+                <ui:NavigationViewItem x:Name="ItemsItem" Content="Создать проект" Icon="{ui:SymbolIcon Add24}" TargetPageType="{x:Type pages:CreateProject}" Cursor="Hand"/>
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem x:Name="SettingsItem" Content="Settings" Icon="{ui:SymbolIcon Settings24}" TargetPageType="{x:Type pages:Settings}"/>
+                <ui:NavigationViewItem x:Name="SettingsItem" Content="Настройки" Icon="{ui:SymbolIcon Settings24}" TargetPageType="{x:Type pages:Settings}"/>
             </ui:NavigationView.FooterMenuItems>
         </ui:NavigationView>
     </Grid>
