@@ -12,7 +12,7 @@
         <!-- Верхний заголовок -->
         <TextBlock 
             x:Name="Title"
-            Text="Редактировать проект" 
+            Text="Редактирование проекта" 
             FontSize="28" 
             FontWeight="Bold" 
             Foreground="White" 
@@ -22,6 +22,7 @@
         <!-- Основная форма -->
         <Grid Margin="20,80,20,20">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -76,19 +77,36 @@
                 Background="#333333" 
                 Foreground="White" 
                 BorderBrush="#555555" />
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="240" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Отвечающие за задачу -->
+            <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" Margin="20,0,0,0">
+                <TextBlock 
+                Text="Участники проекта:" 
+                FontSize="18" 
+                FontWeight="Bold" 
+                Foreground="White" 
+                Margin="0,0,0,10" />
+                <WrapPanel x:Name="AssignedWrapPanel" />
+                <Button Content="+" Width="30" Height="30" Click="AddAssigned_Click" Margin="0,5,0,0" />
+            </StackPanel>
 
             <!-- Кнопка "Сохранить изменения" -->
             <Button 
-                x:Name="SaveChangesButton"
-                Content="Сохранить изменения" 
-                Grid.Row="3" 
-                Grid.ColumnSpan="2" 
-                VerticalAlignment="Bottom"
-                Margin="5,0,5,10" 
-                Height="50" 
-                FontSize="16"  
-                HorizontalAlignment="Stretch"
-                Click="SaveChangesButton_Click" />
+            x:Name="SaveChangesButton"
+            Content="Сохранить изменения" 
+            Grid.Row="4" 
+            Grid.ColumnSpan="2" 
+            VerticalAlignment="Bottom"
+            Margin="20,0,20,20" 
+            Height="50" 
+            FontSize="16"  
+            HorizontalAlignment="Stretch"
+            Click="SaveChangesButton_Click" />
         </Grid>
     </Grid>
 </Page>
