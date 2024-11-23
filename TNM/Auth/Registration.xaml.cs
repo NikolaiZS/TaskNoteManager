@@ -22,10 +22,12 @@ namespace TNM.Auth
     /// </summary>
     public partial class Registration
     {
+        private SupabaseClient _authClient;
         public Registration()
         {
             InitializeComponent();
             MainGrid.Background = GenerateAnimatedGradientBackground();
+            _authClient = new SupabaseClient();
         }
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
@@ -98,54 +100,25 @@ namespace TNM.Auth
             }
         }
 
-        public void RegisterUser(string username, string password, string email)
+        public async Task RegisterUsers(string username, string password, string email)
         {
-            using (var context = new TaskNoteManagementDBEntities())
+            bool success = await _authClient.RegisterUser(username, password, email);
+            if (success)
             {
-                if (context.Users.Any(u => u.Username == username))
-                {
-                    assistBox.Text = "Пользователь с таким именем уже существует.";
-                    return;
-                }
-
-                var newUser = new Users
-                {
-                    Username = username,
-                    PasswordHash = HashPassword(password), 
-                    Email = email,
-                    Role = "User",
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
-                };
-
-                try
-                {
-                    context.Users.Add(newUser);
-                    context.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    foreach (var validationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            string errortext = ($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
-                        }
-                    }
-                    assistBox.Text = "Ошибка при валидации данных. Проверьте введенные значения.";
-                }
-                Authorization auth = new Authorization();
-                auth.Show();
-                this.Close();
-
+                MessageBox.Show("Registration successful!");
+            }
+            else
+            {
+                MessageBox.Show("Registration failed.");
             }
         }
 
-        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        private async void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
             string username = loginBox.Text;
             string password = passwordBox.Password;
             string email = mailBox.Text;
+            string hashedpassword = HashPassword(password);
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -153,7 +126,7 @@ namespace TNM.Auth
                 return;
             }
 
-            RegisterUser(username, password, email);
+            await RegisterUsers(username, hashedpassword, email);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

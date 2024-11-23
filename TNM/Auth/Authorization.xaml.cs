@@ -23,10 +23,12 @@ namespace TNM.Auth
     /// </summary>
     public partial class Authorization
     {
+        private SupabaseClient _authClient;
         public Authorization()
         {
             InitializeComponent();
             MainGrid.Background = GenerateAnimatedGradientBackground();
+            _authClient = new SupabaseClient();
         }
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
@@ -49,25 +51,21 @@ namespace TNM.Auth
                 this.DragMove();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            string username = loginBox.Text;
-            string password = passwordBox.Password;
+            var username = loginBox.Text;
+            var password = passwordBox.Password;
+            string hashedpassword = HashPassword(password);
 
-            bool isAuthenticated = AuthenticateUser(username, password);
-
-            if (isAuthenticated)
+            var authenticated = await _authClient.AuthenticateUser(username, hashedpassword);
+            if (authenticated)
             {
-                
-                MainMenu mainMenu = new MainMenu();
-                mainMenu.Show();
-                this.Close();
+                MessageBox.Show("Login successful!");
             }
             else
             {
-                assistBlock.Text = "Неверное имя или пароль";
+                MessageBox.Show("Invalid credentials.");
             }
-            
         }
 
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
@@ -76,19 +74,6 @@ namespace TNM.Auth
             Registration reg = new Registration();
             reg.Show();
             this.Close();
-        }
-        public bool AuthenticateUser(string username, string password)
-        {
-            using (var context = new TaskNoteManagementDBEntities())
-            {
-                var user = context.Users.SingleOrDefault(u => u.Username == username);
-
-                if (user == null)
-                    return false;
-
-                string hashedPassword = HashPassword(password);
-                return hashedPassword == user.PasswordHash;
-            }
         }
 
         private string HashPassword(string password)

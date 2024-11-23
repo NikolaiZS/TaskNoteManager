@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TNM.Menu;
 
 
 namespace TNM.Pages
@@ -24,29 +25,54 @@ namespace TNM.Pages
         public ProjectView()
         {
             InitializeComponent();
-            LoadProject();
-            
+            //LoadProject();
+
         }
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Test");
         }
-        private void LoadProject()
+        //private void LoadProject()
+        //{
+        //    using (var context = new TaskNoteManagementDBEntities())
+        //    {
+        //        var projects = context.Projects
+        //            .Select(p => new { p.ProjectName, p.Description })
+        //            .ToList();
+
+        //        // Установите результат как ItemsSource для элемента UI
+        //        ProjectList.ItemsSource = projects;
+        //    }
+
+        //}
+        private void EditProject_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new TaskNoteManagementDBEntities())
-            {
-                var projects = context.Projects
-                    .Select(p => new { p.ProjectName, p.Description })
-                    .ToList();
+            var button = sender as Button;
+            //var project = button?.DataContext as Projects;
 
-                // Установите результат как ItemsSource для элемента UI
-                ProjectList.ItemsSource = projects;
-            }
+            //if (project != null)
+            //{
+            //    var mainWindow = Application.Current.MainWindow as MainMenu;
+            //    if (mainWindow != null)
+            //    {
+            //        // Добавим отладочный вывод
+            //        MessageBox.Show("Передача проекта в EditProject");
 
+            //        // Передаем проект в статическое свойство SelectedProject
+            //        EditProject.SelectedProject = project;
+
+            //        // Навигация на страницу EditProject
+            //        mainWindow.NavigationMenu.Navigate(typeof(EditProject));
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Проект не найден!");
+            //}
         }
-        private void EditProject_Click(Object sender, RoutedEventArgs e)
-        {
 
-        }
-    }    
+
+
+
+    }
 }

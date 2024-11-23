@@ -46,6 +46,7 @@
                                     Foreground="White" 
                                     Margin="0,40,0,10" />
                                     <Button 
+                                        Click="EditProject_Click"
                                         Content="Редактировать" 
                                         Foreground="White" 
                                         Height="40" 

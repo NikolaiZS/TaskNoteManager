@@ -20,16 +20,25 @@ namespace TNM.Pages
     /// </summary>
     public partial class EditProject : Page
     {
+        //public static Projects SelectedProject { get; set; }
+
+        //private Projects _project;
+
+        // Конструктор для передачи данных
         public EditProject()
         {
             InitializeComponent();
+
+            // Используем статическое свойство SelectedProject для получения переданных данных
+            //var project = SelectedProject;
+            //if (project != null)
+            //{
+            //    // Здесь вы можете привязать данные или обновить UI
+            //    ProjectNameTextBox.Text = project.ProjectName;
+            //    ProjectDescriptionTextBox.Text = project.Description;
+            //}
         }
-        private void LoadProjectData()
-        {
-            // Пример заполнения текстовых полей
-            ProjectNameTextBox.Text = "Текущее название проекта";
-            ProjectDescriptionTextBox.Text = "Текущее описание проекта";
-        }
+
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
