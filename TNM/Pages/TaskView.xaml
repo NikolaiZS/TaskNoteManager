@@ -65,7 +65,7 @@
             <Button Content="+" Width="30" Height="30" Click="AddTag_Click" Margin="0,5,0,0" />
         </StackPanel>
 
-        <!-- Назначенные -->
+        <!-- Отвечающие за задачу -->
         <StackPanel Grid.Row="3" Orientation="Vertical">
             <TextBlock 
                 Text="Отвечает за задачу:" 
