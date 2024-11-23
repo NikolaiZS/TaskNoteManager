@@ -1,0 +1,94 @@
+﻿<Page x:Class="newTNM.Pages.EditProject"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:newTNM.Pages" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditProject">
+    <Grid>
+        <!-- Верхний заголовок -->
+        <TextBlock 
+            x:Name="Title"
+            Text="Редактировать проект" 
+            FontSize="28" 
+            FontWeight="Bold" 
+            Foreground="White" 
+            Margin="20,20,0,0" 
+            HorizontalAlignment="Left" />
+
+        <!-- Основная форма -->
+        <Grid Margin="20,80,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Поле для редактирования названия проекта -->
+            <TextBlock 
+                x:Name="ProjectNameTextBlock"
+                Text="Название проекта:" 
+                FontSize="16" 
+                Foreground="White" 
+                VerticalAlignment="Center" 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Margin="0,0,10,10" />
+            <TextBox 
+                x:Name="ProjectNameTextBox" 
+                FontSize="14" 
+                Grid.Row="0" 
+                Grid.Column="1" 
+                VerticalAlignment="Center" 
+                Margin="0,0,0,10" 
+                Background="#333333" 
+                Foreground="White" 
+                BorderBrush="#555555" />
+
+            <!-- Поле для редактирования описания проекта -->
+            <TextBlock 
+                x:Name="ProjectDescriptionTextBlock"
+                Text="Описание проекта:" 
+                FontSize="16" 
+                Foreground="White" 
+                VerticalAlignment="Top" 
+                Grid.Row="1" 
+                Grid.Column="0" 
+                Margin="0,10,10,0" />
+            <TextBox 
+                x:Name="ProjectDescriptionTextBox" 
+                FontSize="14" 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Margin="0,10,0,0" 
+                AcceptsReturn="True" 
+                VerticalScrollBarVisibility="Auto" 
+                TextWrapping="Wrap" 
+                Height="100" 
+                Background="#333333" 
+                Foreground="White" 
+                BorderBrush="#555555" />
+
+            <!-- Кнопка "Сохранить изменения" -->
+            <Button 
+                x:Name="SaveChangesButton"
+                Content="Сохранить изменения" 
+                Grid.Row="3" 
+                Grid.ColumnSpan="2" 
+                VerticalAlignment="Bottom"
+                Margin="5,0,5,10" 
+                Height="50" 
+                FontSize="16"  
+                HorizontalAlignment="Stretch"
+                Click="SaveChangesButton_Click" />
+        </Grid>
+    </Grid>
+</Page>
