@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto" />
             <!-- Категории -->
             <RowDefinition Height="*" />
-            <!-- Назначенные -->
+            <!-- Отвечающие за задачу -->
             <RowDefinition Height="Auto" />
             <!-- Кнопка редактирования -->
         </Grid.RowDefinitions>
@@ -25,18 +25,18 @@
         <!-- Название задачи и статус -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,20">
             <TextBlock 
-                Text="Название задачи" 
-                FontSize="22" 
-                FontWeight="Bold" 
-                Foreground="White" 
-                VerticalAlignment="Center" />
+            Text="Название задачи" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="White" 
+            VerticalAlignment="Center" />
 
             <ComboBox 
-                x:Name="StatusComboBox"
-                SelectionChanged="StatusComboBox_SelectionChanged"
-                Margin="20,0,0,0"
-                Width="150"
-                FontSize="16">
+            x:Name="StatusComboBox"
+            SelectionChanged="StatusComboBox_SelectionChanged"
+            Margin="20,0,0,0"
+            Width="150"
+            FontSize="16">
                 <ComboBoxItem Content="В процессе" />
                 <ComboBoxItem Content="Выполнено" />
                 <ComboBoxItem Content="Отменено" />
@@ -45,48 +45,48 @@
 
         <!-- Описание задачи -->
         <TextBlock 
-            x:Name="TaskDescriptionTextBlock"
-            Grid.Row="1"
-            Text="Описание задачи: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod sapien a magna gravida, ac aliquet lectus venenatis." 
-            FontSize="16" 
-            Foreground="White" 
-            TextWrapping="Wrap" 
-            Margin="0,0,0,20" />
+        x:Name="TaskDescriptionTextBlock"
+        Grid.Row="1"
+        Text="Описание задачи: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod sapien a magna gravida, ac aliquet lectus venenatis." 
+        FontSize="16" 
+        Foreground="White" 
+        TextWrapping="Wrap" 
+        Margin="0,0,0,20" />
 
         <!-- Категории (теги) -->
         <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,0,0,20">
             <TextBlock 
-                Text="Теги:" 
-                FontSize="18" 
-                FontWeight="Bold" 
-                Foreground="White" 
-                Margin="0,0,0,10" />
+            Text="Теги:" 
+            FontSize="18" 
+            FontWeight="Bold" 
+            Foreground="White" 
+            Margin="0,0,0,10" />
             <WrapPanel x:Name="TagsWrapPanel" />
             <Button Content="+" Width="30" Height="30" Click="AddTag_Click" Margin="0,5,0,0" />
         </StackPanel>
 
-        <!-- Назначенные -->
+        <!-- Отвечающие за задачу -->
         <StackPanel Grid.Row="3" Orientation="Vertical">
             <TextBlock 
-                Text="Отвечает за задачу:" 
-                FontSize="18" 
-                FontWeight="Bold" 
-                Foreground="White" 
-                Margin="0,0,0,10" />
+            Text="Отвечает за задачу:" 
+            FontSize="18" 
+            FontWeight="Bold" 
+            Foreground="White" 
+            Margin="0,0,0,10" />
             <WrapPanel x:Name="AssignedWrapPanel" />
             <Button Content="+" Width="30" Height="30" Click="AddAssigned_Click" Margin="0,5,0,0" />
         </StackPanel>
 
         <!-- Кнопка редактировать -->
         <Button 
-            x:Name="EditTaskButton"
-            Content="Редактировать" 
-            Grid.Row="4"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom"
-            Height="50"
-            Margin="0,20,0,0"
-            FontSize="16"
-            Click="EditTaskButton_Click" />
+        x:Name="EditTaskButton"
+        Content="Редактировать" 
+        Grid.Row="4"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Bottom"
+        Height="50"
+        Margin="0,20,0,0"
+        FontSize="16"
+        Click="EditTaskButton_Click" />
     </Grid>
 </Page>

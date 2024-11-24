@@ -10,63 +10,68 @@
       Title="ProjectView">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto"
-              HorizontalScrollBarVisibility="Disabled">
+    HorizontalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Vertical" Margin="10">
             <!-- Список проектов -->
             <ItemsControl Name="ProjectList">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" />
+                        <VirtualizingStackPanel/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="10,0">
-                            <Border Margin="8" CornerRadius="8">
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="#c71585" Offset="0.0"/>
-                                        <GradientStop Color="#3C00FF" Offset="1.0"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
-                            <Border Margin="10" CornerRadius="8" Background="#333333">
-                                <Grid Margin="6">
-                                    <TextBlock 
-                                    Text="{Binding ProjectName}" 
-                                    FontSize="22" 
-                                    Foreground="White" 
-                                    FontWeight="Bold" 
-                                    Margin="0,0,0,10" />
-                                    <TextBlock 
-                                    Text="{Binding Description}" 
-                                    TextWrapping="Wrap" 
-                                    FontSize="14" 
-                                    Foreground="White" 
-                                    Margin="0,40,0,10" />
-                                    <Button 
-                                        Click="EditProject_Click"
-                                        Content="Редактировать" 
-                                        Foreground="White" 
-                                        Height="40" 
-                                        HorizontalAlignment="Stretch" 
-                                        Margin="0,143,0,0" />
-                                </Grid>
-                            </Border>
-                        </Grid>
+                        <!-- Шаблон данных -->
+                        <ui:CardAction
+                        x:Name="CardAction"
+                        Margin="8"
+                        Padding="8"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding}"
+                        IsChevronVisible="False">
+                            <Grid x:Name="CardGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                x:Name="ProjectIcon"
+                                Width="60"
+                                Margin="24,0,0,0"
+                                Source="{Binding IconPath}" />
+                                <StackPanel
+                                x:Name="TextContainer"
+                                Grid.Column="1"
+                                Margin="24"
+                                VerticalAlignment="Center">
+                                    <ui:TextBlock
+                                    x:Name="ProjectTitle"
+                                    FontTypography="BodyStrong"
+                                    Text="{Binding Title}"
+                                    Foreground="White"
+                                    TextWrapping="WrapWithOverflow" />
+                                    <ui:TextBlock
+                                    x:Name="ProjectDescription"
+                                    Appearance="Secondary"
+                                    Foreground="White"
+                                    Text="{Binding Description}"
+                                    TextWrapping="WrapWithOverflow" />
+                                </StackPanel>
+                            </Grid>
+                        </ui:CardAction>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
             <!-- Кнопка создания нового проекта -->
             <Button Content="Создать новый проект"
-                Margin="20,20,20,10"
-                Height="50"
-                FontSize="16"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Bottom"
-                Click="CreateNewProject_Click" />
+            Margin="8"
+            Height="50"
+            FontSize="16"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Click="CreateNewProject_Click" />
         </StackPanel>
     </ScrollViewer>
 </Page>

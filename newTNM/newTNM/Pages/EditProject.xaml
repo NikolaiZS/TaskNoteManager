@@ -12,7 +12,7 @@
         <!-- Верхний заголовок -->
         <TextBlock 
             x:Name="Title"
-            Text="Редактировать проект" 
+            Text="Редактирование проекта" 
             FontSize="28" 
             FontWeight="Bold" 
             Foreground="White" 
@@ -25,6 +25,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -34,61 +35,77 @@
 
             <!-- Поле для редактирования названия проекта -->
             <TextBlock 
-                x:Name="ProjectNameTextBlock"
-                Text="Название проекта:" 
-                FontSize="16" 
-                Foreground="White" 
-                VerticalAlignment="Center" 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Margin="0,0,10,10" />
+            x:Name="ProjectNameTextBlock"
+            Text="Название проекта:" 
+            FontSize="16" 
+            Foreground="White" 
+            VerticalAlignment="Center" 
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Margin="0,0,10,10" />
             <TextBox 
-                x:Name="ProjectNameTextBox" 
-                FontSize="14" 
-                Grid.Row="0" 
-                Grid.Column="1" 
-                VerticalAlignment="Center" 
-                Margin="0,0,0,10" 
-                Background="#333333" 
-                Foreground="White" 
-                BorderBrush="#555555" />
-
+            x:Name="ProjectNameTextBox" 
+            FontSize="14" 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            VerticalAlignment="Center" 
+            Margin="0,0,0,10" 
+            Background="#333333" 
+            Foreground="White" 
+            BorderBrush="#555555" />
             <!-- Поле для редактирования описания проекта -->
             <TextBlock 
-                x:Name="ProjectDescriptionTextBlock"
-                Text="Описание проекта:" 
-                FontSize="16" 
-                Foreground="White" 
-                VerticalAlignment="Top" 
-                Grid.Row="1" 
-                Grid.Column="0" 
-                Margin="0,10,10,0" />
+            x:Name="ProjectDescriptionTextBlock"
+            Text="Описание проекта:" 
+            FontSize="16" 
+            Foreground="White" 
+            VerticalAlignment="Top" 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Margin="0,10,10,0" />
             <TextBox 
-                x:Name="ProjectDescriptionTextBox" 
-                FontSize="14" 
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Margin="0,10,0,0" 
-                AcceptsReturn="True" 
-                VerticalScrollBarVisibility="Auto" 
-                TextWrapping="Wrap" 
-                Height="100" 
-                Background="#333333" 
+            x:Name="ProjectDescriptionTextBox" 
+            FontSize="14" 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="0,10,0,0" 
+            AcceptsReturn="True" 
+            VerticalScrollBarVisibility="Auto" 
+            TextWrapping="Wrap" 
+            Height="100" 
+            Background="#333333" 
+            Foreground="White" 
+            BorderBrush="#555555" />
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="240" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Отвечающие за задачу -->
+            <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" Margin="20,0,0,0">
+                <TextBlock 
+                Text="Участники проекта:" 
+                FontSize="18" 
+                FontWeight="Bold" 
                 Foreground="White" 
-                BorderBrush="#555555" />
+                Margin="0,0,0,10" />
+                <WrapPanel x:Name="AssignedWrapPanel" />
+                <Button Content="+" Width="30" Height="30" Click="AddAssigned_Click" Margin="0,5,0,0" />
+            </StackPanel>
 
             <!-- Кнопка "Сохранить изменения" -->
             <Button 
-                x:Name="SaveChangesButton"
-                Content="Сохранить изменения" 
-                Grid.Row="3" 
-                Grid.ColumnSpan="2" 
-                VerticalAlignment="Bottom"
-                Margin="5,0,5,10" 
-                Height="50" 
-                FontSize="16"  
-                HorizontalAlignment="Stretch"
-                Click="SaveChangesButton_Click" />
+            x:Name="SaveChangesButton"
+            Content="Сохранить изменения" 
+            Grid.Row="4" 
+            Grid.ColumnSpan="2" 
+            VerticalAlignment="Bottom"
+            Margin="20,0,20,20" 
+            Height="50" 
+            FontSize="16"  
+            HorizontalAlignment="Stretch"
+            Click="SaveChangesButton_Click" />
         </Grid>
     </Grid>
 </Page>
