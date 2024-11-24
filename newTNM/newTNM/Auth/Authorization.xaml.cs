@@ -64,11 +64,13 @@ namespace newTNM.Auth
                 var authenticated = await _authClient.AuthenticateUserAsync(username, hashedpassword);
                 if (authenticated)
                 {
-                    MessageBox.Show("Login successful!");
+                    MainMenu mainMenu = new MainMenu();
+                    mainMenu.Show();
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Invalid credentials.");
+                    assistBlock.Text = "Неправильнйы логин или пароль";
                 }
             }
 
