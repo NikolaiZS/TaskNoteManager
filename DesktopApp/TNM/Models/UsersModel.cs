@@ -3,10 +3,10 @@ using Supabase.Postgrest.Models;
 
 namespace TNM.Models
 {
-    [Table("users")] // Таблица в базе данных
+    [Table("users")]
     public class User : BaseModel
     {
-        [PrimaryKey("userid", false)] // Поле userid как первичный ключ
+        [PrimaryKey("userid")]
         public int UserId { get; set; }
 
         [Column("username")]
@@ -15,7 +15,7 @@ namespace TNM.Models
         [Column("email")]
         public string Email { get; set; }
 
-        [Column("password")] // Сопоставляем с новым названием столбца
+        [Column("password")]
         public string Password { get; set; }
 
         [Column("role")]
