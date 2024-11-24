@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace newTNM
+namespace TNM
 {
     /// <summary>
     /// Interaction logic for App.xaml

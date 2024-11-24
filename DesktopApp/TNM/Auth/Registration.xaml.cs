@@ -1,37 +1,19 @@
-﻿using Supabase.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Wpf.Ui;
-using newTNM.Menu;
-using System.Security.Cryptography;
-
-namespace newTNM.Auth
+namespace TNM.Auth
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для Registration.xaml
     /// </summary>
-    public partial class Authorization
+    public partial class Registration
     {
         private SupabaseClient _authClient;
 
-        public Authorization()
+        public Registration()
         {
             InitializeComponent();
             MainGrid.Background = GenerateAnimatedGradientBackground();
@@ -57,42 +39,6 @@ namespace newTNM.Auth
         {
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
-        }
-
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            var username = loginBox.Text;
-            var password = passwordBox.Password;
-            string hashedpassword = HashPassword(password);
-
-            var authenticated = await _authClient.AuthenticateUserAsync(username, hashedpassword);
-            if (authenticated)
-            {
-                MessageBox.Show("Login successful!");
-            }
-            else
-            {
-                MessageBox.Show("Invalid credentials.");
-            }
-        }
-
-        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
-        {
-            Registration reg = new Registration();
-            reg.Show();
-            this.Close();
-        }
-
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                StringBuilder builder = new StringBuilder();
-                foreach (var b in bytes)
-                    builder.Append(b.ToString("x2"));
-                return builder.ToString();
-            }
         }
 
         public static LinearGradientBrush GenerateAnimatedGradientBackground()
@@ -132,6 +78,46 @@ namespace newTNM.Auth
             gradientBrush.BeginAnimation(LinearGradientBrush.EndPointProperty, endPointAnimation);
 
             return gradientBrush;
+        }
+
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                    builder.Append(b.ToString("x2"));
+                return builder.ToString();
+            }
+        }
+
+        public async Task RegisterUsers(string username, string email, string password)
+        {
+            await _authClient.AddUserAsync(username, email, password);
+        }
+
+        private async void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            string username = loginBox.Text;
+            string password = passwordBox.Password;
+            string email = mailBox.Text;
+            string hashedpassword = HashPassword(password);
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                assistBox.Text = "Введите имя пользователя и пароль.";
+                return;
+            }
+
+            await RegisterUsers(username, email, hashedpassword);
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Authorization auth = new Authorization();
+            auth.Show();
+            this.Close();
         }
     }
 }

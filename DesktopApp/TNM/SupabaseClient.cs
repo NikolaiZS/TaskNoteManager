@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace newTNM
+namespace TNM
 {
     public class SupabaseClient
     {

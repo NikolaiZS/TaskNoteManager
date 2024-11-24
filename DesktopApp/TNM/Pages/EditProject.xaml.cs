@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace newTNM.Pages
+namespace TNM.Pages
 {
     /// <summary>
     /// Логика взаимодействия для EditProject.xaml

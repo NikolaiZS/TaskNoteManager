@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace newTNM.Pages
+namespace TNM.Pages
 {
     /// <summary>
     /// Логика взаимодействия для ProjectView.xaml

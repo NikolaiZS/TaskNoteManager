@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace newTNM.Menu
+namespace TNM.Menu
 {
     /// <summary>
     /// Логика взаимодействия для MainMenu.xaml

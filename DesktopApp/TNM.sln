@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "newTNM", "newTNM\newTNM.csproj", "{8C4C82EE-E821-403C-98D9-E7129D9E56A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNM", "TNM\TNM.csproj", "{8C4C82EE-E821-403C-98D9-E7129D9E56A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
