@@ -28,6 +28,7 @@
                             Padding="8"
                             Command="{Binding EditCommand}"
                             CommandParameter="{Binding}"
+                            Click="CardAction_Click"
                             IsChevronVisible="False">
                             <Grid x:Name="CardGrid">
                                 <Grid.ColumnDefinitions>

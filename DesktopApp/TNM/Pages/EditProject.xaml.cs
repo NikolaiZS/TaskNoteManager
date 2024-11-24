@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TNM.Models;
 
 namespace TNM.Pages
 {
@@ -11,9 +12,10 @@ namespace TNM.Pages
     {
         private List<SolidColorBrush> assignedColors;
         private int assignedColorIndex = 0;
+        private Projects _project;
 
         // Конструктор для передачи данных
-        public EditProject()
+        public EditProject(Projects project)
         {
             InitializeComponent();
             InitializeTaskView();

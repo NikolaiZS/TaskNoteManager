@@ -2,13 +2,14 @@
 using System.Windows;
 using System.Windows.Controls;
 using TNM.Models;
+using Wpf.Ui;
 
 namespace TNM.Pages
 {
     /// <summary>
     // Логика взаимодействия для ProjectView.xaml
     /// </summary>
-    public partial class ProjectView : Page
+    public partial class ProjectView : Page 
     {
         SupabaseClient _client = new SupabaseClient();
         public ObservableCollection<Projects> Projects { get; set; }
@@ -44,31 +45,23 @@ namespace TNM.Pages
             }
         }
 
+        private void CardAction_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Wpf.Ui.Controls.CardAction cardAction)
+            {
+                // Получите данные проекта из DataContext
+                var project = cardAction.DataContext as Projects;
 
-        //private void EditProject_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var button = sender as Button;
-        //    var project = button?.DataContext as Projects;
-
-        //    if (project != null)
-        //    {
-        //        var mainWindow = Application.Current.MainWindow as MainMenu;
-        //        if (mainWindow != null)
-        //        {
-        //            // Добавим отладочный вывод
-        //            MessageBox.Show("Передача проекта в EditProject");
-
-        //            // Передаем проект в статическое свойство SelectedProject
-        //            EditProject.SelectedProject = project;
-
-        //            // Навигация на страницу EditProject
-        //            mainWindow.NavigationMenu.Navigate(typeof(EditProject));
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Проект не найден!");
-        //    }
-        //}
+                if (project != null)
+                {
+                    var editProjectPage = new EditProject(project);
+                    NavigationService?.Navigate(editProjectPage);
+                }
+                else
+                {
+                    MessageBox.Show("Не удалось получить данные проекта.");
+                }
+            }
+        }
     }
 }
