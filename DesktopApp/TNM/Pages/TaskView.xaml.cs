@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TNM.Models;
 
 namespace TNM.Pages
 {
@@ -14,7 +15,7 @@ namespace TNM.Pages
         private int tagColorIndex = 0;
         private int assignedColorIndex = 0;
 
-        public TaskView()
+        public TaskView(Tasks Task)
         {
             InitializeComponent();
             InitializeTaskView();
