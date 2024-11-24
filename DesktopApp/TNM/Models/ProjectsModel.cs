@@ -12,8 +12,8 @@ namespace TNM.Models
         [Column("projectname")]
         public string projectname { get; set; }
 
-        [Column("projectdescription")]
-        public string projectdescription { get; set; }
+        [Column("description")]
+        public string description { get; set; }
 
         [Column("createdat")]
         public DateTime CreatedAt { get; set; }

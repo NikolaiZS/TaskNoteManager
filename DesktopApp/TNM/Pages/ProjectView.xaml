@@ -54,7 +54,7 @@
                                     x:Name="ProjectDescription"
                                     Appearance="Secondary"
                                     Foreground="White"
-                                    Text="{Binding projectdescription}"
+                                    Text="{Binding description}"
                                     TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
                             </Grid>
