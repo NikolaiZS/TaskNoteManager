@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TNM.Models;
 
 namespace TNM
 {
@@ -94,5 +95,22 @@ namespace TNM
 
             return response != null;
         }
+        public async Task<List<Projects>> GetAllProjectsAsync()
+        {
+            var client = App.SupabaseService.GetClient();
+
+            try
+            {
+                // Получаем все проекты из таблицы "projects"
+                var response = await client.From<Projects>().Get();
+                return response.Models;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при получении проектов: {ex.Message}");
+                return new List<Projects>();
+            }
+        }
+
     }
 }

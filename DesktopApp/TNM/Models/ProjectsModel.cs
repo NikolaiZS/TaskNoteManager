@@ -3,9 +3,10 @@ using Supabase.Postgrest.Models;
 
 namespace TNM.Models
 {
-    public class ProjectsModel
+    [Table("projects")]
+    public class Projects : BaseModel
     {
-        [PrimaryKey("projectid")]
+        [PrimaryKey("projectid", false)]
         public int projectid { get; set; }
 
         [Column("projectname")]

@@ -13,7 +13,7 @@
     HorizontalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Vertical" Margin="10">
             <!-- Список проектов -->
-            <ItemsControl Name="ProjectList">
+            <ItemsControl Name="ProjectList" ItemsSource="{Binding Projects}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />
@@ -22,40 +22,39 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <!-- Шаблон данных -->
                         <ui:CardAction
-                        x:Name="CardAction"
-                        Margin="8"
-                        Padding="8"
-                        Command="{Binding EditCommand}"
-                        CommandParameter="{Binding}"
-                        IsChevronVisible="False">
+                            x:Name="CardAction"
+                            Margin="8"
+                            Padding="8"
+                            Command="{Binding EditCommand}"
+                            CommandParameter="{Binding}"
+                            IsChevronVisible="False">
                             <Grid x:Name="CardGrid">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Image
-                                x:Name="ProjectIcon"
-                                Width="60"
-                                Margin="24,0,0,0"
-                                Source="{Binding IconPath}" />
+                                    x:Name="ProjectIcon"
+                                    Width="60"
+                                    Margin="24,0,0,0"
+                                    Source="{Binding IconPath}" />
                                 <StackPanel
-                                x:Name="TextContainer"
-                                Grid.Column="1"
-                                Margin="24"
-                                VerticalAlignment="Center">
+                                    x:Name="TextContainer"
+                                    Grid.Column="1"
+                                    Margin="24"
+                                    VerticalAlignment="Center">
                                     <ui:TextBlock
-                                    x:Name="ProjectTitle"
-                                    FontTypography="BodyStrong"
-                                    Text="{Binding Title}"
-                                    Foreground="White"
-                                    TextWrapping="WrapWithOverflow" />
+                                        x:Name="ProjectTitle"
+                                        FontTypography="BodyStrong"
+                                        Text="{Binding projectname}"
+                                                    Foreground="White"
+                                        TextWrapping="WrapWithOverflow" />
                                     <ui:TextBlock
                                     x:Name="ProjectDescription"
                                     Appearance="Secondary"
                                     Foreground="White"
-                                    Text="{Binding Description}"
+                                    Text="{Binding projectdescription}"
                                     TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
                             </Grid>

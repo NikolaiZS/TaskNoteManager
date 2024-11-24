@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TNM.Menu;
+using TNM.Models;
 
 namespace TNM.Pages
 {
@@ -21,10 +23,14 @@ namespace TNM.Pages
     /// </summary>
     public partial class ProjectView : Page
     {
+        SupabaseClient _client = new SupabaseClient();
+        public ObservableCollection<Projects> Projects { get; set; }
         public ProjectView()
         {
             InitializeComponent();
-            //LoadProject();
+            Projects = new ObservableCollection<Projects>();
+            DataContext = this;
+            LoadProjects();
         }
 
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
@@ -32,18 +38,25 @@ namespace TNM.Pages
             MessageBox.Show("Test");
         }
 
-        //private void LoadProject()
-        //{
-        //    using (var context = new TaskNoteManagementDBEntities())
-        //    {
-        //        var projects = context.Projects
-        //            .Select(p => new { p.ProjectName, p.Description })
-        //            .ToList();
+        private async void LoadProjects()
+        {
+            try
+            {
+                var client = App.SupabaseService.GetClient();
+                var response = await client.From<Projects>().Get();
 
-        //        // Установите результат как ItemsSource для элемента UI
-        //        ProjectList.ItemsSource = projects;
-        //    }
-        //}
+                Projects.Clear();
+                foreach (var project in response.Models)
+                {
+                    Projects.Add(project);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки проектов: {ex.Message}");
+            }
+        }
+
 
         //private void EditProject_Click(object sender, RoutedEventArgs e)
         //{
