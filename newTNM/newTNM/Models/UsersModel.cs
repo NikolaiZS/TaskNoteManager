@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Supabase.Postgrest.Attributes;
+﻿using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 
 [Table("users")] // Таблица в базе данных

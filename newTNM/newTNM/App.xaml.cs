@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace newTNM
 {
@@ -25,7 +23,5 @@ namespace newTNM
         }
 
         public static SupabaseClient SupabaseService => _supabaseService;
-
     }
-
 }

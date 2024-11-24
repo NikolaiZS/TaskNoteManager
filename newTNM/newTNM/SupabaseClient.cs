@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Supabase;
+﻿using System.Windows;
 
 namespace newTNM
 {
@@ -68,10 +62,7 @@ namespace newTNM
             }
         }
 
-
-
         //            var response = await client.From<User>().Insert(newUser);
-
 
         public async Task<List<User>> GetUsersAsync()
         {
@@ -91,10 +82,9 @@ namespace newTNM
                 .Single();
             return response;
         }
+
         public async Task<bool> AuthenticateUserAsync(string username, string password)
         {
-
-
             // Ищем пользователя в таблице
             var response = await _client
                 .From<User>()
@@ -104,7 +94,5 @@ namespace newTNM
 
             return response != null;
         }
-
-
     }
 }

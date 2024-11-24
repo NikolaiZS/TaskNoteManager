@@ -1,20 +1,8 @@
-﻿using Supabase.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Wpf.Ui.Controls;
 
 namespace newTNM.Auth
 {
@@ -24,12 +12,14 @@ namespace newTNM.Auth
     public partial class Registration
     {
         private SupabaseClient _authClient;
+
         public Registration()
         {
             InitializeComponent();
             MainGrid.Background = GenerateAnimatedGradientBackground();
             _authClient = new SupabaseClient();
         }
+
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -50,6 +40,7 @@ namespace newTNM.Auth
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
         }
+
         public static LinearGradientBrush GenerateAnimatedGradientBackground()
         {
             var gradientBrush = new LinearGradientBrush
