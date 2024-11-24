@@ -1,11 +1,9 @@
 ﻿<Page x:Class="newTNM.Pages.TaskView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:newTNM.Pages" 
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      mc:Ignorable="d" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TaskView">
     <Grid Margin="20">
@@ -24,14 +22,14 @@
 
         <!-- Название задачи и статус -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,20">
-            <TextBlock 
-            Text="Название задачи" 
-            FontSize="22" 
-            FontWeight="Bold" 
-            Foreground="White" 
+            <TextBlock
+            Text="Название задачи"
+            FontSize="22"
+            FontWeight="Bold"
+            Foreground="White"
             VerticalAlignment="Center" />
 
-            <ComboBox 
+            <ComboBox
             x:Name="StatusComboBox"
             SelectionChanged="StatusComboBox_SelectionChanged"
             Margin="20,0,0,0"
@@ -44,22 +42,22 @@
         </StackPanel>
 
         <!-- Описание задачи -->
-        <TextBlock 
+        <TextBlock
         x:Name="TaskDescriptionTextBlock"
         Grid.Row="1"
-        Text="Описание задачи: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod sapien a magna gravida, ac aliquet lectus venenatis." 
-        FontSize="16" 
-        Foreground="White" 
-        TextWrapping="Wrap" 
+        Text="Описание задачи: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod sapien a magna gravida, ac aliquet lectus venenatis."
+        FontSize="16"
+        Foreground="White"
+        TextWrapping="Wrap"
         Margin="0,0,0,20" />
 
         <!-- Категории (теги) -->
         <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,0,0,20">
-            <TextBlock 
-            Text="Теги:" 
-            FontSize="18" 
-            FontWeight="Bold" 
-            Foreground="White" 
+            <TextBlock
+            Text="Теги:"
+            FontSize="18"
+            FontWeight="Bold"
+            Foreground="White"
             Margin="0,0,0,10" />
             <WrapPanel x:Name="TagsWrapPanel" />
             <Button Content="+" Width="30" Height="30" Click="AddTag_Click" Margin="0,5,0,0" />
@@ -67,20 +65,20 @@
 
         <!-- Отвечающие за задачу -->
         <StackPanel Grid.Row="3" Orientation="Vertical">
-            <TextBlock 
-            Text="Отвечает за задачу:" 
-            FontSize="18" 
-            FontWeight="Bold" 
-            Foreground="White" 
+            <TextBlock
+            Text="Отвечает за задачу:"
+            FontSize="18"
+            FontWeight="Bold"
+            Foreground="White"
             Margin="0,0,0,10" />
             <WrapPanel x:Name="AssignedWrapPanel" />
             <Button Content="+" Width="30" Height="30" Click="AddAssigned_Click" Margin="0,5,0,0" />
         </StackPanel>
 
         <!-- Кнопка редактировать -->
-        <Button 
+        <Button
         x:Name="EditTaskButton"
-        Content="Редактировать" 
+        Content="Редактировать"
         Grid.Row="4"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Bottom"

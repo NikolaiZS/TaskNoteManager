@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace newTNM.Pages
 {
@@ -29,6 +18,7 @@ namespace newTNM.Pages
             InitializeComponent();
             InitializeTaskView();
         }
+
         private void InitializeTaskView()
         {
             // Инициализация цветов
@@ -41,6 +31,7 @@ namespace newTNM.Pages
             };
             LoadInitialAssigned();
         }
+
         // Загрузка начальных назначенных
         private void LoadInitialAssigned()
         {
@@ -50,7 +41,6 @@ namespace newTNM.Pages
                 AddAssigned(person);
             }
         }
-
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
@@ -84,6 +74,7 @@ namespace newTNM.Pages
             // Вернуться на страницу списка проектов (пример)
             NavigationService?.GoBack();
         }
+
         // Добавить нового назначенного с уникальным цветом
         private void AddAssigned(string name)
         {
@@ -103,6 +94,7 @@ namespace newTNM.Pages
             AssignedWrapPanel.Children.Add(assigned);
             assignedColorIndex++; // Переходим к следующему цвету для следующего назначенного
         }
+
         private void AddAssigned_Click(object sender, RoutedEventArgs e)
         {
             AddAssigned("Новый человек");

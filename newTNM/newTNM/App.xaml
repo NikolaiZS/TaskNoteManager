@@ -9,13 +9,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
-                <ResourceDictionary Source="Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyle.xaml" />
                 <mui:ThemeResources />
                 <mui:XamlControlsResources />
-
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
-
     </Application.Resources>
 </Application>
