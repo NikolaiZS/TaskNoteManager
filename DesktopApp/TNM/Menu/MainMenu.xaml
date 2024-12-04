@@ -14,7 +14,6 @@
       WindowStartupLocation="CenterScreen"
       WindowStyle="None"
       Title="MainMenu">
-
     <Grid Cursor="">
         <Grid.RowDefinitions>
             <RowDefinition Name="HeaderRow" Height="40" />

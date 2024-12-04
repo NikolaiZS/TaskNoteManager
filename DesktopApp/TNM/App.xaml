@@ -9,7 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary />
                 <ui:ControlsDictionary />
-                <ResourceDictionary Source="Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="Styles/TNM.xaml" />
                 <mui:ThemeResources />
                 <mui:XamlControlsResources />
             </ResourceDictionary.MergedDictionaries>

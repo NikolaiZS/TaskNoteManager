@@ -20,8 +20,6 @@ namespace TNM
             string savedTheme = ConfigurationManager.AppSettings["ApplicationTheme"];
             ApplicationTheme initialTheme = savedTheme == "Dark" ? ApplicationTheme.Dark : ApplicationTheme.Light;
             ApplicationThemeManager.Apply(initialTheme);
-            // Применение темы
-            //ApplicationThemeManager.Apply(initialTheme);
 
             // Проверка текущей темы приложения
             var currentTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
