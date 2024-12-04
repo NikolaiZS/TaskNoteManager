@@ -1,16 +1,16 @@
 ﻿<ui:FluentWindow x:Class="TNM.Menu.MainMenu"
-                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:pages="clr-namespace:TNM.Pages"
-                 mc:Ignorable="d"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:local="clr-namespace:TNM.Styles"
+      xmlns:pages="clr-namespace:TNM.Pages"
+      mc:Ignorable="d"
       Height="650"
       Width="1000"
       MinHeight="500"
       MinWidth="900"
-      Background="Black"
       WindowStartupLocation="CenterScreen"
       WindowStyle="None"
       Title="MainMenu">
@@ -20,22 +20,8 @@
             <RowDefinition Name="HeaderRow" Height="40" />
             <RowDefinition Name="BodyRow" Height="1.5*" />
         </Grid.RowDefinitions>
-
         <!-- Верхняя панель с кнопками -->
-        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="#333333" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Minimize_Click">
-                    <ui:SymbolIcon Symbol="ArrowMinimize20" FontSize="20" />
-                </ui:Button>
-                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Maximize_Click">
-                    <ui:SymbolIcon Symbol="FullScreenMaximize20" FontSize="20" />
-                </ui:Button>
-                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Foreground="Red" Click="Close_Click">
-                    <ui:SymbolIcon Symbol="ArrowExit20" FontSize="20" />
-                </ui:Button>
-            </StackPanel>
-        </DockPanel>
-
+        <local:WindowControlBar />
         <!-- NavigationView с кнопками и областью отображения контента -->
         <ui:NavigationView x:Name="NavigationMenu" Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
             <ui:NavigationView.MenuItems>

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        xmlns:local="clr-namespace:TNM.Auth"
+        xmlns:local="clr-namespace:TNM.Styles"
         mc:Ignorable="d"
         Height="400"
         Width="400"
@@ -14,19 +14,7 @@
         MinHeight="410">
     <Grid Name="MainGrid">
         <!-- Панель заголовка с кнопками управления окнами (не масштабируется) -->
-        <DockPanel Grid.Row="0" Background="#333333" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Minimize_Click">
-                    <ui:SymbolIcon Symbol="ArrowMinimize20" FontSize="20" />
-                </ui:Button>
-                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Click="Maximize_Click">
-                    <ui:SymbolIcon Symbol="FullScreenMaximize20" FontSize="20" />
-                </ui:Button>
-                <ui:Button Style="{StaticResource WindowControlButtonStyle}" Foreground="Red" Click="Close_Click">
-                    <ui:SymbolIcon Symbol="ArrowExit20" FontSize="20" />
-                </ui:Button>
-            </StackPanel>
-        </DockPanel>
+        <local:WindowControlBar />
         <Viewbox Grid.Row="1" Stretch="Uniform">
             <!-- Содержимое окна, которое масштабируется по мере изменения размеров окна -->
             <Grid Grid.Row="1">

@@ -28,11 +28,13 @@
                     </Grid>
                 </ui:CardControl.Header>
                 <ComboBox
+                x:Name="ThemeComboBox"
+                SelectionChanged="ThemeComboBox_SelectionChanged"
                 Grid.Column="1"
                 MinWidth="200">
                     <!--SelectedIndex="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource ThemeToIndexConverter}, Mode=TwoWay}"-->
-                    <ComboBoxItem Content="Светлая" />
-                    <ComboBoxItem Content="Темная" />
+                    <ComboBoxItem Content="Светлая" Tag="Light" />
+                    <ComboBoxItem Content="Тёмная" Tag="Dark" />
                 </ComboBox>
             </ui:CardControl>
             <!--TEST-->

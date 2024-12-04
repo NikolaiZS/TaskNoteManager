@@ -20,62 +20,44 @@ namespace TNM.Auth
             _authClient = new SupabaseClient();
         }
 
-        private void Minimize_Click(object sender, RoutedEventArgs e)
+        public static RadialGradientBrush GenerateAnimatedGradientBackground()
         {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        private void Maximize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void TitleBar_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
-                this.DragMove();
-        }
-
-        public static LinearGradientBrush GenerateAnimatedGradientBackground()
-        {
-            var gradientBrush = new LinearGradientBrush
+            var gradientBrush = new RadialGradientBrush
             {
-                StartPoint = new Point(0, 0),
-                EndPoint = new Point(1, 1),
+                GradientOrigin = new Point(0.5, 0.5),
+                Center = new Point(0.5, 0.5),
+                RadiusX = 0.5,
+                RadiusY = 0.5,
                 GradientStops = new GradientStopCollection
-        {
-            new GradientStop(Color.FromRgb(15, 15, 25), 0.0),
-            new GradientStop(Color.FromRgb(20, 20, 30), 0.5),
-            new GradientStop(Color.FromRgb(10, 10, 20), 1.0)
-        }
+                {
+                    new GradientStop(Color.FromRgb(10, 10, 20), 0.0),
+                    new GradientStop(Color.FromRgb(20, 20, 30), 0.5),
+                    new GradientStop(Color.FromRgb(15, 15, 25), 1.0)
+                }
             };
-            var startPointAnimation = new PointAnimation
+
+            var radiusXAnimation = new DoubleAnimation
             {
-                From = new Point(0, 0),
-                To = new Point(1, 1),
-                Duration = new Duration(TimeSpan.FromSeconds(8)),
+                From = 0.4,
+                To = 0.6,
+                Duration = new Duration(TimeSpan.FromSeconds(6)),
                 RepeatBehavior = RepeatBehavior.Forever,
                 AutoReverse = true,
                 EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            var endPointAnimation = new PointAnimation
+            var radiusYAnimation = new DoubleAnimation
             {
-                From = new Point(1, 1),
-                To = new Point(0, 0),
-                Duration = new Duration(TimeSpan.FromSeconds(8)),
+                From = 0.4,
+                To = 0.6,
+                Duration = new Duration(TimeSpan.FromSeconds(6)),
                 RepeatBehavior = RepeatBehavior.Forever,
                 AutoReverse = true,
                 EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            gradientBrush.BeginAnimation(LinearGradientBrush.StartPointProperty, startPointAnimation);
-            gradientBrush.BeginAnimation(LinearGradientBrush.EndPointProperty, endPointAnimation);
+            gradientBrush.BeginAnimation(RadialGradientBrush.RadiusXProperty, radiusXAnimation);
+            gradientBrush.BeginAnimation(RadialGradientBrush.RadiusYProperty, radiusYAnimation);
 
             return gradientBrush;
         }
