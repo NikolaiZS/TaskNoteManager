@@ -65,7 +65,7 @@ namespace TNM.Pages
 
                 if (task != null)
                 {
-                    var ViewTaskPage = new TaskView(task);
+                    var ViewTaskPage = new TaskView(/*task*/);
                     NavigationService?.Navigate(ViewTaskPage);
                 }
                 else

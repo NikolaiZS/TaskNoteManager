@@ -15,7 +15,7 @@ namespace TNM.Pages
         private Projects _project;
 
         // Конструктор для передачи данных
-        public EditProject(Projects project)
+        public EditProject(/*Projects project*/)
         {
             InitializeComponent();
             InitializeTaskView();

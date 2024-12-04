@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
 using System.Configuration;
-using System.Windows;
 
 namespace TNM.Pages
 {
@@ -19,27 +19,27 @@ namespace TNM.Pages
         {
             if (ThemeComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag != null)
             {
-                string themeTag = selectedItem.Tag.ToString();
-                ApplicationTheme selectedTheme = themeTag == "Dark" ? ApplicationTheme.Dark : ApplicationTheme.Light;
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light, Wpf.Ui.Controls.WindowBackdropType.Mica, true);
+                //string themeTag = selectedItem.Tag.ToString();
+                //ApplicationTheme selectedTheme = themeTag == "Dark" ? ApplicationTheme.Dark : ApplicationTheme.Light;
 
-                // Применение темы
-                ApplicationThemeManager.Apply(selectedTheme);
+                //// Применение темы
+                //ApplicationThemeManager.Apply(selectedTheme);
 
-                // Проверка текущей темы
-                var currentTheme = ApplicationThemeManager.GetAppTheme();
-                MessageBox.Show($"Theme applied: {currentTheme}", "Theme Debug");
+                //// Проверка текущей темы
+                //var currentTheme = ApplicationThemeManager.GetAppTheme();
 
-                // Сохранение выбранной темы
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                if (config.AppSettings.Settings["ApplicationTheme"] != null)
-                {
-                    config.AppSettings.Settings["ApplicationTheme"].Value = themeTag;
-                }
-                else
-                {
-                    config.AppSettings.Settings.Add("ApplicationTheme", themeTag);
-                }
-                config.Save(ConfigurationSaveMode.Modified);
+                //// Сохранение выбранной темы
+                //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //if (config.AppSettings.Settings["ApplicationTheme"] != null)
+                //{
+                //    config.AppSettings.Settings["ApplicationTheme"].Value = themeTag;
+                //}
+                //else
+                //{
+                //    config.AppSettings.Settings.Add("ApplicationTheme", themeTag);
+                //}
+                //config.Save(ConfigurationSaveMode.Modified);
             }
         }
     }

@@ -9,10 +9,11 @@ namespace TNM.Pages
     /// <summary>
     // Логика взаимодействия для ProjectView.xaml
     /// </summary>
-    public partial class ProjectView : Page 
+    public partial class ProjectView : Page
     {
-        SupabaseClient _client = new SupabaseClient();
+        private SupabaseClient _client = new SupabaseClient();
         public ObservableCollection<Projects> Projects { get; set; }
+
         public ProjectView()
         {
             InitializeComponent();
@@ -54,7 +55,7 @@ namespace TNM.Pages
 
                 if (project != null)
                 {
-                    var editProjectPage = new EditProject(project);
+                    var editProjectPage = new EditProject(/*project*/);
                     NavigationService?.Navigate(editProjectPage);
                 }
                 else

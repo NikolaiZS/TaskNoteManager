@@ -15,7 +15,7 @@ namespace TNM.Pages
         private int tagColorIndex = 0;
         private int assignedColorIndex = 0;
 
-        public TaskView(Tasks Task)
+        public TaskView(/*Tasks Task*/)
         {
             InitializeComponent();
             InitializeTaskView();
