@@ -1,0 +1,69 @@
+﻿<ui:FluentWindow x:Class="TNM.Auth.Authorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:TNM.Styles"
+        mc:Ignorable="d"
+        Height="400"
+        Width="400"
+        Background="Black"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MinHeight="410">
+    <Grid Name="MainGrid">
+        <!-- Панель заголовка с кнопками управления окнами (не масштабируется) -->
+        <local:WindowControlBar />
+        <Viewbox Grid.Row="1" Stretch="Uniform">
+            <!-- Содержимое окна, которое масштабируется по мере изменения размеров окна -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Name="HeaderRow" Height="22" />
+                    <RowDefinition Name="BodyRow" Height="0.05*" />
+                    <RowDefinition Name="BodyRow1" Height="0.05*" />
+                    <RowDefinition Name="BodyRow2" Height="0.05*" />
+                    <RowDefinition Name="BodyRow3" Height="0.05*" />
+                    <RowDefinition Name="FooterRow" Height="0.12*" />
+                </Grid.RowDefinitions>
+
+                <!-- Логотип и заголовок -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ui:TextBlock Foreground="MediumVioletRed" Text="TNM" FontSize="48" FontWeight="Bold" Margin="0,0,0,0" />
+                    <Viewbox Width="50" Height="50" Margin="0,6,0,0">
+                        <ui:SymbolIcon Symbol="CalendarRtl48" Filled="True">
+                            <ui:SymbolIcon.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#c71585" Offset="0.0" />
+                                    <GradientStop Color="#3C00FF" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </ui:SymbolIcon.Foreground>
+                        </ui:SymbolIcon>
+                    </Viewbox>
+                </StackPanel>
+
+                <!-- Текстовая подсказка -->
+                <ui:TextBlock x:Name="assistBlock" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Войдите, чтобы продолжить" FontSize="12" Foreground="#a59b99" Margin="0,0,0,5" />
+
+                <!-- Поле для логина -->
+                <ui:TextBox x:Name="loginBox" Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите логин               " Margin="0,5,0,0" />
+
+                <!-- Поле для пароля -->
+                <ui:PasswordBox x:Name="passwordBox" Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5" />
+
+                <!-- Кнопки входа и регистрации -->
+                <ui:Button x:Name="LoginButton" Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,5,0,0" Click="LoginButton_Click">
+                    <Viewbox>
+                        <ui:TextBlock Text="Войти" />
+                    </Viewbox>
+                </ui:Button>
+
+                <ui:Button x:Name="RegistrationButton" Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,50,0,5" Click="RegistrationButton_Click">
+                    <Viewbox>
+                        <ui:TextBlock Text="Регистрация" />
+                    </Viewbox>
+                </ui:Button>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</ui:FluentWindow>
