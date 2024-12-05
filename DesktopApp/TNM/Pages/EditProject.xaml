@@ -10,12 +10,11 @@
       Title="EditProject">
     <Grid>
         <!-- Верхний заголовок -->
-        <TextBlock
+        <ui:TextBlock
             x:Name="Title"
             Text="Редактирование проекта"
             FontSize="28"
             FontWeight="Bold"
-            Foreground="White"
             Margin="20,20,0,0"
             HorizontalAlignment="Left" />
 
@@ -34,36 +33,31 @@
             </Grid.ColumnDefinitions>
 
             <!-- Поле для редактирования названия проекта -->
-            <TextBlock
+            <ui:TextBlock
             x:Name="ProjectNameTextBlock"
             Text="Название проекта:"
             FontSize="16"
-            Foreground="White"
             VerticalAlignment="Center"
             Grid.Row="0"
             Grid.Column="0"
             Margin="0,0,10,10" />
-            <TextBox
+            <ui:TextBox
             x:Name="ProjectNameTextBox"
             FontSize="14"
             Grid.Row="0"
             Grid.Column="1"
             VerticalAlignment="Center"
-            Margin="0,0,0,10"
-            Background="#333333"
-            Foreground="White"
-            BorderBrush="#555555" />
+            Margin="0,0,0,10" />
             <!-- Поле для редактирования описания проекта -->
-            <TextBlock
+            <ui:TextBlock
             x:Name="ProjectDescriptionTextBlock"
             Text="Описание проекта:"
             FontSize="16"
-            Foreground="White"
             VerticalAlignment="Top"
             Grid.Row="1"
             Grid.Column="0"
             Margin="0,10,10,0" />
-            <TextBox
+            <ui:TextBox
             x:Name="ProjectDescriptionTextBox"
             FontSize="14"
             Grid.Row="1"
@@ -72,10 +66,7 @@
             AcceptsReturn="True"
             VerticalScrollBarVisibility="Auto"
             TextWrapping="Wrap"
-            Height="100"
-            Background="#333333"
-            Foreground="White"
-            BorderBrush="#555555" />
+            Height="100" />
         </Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -84,18 +75,17 @@
             </Grid.RowDefinitions>
             <!-- Отвечающие за задачу -->
             <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" Margin="20,0,0,0">
-                <TextBlock
+                <ui:TextBlock
                 Text="Участники проекта:"
                 FontSize="18"
                 FontWeight="Bold"
-                Foreground="White"
                 Margin="0,0,0,10" />
                 <WrapPanel x:Name="AssignedWrapPanel" />
-                <Button Content="+" Width="30" Height="30" Click="AddAssigned_Click" Margin="0,5,0,0" />
+                <ui:Button Content="+" Width="35" Height="35" Click="AddAssigned_Click" Margin="0,5,0,0" />
             </StackPanel>
 
             <!-- Кнопка "Сохранить изменения" -->
-            <Button
+            <ui:Button
             x:Name="SaveChangesButton"
             Content="Сохранить изменения"
             Grid.Row="4"

@@ -37,6 +37,7 @@ namespace TNM.Auth
             else
             {
                 assistBlock.Text = "Неправильный логин или пароль";
+                assistBlock.Foreground = new SolidColorBrush(Colors.Red);
             }
         }
 

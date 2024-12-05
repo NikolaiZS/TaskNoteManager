@@ -89,6 +89,7 @@ namespace TNM.Auth
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 assistBox.Text = "Введите имя пользователя и пароль.";
+                assistBox.Foreground = new SolidColorBrush(Colors.Red);
                 return;
             }
 
