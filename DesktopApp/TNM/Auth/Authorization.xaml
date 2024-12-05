@@ -50,11 +50,12 @@
                 <!-- Поле для пароля -->
                 <ui:PasswordBox x:Name="passwordBox" Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5" />
 
-                <!-- Кнопки входа и регистрации -->
-                <ui:Button x:Name="LoginButton" Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,5,0,0" Click="LoginButton_Click">
-                    <Viewbox>
-                        <ui:TextBlock Text="Войти" />
-                    </Viewbox>
+                <ui:Button x:Name="LoginButton" Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,5,0,0" Click="LoginButton_Click" Visibility="Visible">
+                    <!-- Добавляем ProgressRing и TextBlock -->
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ui:ProgressRing x:Name="LoginProgressRing" Width="20" Height="20" Visibility="Hidden" />
+                        <TextBlock x:Name="LoginTextBlock" Visibility="Visible" Text="Войти" />
+                    </StackPanel>
                 </ui:Button>
 
                 <ui:Button x:Name="RegistrationButton" Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,50,0,5" Click="RegistrationButton_Click">

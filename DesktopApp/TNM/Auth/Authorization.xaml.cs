@@ -25,23 +25,47 @@ namespace TNM.Auth
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var username = loginBox.Text;
-            var password = passwordBox.Password;
-            string hashedpassword = HashPassword(password);
+            // Скрываем TextBlock и показываем ProgressRing
+            LoginTextBlock.Visibility = Visibility.Hidden;
+            LoginProgressRing.Visibility = Visibility.Visible;
 
-            var user = await _authClient.AuthenticateUserAsync(username, hashedpassword);
-            if (user != null)
+            // Деактивируем кнопку, чтобы предотвратить повторный клик
+            LoginButton.IsEnabled = false;
+
+            try
             {
-                int userId = user.UserId;
-                CurrentUser.CurrentUserId = userId;
-                MainMenu mainMenu = new MainMenu();
-                mainMenu.Show();
-                this.Close();
+                var username = loginBox.Text;
+                var password = passwordBox.Password;
+                string hashedpassword = HashPassword(password);
+
+                // Выполняем аутентификацию
+                var user = await _authClient.AuthenticateUserAsync(username, hashedpassword);
+                if (user != null)
+                {
+                    int userId = user.UserId;
+                    CurrentUser.CurrentUserId = userId;
+
+                    // Переход к следующему окну
+                    MainMenu mainMenu = new MainMenu();
+                    mainMenu.Show();
+                    this.Close();
+                }
+                else
+                {
+                    assistBlock.Text = "Неправильный логин или пароль";
+                    assistBlock.Foreground = new SolidColorBrush(Colors.Red);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                assistBlock.Text = "Неправильный логин или пароль";
-                assistBlock.Foreground = new SolidColorBrush(Colors.Red);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                // Возвращаем исходный вид
+                LoginButton.IsEnabled = true;
+                LoginTextBlock.Visibility = Visibility.Visible;
+                LoginProgressRing.Visibility = Visibility.Hidden;
             }
         }
 
