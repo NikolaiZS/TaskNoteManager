@@ -177,65 +177,36 @@ namespace TNM.Pages
 
         private void AddAssigned_Click(object sender, RoutedEventArgs e)
         {
-            // Создаем ComboBox для выбора пользователя
-            ComboBox userSelectionComboBox = new ComboBox
-            {
-                ItemsSource = systemUsers.Where(user => !IsUserAssigned(user)).ToList(), // Исключаем уже добавленных пользователей
-                Width = 200,
-                Margin = new Thickness(10)
-            };
+            // Получаем доступных для добавления пользователей
+            var availableUsers = systemUsers.Where(user => !IsUserAssigned(user)).ToList();
 
-            // Проверяем, есть ли вообще доступные пользователи для добавления
-            if (!userSelectionComboBox.Items.OfType<string>().Any())
+            // Проверяем, есть ли доступные пользователи
+            if (!availableUsers.Any())
             {
                 MessageBox.Show("Все пользователи уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            // Создаем окно с кнопкой подтверждения
-            Window popupWindow = new Window
+            // Заполняем ComboBox доступными пользователями
+            UserSelectionComboBox.ItemsSource = availableUsers;
+
+            // Показываем Flyout
+            UserSelectionFlyout.Show();
+        }
+
+        private void ConfirmUserSelection_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserSelectionComboBox.SelectedItem is string selectedUser)
             {
-                Title = "Выбор пользователя",
-                Content = new StackPanel
-                {
-                    Children =
-            {
-                new TextBlock
-                {
-                    Text = "Выберите пользователя:",
-                    Margin = new Thickness(10)
-                },
-                userSelectionComboBox,
-                new Button
-                {
-                    Content = "Добавить",
-                    Width = 100,
-                    Margin = new Thickness(10),
-                    HorizontalAlignment = HorizontalAlignment.Center
-                }
+                AddAssigned(selectedUser);
+
+                // Закрываем Flyout после добавления
+                UserSelectionFlyout.Hide();
             }
-                },
-                Width = 300,
-                Height = 200,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize
-            };
-
-            // Событие нажатия кнопки "Добавить"
-            ((Button)((StackPanel)popupWindow.Content).Children[2]).Click += (s, args) =>
+            else
             {
-                if (userSelectionComboBox.SelectedItem is string selectedUser)
-                {
-                    AddAssigned(selectedUser);
-                    popupWindow.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Пожалуйста, выберите пользователя.");
-                }
-            };
-
-            popupWindow.ShowDialog();
+                MessageBox.Show("Пожалуйста, выберите пользователя.", "Информация", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         // Метод проверки, добавлен ли пользователь

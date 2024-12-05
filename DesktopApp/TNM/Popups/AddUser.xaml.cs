@@ -17,19 +17,19 @@ namespace TNM.Popups
     /// <summary>
     /// Логика взаимодействия для AddUser.xaml
     /// </summary>
-    public partial class AddUser : Window
+    public partial class AddUser
     {
         private readonly List<string> systemUsers; // Список всех пользователей
         private readonly Func<string, bool> IsUserAssigned; // Метод проверки добавленных пользователей
         private readonly Action<string> AddAssigned; // Метод добавления пользователя
 
-        public AddUser(List<string> users, Func<string, bool> isUserAssigned, Action<string> addAssigned)
+        public AddUser(/*List<string> users, Func<string, bool> isUserAssigned, Action<string> addAssigned*/)
         {
             InitializeComponent();
 
-            systemUsers = users;
-            IsUserAssigned = isUserAssigned;
-            AddAssigned = addAssigned;
+            //systemUsers = users;
+            //IsUserAssigned = isUserAssigned;
+            //AddAssigned = addAssigned;
 
             // Заполнение ComboBox пользователями
             UserSelectionComboBox.ItemsSource = systemUsers.Where(user => !IsUserAssigned(user)).ToList();

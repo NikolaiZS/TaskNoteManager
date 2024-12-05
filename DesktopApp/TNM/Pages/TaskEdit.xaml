@@ -87,5 +87,12 @@
         Margin="0,20,0,0"
         FontSize="16"
         Click="EditTaskButton_Click" />
+        <ui:Flyout x:Name="UserSelectionFlyout" Placement="Mouse" Width="300">
+            <StackPanel>
+                <TextBlock Text="Выберите пользователя:" Margin="10" />
+                <ComboBox x:Name="UserSelectionComboBox" Width="250" Margin="10" />
+                <Button Content="Добавить" Width="100" Margin="10" HorizontalAlignment="Center" Click="ConfirmUserSelection_Click" />
+            </StackPanel>
+        </ui:Flyout>
     </Grid>
 </Page>
