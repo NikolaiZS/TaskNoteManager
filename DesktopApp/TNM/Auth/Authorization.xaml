@@ -14,6 +14,7 @@
     <Grid Name="MainGrid">
         <!-- Панель заголовка с кнопками управления окнами (не масштабируется) -->
         <ui:TitleBar />
+        <ui:SnackbarPresenter x:Name="SnackbarPresenter" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1" Margin="0,10,0,0" />
         <Viewbox Grid.Row="1" Stretch="Uniform">
             <!-- Содержимое окна, которое масштабируется по мере изменения размеров окна -->
             <Grid Grid.Row="1">
@@ -51,11 +52,10 @@
                 <ui:PasswordBox x:Name="passwordBox" Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5" />
 
                 <ui:Button x:Name="LoginButton" Grid.Row="5" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,5,0,0" Click="LoginButton_Click" Visibility="Visible">
-                    <!-- Добавляем ProgressRing и TextBlock -->
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ui:ProgressRing x:Name="LoginProgressRing" Width="20" Height="20" Visibility="Hidden" />
-                        <TextBlock x:Name="LoginTextBlock" Visibility="Visible" Text="Войти" />
-                    </StackPanel>
+                    <WrapPanel>
+                        <ui:TextBlock x:Name="LoginTextBlock" FontSize="22" Visibility="Visible" Margin="30,0,0,0" Text="Войти" />
+                        <ui:ProgressRing Margin="10,0,0,0" x:Name="LoginProgressRing" Width="20" Height="20" Visibility="Hidden" IsIndeterminate="True" />
+                    </WrapPanel>
                 </ui:Button>
 
                 <ui:Button x:Name="RegistrationButton" Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,50,0,5" Click="RegistrationButton_Click">

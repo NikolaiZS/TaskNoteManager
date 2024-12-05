@@ -10,6 +10,7 @@
     <ui:DynamicScrollViewer VerticalScrollBarVisibility="Auto"
     HorizontalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Vertical" Margin="10">
+            <ui:SnackbarPresenter x:Name="SnackbarPresenter" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1" Margin="0,10,0,0" />
             <!-- Список проектов -->
             <ItemsControl Name="TaskList" ItemsSource="{Binding _Tasks}">
                 <ItemsControl.ItemsPanel>

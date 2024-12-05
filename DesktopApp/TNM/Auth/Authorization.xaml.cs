@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TNM.Menu;
+using Wpf.Ui.Controls;
 
 namespace TNM.Auth
 {
@@ -26,7 +27,6 @@ namespace TNM.Auth
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // Скрываем TextBlock и показываем ProgressRing
-            LoginTextBlock.Visibility = Visibility.Hidden;
             LoginProgressRing.Visibility = Visibility.Visible;
 
             // Деактивируем кнопку, чтобы предотвратить повторный клик
@@ -58,13 +58,18 @@ namespace TNM.Auth
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Snackbar с ошибкой
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка: {ex.Message}",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
             finally
             {
                 // Возвращаем исходный вид
                 LoginButton.IsEnabled = true;
-                LoginTextBlock.Visibility = Visibility.Visible;
                 LoginProgressRing.Visibility = Visibility.Hidden;
             }
         }
