@@ -6,23 +6,23 @@ using TNM.Models;
 namespace TNM.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TaskView.xaml
+    /// Логика взаимодействия для TaskEdit.xaml
     /// </summary>
-    public partial class TaskView : Page
+    public partial class TaskEdit : Page
     {
         private List<SolidColorBrush> tagColors;
         private List<SolidColorBrush> assignedColors;
         private int tagColorIndex = 0;
         private int assignedColorIndex = 0;
 
-        public TaskView(/*Tasks Task*/)
+        public TaskEdit(/*Tasks Task*/)
         {
             InitializeComponent();
-            InitializeTaskView();
+            InitializeTaskEdit();
         }
 
         // Инициализация начальных данных
-        private void InitializeTaskView()
+        private void InitializeTaskEdit()
         {
             // Инициализация цветов
             tagColors = new List<SolidColorBrush>

@@ -22,13 +22,12 @@ namespace TNM.Pages
     /// </summary>
     public partial class ProjectPage : Page
     {
-        private SupabaseClient _client = new SupabaseClient();
-        public ObservableCollection<Tasks> Tasks { get; set; }
+        public ObservableCollection<Tasks> _Tasks { get; set; }
 
-        public ProjectPage()
+        public ProjectPage(Tasks Tasks)
         {
             InitializeComponent();
-            Tasks = new ObservableCollection<Tasks>();
+            _Tasks = new ObservableCollection<Tasks>();
             DataContext = this;
             LoadTasks();
         }
@@ -42,13 +41,14 @@ namespace TNM.Pages
         {
             try
             {
-                var client = App.SupabaseService.GetClient();
-                var response = await client.From<Tasks>().Get();
+                var _client = new SupabaseClient();
+                _client = App.SupabaseService.GetClient();
+                var response = await _client.From<Tasks>().Get();
 
-                Tasks.Clear();
+                _Tasks.Clear();
                 foreach (var task in response.Models)
                 {
-                    Tasks.Add(task);
+                    _Tasks.Add(task);
                 }
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace TNM.Pages
 
                 if (task != null)
                 {
-                    var ViewTaskPage = new TaskView(/*task*/);
+                    var ViewTaskPage = new TaskEdit(/*task*/);
                     NavigationService?.Navigate(ViewTaskPage);
                 }
                 else

@@ -4,6 +4,5 @@
         <ResourceDictionary Source="Accent.xaml" />
         <ResourceDictionary Source="ButtonStyle.xaml" />
         <ResourceDictionary Source="DarkTheme.xaml" />
-        <ResourceDictionary Source="LightTheme.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

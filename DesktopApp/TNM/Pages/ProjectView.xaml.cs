@@ -55,8 +55,8 @@ namespace TNM.Pages
 
                 if (project != null)
                 {
-                    var editProjectPage = new EditProject(/*project*/);
-                    NavigationService?.Navigate(editProjectPage);
+                    var ProjectPage = new ProjectPage();
+                    NavigationService?.Navigate(ProjectPage);
                 }
                 else
                 {
