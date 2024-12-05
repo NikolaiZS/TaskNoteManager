@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Configuration;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
@@ -17,7 +18,8 @@ namespace TNM.Auth
         public Authorization()
         {
             InitializeComponent();
-            MainGrid.Background = GenerateAnimatedGradientBackground();
+            var backgroundTheme = new ThemeBackgroundHelper();
+            MainGrid.Background = backgroundTheme.GetBackgroundForCurrentTheme();
             _authClient = new SupabaseClient();
         }
 
@@ -60,48 +62,6 @@ namespace TNM.Auth
                     builder.Append(b.ToString("x2"));
                 return builder.ToString();
             }
-        }
-
-        public static RadialGradientBrush GenerateAnimatedGradientBackground()
-        {
-            var gradientBrush = new RadialGradientBrush
-            {
-                GradientOrigin = new Point(0.5, 0.5),
-                Center = new Point(0.5, 0.5),
-                RadiusX = 0.5,
-                RadiusY = 0.5,
-                GradientStops = new GradientStopCollection
-                {
-                    new GradientStop(Color.FromRgb(10, 10, 20), 0.0),
-                    new GradientStop(Color.FromRgb(20, 20, 30), 0.5),
-                    new GradientStop(Color.FromRgb(15, 15, 25), 1.0)
-                }
-            };
-
-            var radiusXAnimation = new DoubleAnimation
-            {
-                From = 0.4,
-                To = 0.6,
-                Duration = new Duration(TimeSpan.FromSeconds(6)),
-                RepeatBehavior = RepeatBehavior.Forever,
-                AutoReverse = true,
-                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-            };
-
-            var radiusYAnimation = new DoubleAnimation
-            {
-                From = 0.4,
-                To = 0.6,
-                Duration = new Duration(TimeSpan.FromSeconds(6)),
-                RepeatBehavior = RepeatBehavior.Forever,
-                AutoReverse = true,
-                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-            };
-
-            gradientBrush.BeginAnimation(RadialGradientBrush.RadiusXProperty, radiusXAnimation);
-            gradientBrush.BeginAnimation(RadialGradientBrush.RadiusYProperty, radiusYAnimation);
-
-            return gradientBrush;
         }
     }
 }

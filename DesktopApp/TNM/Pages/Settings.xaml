@@ -7,7 +7,6 @@
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800"
     Title="Settings">
-
     <Grid>
         <StackPanel Margin="0,0,0,24">
             <ui:CardControl VerticalAlignment="Top" Margin="0,0,0,0" Icon="{ui:SymbolIcon Color24}">
@@ -24,7 +23,7 @@
                         <ui:TextBlock
                         Grid.Row="1"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="Выберете тему для отображения (необходима перезагрузка)" />
+                        Text="Выберете тему (необходима перезагрузка)" />
                     </Grid>
                 </ui:CardControl.Header>
                 <ComboBox
@@ -41,7 +40,8 @@
             Text="О нас"
             FontSize="20"
             Margin="15,20,0,8"
-             VerticalAlignment="Bottom" />
+            VerticalAlignment="Bottom"
+            Foreground="{DynamicResource TextPrimaryBrush}" />
             <ui:CardExpander ContentPadding="0" Icon="">
                 <ui:CardExpander.Header>
                     <Grid>

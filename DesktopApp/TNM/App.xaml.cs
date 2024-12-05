@@ -16,30 +16,10 @@ namespace TNM
         {
             base.OnStartup(e);
             await InitializeSupabase();
-            ApplyThemeFromConfig();
-        }
-
-        private void ApplyThemeFromConfig()
-        {
-            var themeValue = ConfigurationManager.AppSettings["ApplicationTheme"];
-
-            if (Enum.TryParse(themeValue, true, out ApplicationTheme theme))
-            {
-                ApplicationThemeManager.Apply(
-                    theme,
-                    Wpf.Ui.Controls.WindowBackdropType.None,
-                    false
-                );
-            }
-            else
-            {
-                // Тема по умолчанию
-                ApplicationThemeManager.Apply(
-                    ApplicationTheme.Dark,
-                    Wpf.Ui.Controls.WindowBackdropType.None,
-                    false
-                );
-            }
+            var theme = new ThemeBackgroundHelper();
+            var currentTheme = theme.GetCurrentTheme();
+            theme.ApplyThemeFromConfig();
+            theme.ApplyTheme(currentTheme);
         }
 
         private async Task InitializeSupabase()

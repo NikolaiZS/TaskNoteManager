@@ -7,8 +7,7 @@
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800"
     Title="ProjectPage">
-
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
+    <ui:DynamicScrollViewer VerticalScrollBarVisibility="Auto"
     HorizontalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Vertical" Margin="10">
             <!-- Список проектов -->
@@ -69,5 +68,5 @@
             VerticalAlignment="Bottom"
             Click="CreateNewTask_Click" />
         </StackPanel>
-    </ScrollViewer>
+    </ui:DynamicScrollViewer>
 </Page>
