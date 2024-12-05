@@ -27,9 +27,11 @@ namespace TNM.Auth
             var password = passwordBox.Password;
             string hashedpassword = HashPassword(password);
 
-            var authenticated = await _authClient.AuthenticateUserAsync(username, hashedpassword);
-            if (authenticated)
+            var user = await _authClient.AuthenticateUserAsync(username, hashedpassword);
+            if (user != null)
             {
+                int userId = user.UserId;
+                CurrentUser.CurrentUserId = userId;
                 MainMenu mainMenu = new MainMenu();
                 mainMenu.Show();
                 this.Close();

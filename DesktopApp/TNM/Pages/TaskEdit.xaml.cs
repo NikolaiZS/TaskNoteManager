@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using Supabase.Interfaces;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TNM.Models;
+using Wpf.Ui;
 
 namespace TNM.Pages
 {
@@ -14,11 +16,36 @@ namespace TNM.Pages
         private List<SolidColorBrush> assignedColors;
         private int tagColorIndex = 0;
         private int assignedColorIndex = 0;
+        private List<string> systemUsers;
 
         public TaskEdit(/*Tasks Task*/)
         {
             InitializeComponent();
             InitializeTaskEdit();
+        }
+
+        private async Task<List<string>> LoadUsersFromDatabaseAsync()
+        {
+            try
+            {
+                // Выполняем запрос к таблице "users"
+                var client = App.SupabaseService.GetClient();
+                var response = await client.From<Users>().Get();
+
+                if (response.Models != null)
+                {
+                    // Возвращаем список имен пользователей
+                    return response.Models
+                        .Select(user => user.Username)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке пользователей: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return new List<string>(); // Пустой список при ошибке
         }
 
         // Инициализация начальных данных
@@ -43,6 +70,7 @@ namespace TNM.Pages
             InitializeStatus();
             LoadInitialTags();
             LoadInitialAssigned();
+            LoadSystemUsers();
         }
 
         // Инициализация статуса задачи
@@ -141,9 +169,86 @@ namespace TNM.Pages
             assignedColorIndex++; // Переходим к следующему цвету для следующего назначенного
         }
 
+        private async void LoadSystemUsers()
+        {
+            var users = await LoadUsersFromDatabaseAsync();
+            systemUsers = users;
+        }
+
         private void AddAssigned_Click(object sender, RoutedEventArgs e)
         {
-            AddAssigned("Новый человек");
+            // Создаем ComboBox для выбора пользователя
+            ComboBox userSelectionComboBox = new ComboBox
+            {
+                ItemsSource = systemUsers.Where(user => !IsUserAssigned(user)).ToList(), // Исключаем уже добавленных пользователей
+                Width = 200,
+                Margin = new Thickness(10)
+            };
+
+            // Проверяем, есть ли вообще доступные пользователи для добавления
+            if (!userSelectionComboBox.Items.OfType<string>().Any())
+            {
+                MessageBox.Show("Все пользователи уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            // Создаем окно с кнопкой подтверждения
+            Window popupWindow = new Window
+            {
+                Title = "Выбор пользователя",
+                Content = new StackPanel
+                {
+                    Children =
+            {
+                new TextBlock
+                {
+                    Text = "Выберите пользователя:",
+                    Margin = new Thickness(10)
+                },
+                userSelectionComboBox,
+                new Button
+                {
+                    Content = "Добавить",
+                    Width = 100,
+                    Margin = new Thickness(10),
+                    HorizontalAlignment = HorizontalAlignment.Center
+                }
+            }
+                },
+                Width = 300,
+                Height = 200,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize
+            };
+
+            // Событие нажатия кнопки "Добавить"
+            ((Button)((StackPanel)popupWindow.Content).Children[2]).Click += (s, args) =>
+            {
+                if (userSelectionComboBox.SelectedItem is string selectedUser)
+                {
+                    AddAssigned(selectedUser);
+                    popupWindow.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите пользователя.");
+                }
+            };
+
+            popupWindow.ShowDialog();
+        }
+
+        // Метод проверки, добавлен ли пользователь
+        private bool IsUserAssigned(string userName)
+        {
+            foreach (var child in AssignedWrapPanel.Children)
+            {
+                if (child is Border border && border.Child is TextBlock textBlock && textBlock.Text == userName)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         // Обработка кнопки "Редактировать"

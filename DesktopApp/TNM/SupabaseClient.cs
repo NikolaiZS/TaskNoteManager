@@ -41,7 +41,7 @@ namespace TNM
         {
             var client = App.SupabaseService.GetClient();
 
-            var user = new User
+            var user = new Users
             {
                 Username = username,
                 Email = email,
@@ -54,7 +54,7 @@ namespace TNM
             try
             {
                 // Вставка объекта пользователя в базу
-                var response = await client.From<User>().Insert(new List<User> { user });
+                var response = await client.From<Users>().Insert(new List<Users> { user });
                 MessageBox.Show("Пользователь успешно добавлен.");
             }
             catch (Exception ex)
@@ -65,36 +65,36 @@ namespace TNM
 
         //            var response = await client.From<User>().Insert(newUser);
 
-        public async Task<List<User>> GetUsersAsync()
+        public async Task<List<Users>> GetUsersAsync()
         {
             var client = GetClient();
 
-            var response = await client.From<User>().Get();
+            var response = await client.From<Users>().Get();
             return response.Models.ToList();
         }
 
-        public async Task<User?> GetUserByUsernameAsync(string username)
+        public async Task<Users?> GetUserByUsernameAsync(string username)
         {
             var client = GetClient();
 
             var response = await client
-                .From<User>()
+                .From<Users>()
                 .Filter("username", Supabase.Postgrest.Constants.Operator.Equals, username)
                 .Single();
             return response;
         }
 
-        public async Task<bool> AuthenticateUserAsync(string username, string password)
+        public async Task<Users> AuthenticateUserAsync(string username, string password)
         {
-            // Ищем пользователя в таблице
             var response = await _client
-                .From<User>()
-                .Filter("username", Supabase.Postgrest.Constants.Operator.Equals, username)
-                .Filter("password", Supabase.Postgrest.Constants.Operator.Equals, password)
-                .Single();
+            .From<Users>()
+            .Filter("username", Supabase.Postgrest.Constants.Operator.Equals, username)
+            .Filter("password", Supabase.Postgrest.Constants.Operator.Equals, password)
+            .Single();
 
-            return response != null;
+            return response;
         }
+
         public async Task<List<Projects>> GetAllProjectsAsync()
         {
             var client = App.SupabaseService.GetClient();
@@ -111,6 +111,5 @@ namespace TNM
                 return new List<Projects>();
             }
         }
-
     }
 }

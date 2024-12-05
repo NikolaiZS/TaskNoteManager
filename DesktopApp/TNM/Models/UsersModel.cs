@@ -4,7 +4,7 @@ using Supabase.Postgrest.Models;
 namespace TNM.Models
 {
     [Table("users")]
-    public class User : BaseModel
+    public class Users : BaseModel
     {
         [PrimaryKey("userid")]
         public int UserId { get; set; }

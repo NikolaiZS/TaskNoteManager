@@ -12,7 +12,7 @@
     HorizontalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Vertical" Margin="10">
             <!-- Список проектов -->
-            <ItemsControl Name="TaskList" ItemsSource="{Binding Tasks}">
+            <ItemsControl Name="TaskList" ItemsSource="{Binding _Tasks}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />

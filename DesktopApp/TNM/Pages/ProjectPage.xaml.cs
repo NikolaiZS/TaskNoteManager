@@ -23,32 +23,48 @@ namespace TNM.Pages
     public partial class ProjectPage : Page
     {
         public ObservableCollection<Tasks> _Tasks { get; set; }
+        public int projectId = 1;
+        private readonly Projects _project;
 
-        public ProjectPage(Tasks Tasks)
+        public ProjectPage(Projects project)
         {
             InitializeComponent();
             _Tasks = new ObservableCollection<Tasks>();
             DataContext = this;
+            _project = project;
             LoadTasks();
         }
 
-        private void CreateNewTask_Click(object sender, RoutedEventArgs e)
+        private async void CreateNewTask_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Test");
+            //try
+            //{
+            //    var client = App.SupabaseService.GetClient();
+            //    var response = await client.
+            //}
         }
 
         private async void LoadTasks()
         {
             try
             {
-                var _client = new SupabaseClient();
-                _client = App.SupabaseService.GetClient();
-                var response = await _client.From<Tasks>().Get();
+                var client = App.SupabaseService.GetClient();
+                var response = await client.From<Tasks>()
+                                    .Filter("projectid", Supabase.Postgrest.Constants.Operator.Equals, _project.projectid)
+                                    .Select("taskid, title, description, createduserid, assigneduserid, tagsid, createdate, updatedate, status, priority")
+                                    .Get();
 
                 _Tasks.Clear();
-                foreach (var task in response.Models)
+                if (response.Models.Count == 0)
                 {
-                    _Tasks.Add(task);
+                    MessageBox.Show("None selected");
+                }
+                else
+                {
+                    foreach (var task in response.Models)
+                    {
+                        _Tasks.Add(task);
+                    }
                 }
             }
             catch (Exception ex)

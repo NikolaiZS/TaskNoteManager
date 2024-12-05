@@ -11,8 +11,8 @@ namespace TNM.Pages
     /// </summary>
     public partial class ProjectView : Page
     {
-        private SupabaseClient _client = new SupabaseClient();
         public ObservableCollection<Projects> Projects { get; set; }
+        private readonly int _userId;
 
         public ProjectView()
         {
@@ -20,6 +20,7 @@ namespace TNM.Pages
             Projects = new ObservableCollection<Projects>();
             DataContext = this;
             LoadProjects();
+            _userId = CurrentUser.CurrentUserId;
         }
 
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
@@ -55,7 +56,7 @@ namespace TNM.Pages
 
                 if (project != null)
                 {
-                    var ProjectPage = new ProjectPage();
+                    var ProjectPage = new ProjectPage(project);
                     NavigationService?.Navigate(ProjectPage);
                 }
                 else
