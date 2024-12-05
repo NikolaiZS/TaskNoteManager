@@ -14,12 +14,12 @@
       MinHeight="410">
     <Grid Name="MainGrid">
         <!-- Панель заголовка с кнопками управления окнами (не масштабируется) -->
-        <local:WindowControlBar />
+        <ui:TitleBar />
         <Viewbox Grid.Row="1" Stretch="Uniform">
             <!-- Содержимое окна, которое масштабируется по мере изменения размеров окна -->
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Name="HeaderRow" Height="22" />
+                    <RowDefinition Name="HeaderRow" Height="10" />
                     <RowDefinition Name="BodyRow" Height="0.05*" />
                     <RowDefinition Name="BodyRow1" Height="0.05*" />
                     <RowDefinition Name="BodyRow2" Height="0.05*" />
@@ -47,13 +47,13 @@
                 <ui:TextBlock x:Name="assistBox" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Зарегистрируйтесь, чтобы продолжить" FontSize="12" Foreground="#a59b99" Margin="0,0,0,5" />
 
                 <!-- Поле для логина -->
-                <ui:TextBox x:Name="loginBox" Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите логин               " Margin="0,5,0,5" />
+                <ui:TextBox x:Name="loginBox" Grid.Row="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите логин          " Margin="0,5,0,5" />
 
                 <!-- Поле для почты -->
-                <ui:TextBox x:Name="mailBox" Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите почту               " />
+                <ui:TextBox x:Name="mailBox" Grid.Row="4" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="14" PlaceholderEnabled="True" PlaceholderText="Введите почту          " />
 
                 <!-- Поле для пароля -->
-                <ui:PasswordBox x:Name="passwordBox" Grid.Row="5" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" FontSize="12" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5" />
+                <ui:PasswordBox x:Name="passwordBox" Grid.Row="5" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" PlaceholderEnabled="True" PlaceholderText="Введите пароль" Margin="0,5,0,5" />
 
                 <!-- Кнопки регистрации и возврата на страницу авторизации -->
                 <ui:Button x:Name="RegistrationButton" Grid.Row="6" HorizontalAlignment="Center" Width="250" Height="40" VerticalAlignment="Top" Margin="0,0,0,0" Click="RegistrationButton_Click">

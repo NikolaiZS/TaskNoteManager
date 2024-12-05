@@ -16,14 +16,30 @@ namespace TNM
         {
             base.OnStartup(e);
             await InitializeSupabase();
-            // Чтение сохранённой темы
-            string savedTheme = ConfigurationManager.AppSettings["ApplicationTheme"];
-            ApplicationTheme initialTheme = savedTheme == "Dark" ? ApplicationTheme.Dark : ApplicationTheme.Light;
-            ApplicationThemeManager.Apply(initialTheme);
+            ApplyThemeFromConfig();
+        }
 
-            // Проверка текущей темы приложения
-            var currentTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
-            MessageBox.Show($"Current application theme: {currentTheme}", "Application Theme");
+        private void ApplyThemeFromConfig()
+        {
+            var themeValue = ConfigurationManager.AppSettings["ApplicationTheme"];
+
+            if (Enum.TryParse(themeValue, true, out ApplicationTheme theme))
+            {
+                ApplicationThemeManager.Apply(
+                    theme,
+                    Wpf.Ui.Controls.WindowBackdropType.None,
+                    false
+                );
+            }
+            else
+            {
+                // Тема по умолчанию
+                ApplicationThemeManager.Apply(
+                    ApplicationTheme.Dark,
+                    Wpf.Ui.Controls.WindowBackdropType.None,
+                    false
+                );
+            }
         }
 
         private async Task InitializeSupabase()

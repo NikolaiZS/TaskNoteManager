@@ -16,11 +16,11 @@
       Title="MainMenu">
     <Grid Cursor="">
         <Grid.RowDefinitions>
-            <RowDefinition Name="HeaderRow" Height="40" />
+            <RowDefinition Name="HeaderRow" Height="30" />
             <RowDefinition Name="BodyRow" Height="1.5*" />
         </Grid.RowDefinitions>
         <!-- Верхняя панель с кнопками -->
-        <local:WindowControlBar />
+        <ui:TitleBar />
         <!-- NavigationView с кнопками и областью отображения контента -->
         <ui:NavigationView x:Name="NavigationMenu" Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
             <ui:NavigationView.MenuItems>

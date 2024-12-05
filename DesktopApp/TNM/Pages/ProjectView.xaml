@@ -49,12 +49,10 @@
                                         x:Name="ProjectTitle"
                                         FontTypography="BodyStrong"
                                         Text="{Binding projectname}"
-                                                    Foreground="White"
                                         TextWrapping="WrapWithOverflow" />
                                     <ui:TextBlock
                                     x:Name="ProjectDescription"
                                     Appearance="Secondary"
-                                    Foreground="White"
                                     Text="{Binding description}"
                                     TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
