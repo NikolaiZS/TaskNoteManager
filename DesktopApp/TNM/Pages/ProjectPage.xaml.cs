@@ -22,20 +22,26 @@ namespace TNM.Pages
     /// </summary>
     public partial class ProjectPage : Page
     {
-        private SupabaseClient _client = new SupabaseClient();
-        public ObservableCollection<Tasks> Tasks { get; set; }
+        public ObservableCollection<Tasks> _Tasks { get; set; }
+        public int projectId = 1;
+        private readonly Projects _project;
 
-        public ProjectPage()
+        public ProjectPage(Projects project)
         {
             InitializeComponent();
-            Tasks = new ObservableCollection<Tasks>();
+            _Tasks = new ObservableCollection<Tasks>();
             DataContext = this;
+            _project = project;
             LoadTasks();
         }
 
-        private void CreateNewTask_Click(object sender, RoutedEventArgs e)
+        private async void CreateNewTask_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Test");
+            //try
+            //{
+            //    var client = App.SupabaseService.GetClient();
+            //    var response = await client.
+            //}
         }
 
         private async void LoadTasks()
@@ -43,12 +49,22 @@ namespace TNM.Pages
             try
             {
                 var client = App.SupabaseService.GetClient();
-                var response = await client.From<Tasks>().Get();
+                var response = await client.From<Tasks>()
+                                    .Filter("projectid", Supabase.Postgrest.Constants.Operator.Equals, _project.projectid)
+                                    .Select("taskid, title, description, createduserid, assigneduserid, tagsid, createdate, updatedate, status, priority")
+                                    .Get();
 
-                Tasks.Clear();
-                foreach (var task in response.Models)
+                _Tasks.Clear();
+                if (response.Models.Count == 0)
                 {
-                    Tasks.Add(task);
+                    MessageBox.Show("None selected");
+                }
+                else
+                {
+                    foreach (var task in response.Models)
+                    {
+                        _Tasks.Add(task);
+                    }
                 }
             }
             catch (Exception ex)
@@ -65,7 +81,7 @@ namespace TNM.Pages
 
                 if (task != null)
                 {
-                    var ViewTaskPage = new TaskView(task);
+                    var ViewTaskPage = new TaskEdit(/*task*/);
                     NavigationService?.Navigate(ViewTaskPage);
                 }
                 else

@@ -10,20 +10,16 @@ namespace TNM
     /// </summary>
     public partial class App : Application
     {
-        private static SupabaseClient _supabaseService;
+        private static SupabaseClient? _supabaseService;
 
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             await InitializeSupabase();
-            // Чтение сохранённой темы
-            string savedTheme = ConfigurationManager.AppSettings["ApplicationTheme"];
-            ApplicationTheme initialTheme = savedTheme == "Dark" ? ApplicationTheme.Dark : ApplicationTheme.Light;
-            ApplicationThemeManager.Apply(initialTheme);
-
-            // Проверка текущей темы приложения
-            var currentTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
-            MessageBox.Show($"Current application theme: {currentTheme}", "Application Theme");
+            var theme = new ThemeBackgroundHelper();
+            var currentTheme = theme.GetCurrentTheme();
+            theme.ApplyThemeFromConfig();
+            theme.UpdateThemeResources(currentTheme);
         }
 
         private async Task InitializeSupabase()

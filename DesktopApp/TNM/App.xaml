@@ -10,8 +10,6 @@
                 <ui:ThemesDictionary />
                 <ui:ControlsDictionary />
                 <ResourceDictionary Source="Styles/TNM.xaml" />
-                <mui:ThemeResources />
-                <mui:XamlControlsResources />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

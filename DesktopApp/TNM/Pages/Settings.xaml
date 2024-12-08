@@ -1,14 +1,14 @@
 ﻿<Page x:Class="TNM.Pages.Settings"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:TNM.Pages" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Settings">
-
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TNM.Pages" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    mc:Ignorable="d"
+    d:DesignHeight="450" d:DesignWidth="800"
+    Title="Settings">
     <Grid>
+        <ui:SnackbarPresenter x:Name="SnackbarPresenter" VerticalAlignment="Bottom" HorizontalAlignment="Center" Panel.ZIndex="1" Margin="0,10,0,0" />
         <StackPanel Margin="0,0,0,24">
             <ui:CardControl VerticalAlignment="Top" Margin="0,0,0,0" Icon="{ui:SymbolIcon Color24}">
                 <ui:CardControl.Header>
@@ -18,13 +18,13 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <ui:TextBlock
-                Grid.Row="0"
-                FontTypography="Body"
-                Text="Тема приложения" />
+                        Grid.Row="0"
+                        FontTypography="Body"
+                        Text="Тема приложения" />
                         <ui:TextBlock
-                Grid.Row="1"
-                Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                Text="Выберете тему для отображения" />
+                        Grid.Row="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Выберете тему (необходима перезагрузка)" />
                     </Grid>
                 </ui:CardControl.Header>
                 <ComboBox
@@ -32,16 +32,18 @@
                 SelectionChanged="ThemeComboBox_SelectionChanged"
                 Grid.Column="1"
                 MinWidth="200">
-                    <!--SelectedIndex="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource ThemeToIndexConverter}, Mode=TwoWay}"-->
-                    <ComboBoxItem Content="Светлая" Tag="Light" />
                     <ComboBoxItem Content="Тёмная" Tag="Dark" />
+                    <ComboBoxItem Content="Светлая" Tag="Light" />
+                    <ComboBoxItem Content="Высокий контраст" Tag="HighContrast" />
                 </ComboBox>
             </ui:CardControl>
             <!--TEST-->
             <ui:TextBlock
-            Margin="0,24,0,8"
-            FontTypography="BodyStrong"
-            Text="О нас" Foreground="White" VerticalAlignment="Bottom" />
+            Text="О нас"
+            FontSize="20"
+            Margin="15,20,0,8"
+            VerticalAlignment="Bottom"
+            Foreground="{DynamicResource TextPrimaryBrush}" />
             <ui:CardExpander ContentPadding="0" Icon="">
                 <ui:CardExpander.Header>
                     <Grid>
@@ -56,20 +58,17 @@
                         <ui:TextBlock
                         Grid.Row="0"
                         Grid.Column="0"
-                        FontTypography="Body"
                         Text="TNM" />
                         <ui:TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="© 2024 TNM" />
-                        <TextBlock
+                        <ui:TextBlock
                         Grid.Row="0"
                         Grid.RowSpan="2"
                         Grid.Column="1"
                         Margin="0,0,16,0"
                         VerticalAlignment="Center"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
                     </Grid>
                 </ui:CardExpander.Header>
@@ -79,10 +78,9 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Исходный код" />
-                        <TextBlock
+                        <ui:TextBlock Grid.Column="0" Text="Исходный код" />
+                        <ui:TextBlock
                         Grid.Column="1"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="https://github.com/NikolaiZS/TaskNoteManager" />
                     </Grid>
                     <ui:Anchor
@@ -99,7 +97,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Отправить отчет об ошибке" />
+                            <ui:TextBlock Grid.Column="0" Text="Отправить отчет об ошибке" />
                             <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
                         </Grid>
                     </ui:Anchor>
@@ -121,7 +119,7 @@
                             <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
                         </Grid>
                     </ui:Anchor>
-                    <TextBlock Margin="16" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+                    <ui:TextBlock Margin="16" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
                 </StackPanel>
             </ui:CardExpander>
         </StackPanel>
