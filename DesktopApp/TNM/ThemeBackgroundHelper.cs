@@ -21,13 +21,10 @@ namespace TNM
             return ConfigurationManager.AppSettings["ApplicationTheme"] ?? "Dark";
         }
 
-        public void ApplyTheme(string theme)
-        {
-            // Обновляем фон и другие визуальные элементы
-            UpdateThemeResources(theme);
-        }
-
-        public static void UpdateThemeResources(string theme)
+        /// <summary>
+        /// Динамически обновляет цвет brush в зависимости от темы
+        /// </summary>
+        public void UpdateThemeResources(string theme)
         {
             var resources = Application.Current.Resources;
 
@@ -131,6 +128,9 @@ namespace TNM
             gradientBrush.BeginAnimation(RadialGradientBrush.RadiusYProperty, radiusYAnimation);
         }
 
+        /// <summary>
+        /// Обновляет фон и другие визуальные элементы из конфига
+        /// </summary>
         public void ApplyThemeFromConfig()
         {
             var themeValue = ConfigurationManager.AppSettings["ApplicationTheme"];
@@ -152,6 +152,17 @@ namespace TNM
                     false
                 );
             }
+        }
+
+        /// <summary>
+        /// Обновляет значение ApplicationTheme в App.config.
+        /// </summary>
+        public void UpdateThemeInConfig(string newTheme)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["ApplicationTheme"].Value = newTheme;
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }
