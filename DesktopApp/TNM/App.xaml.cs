@@ -19,7 +19,7 @@ namespace TNM
             var theme = new ThemeBackgroundHelper();
             var currentTheme = theme.GetCurrentTheme();
             theme.ApplyThemeFromConfig();
-            theme.ApplyTheme(currentTheme);
+            theme.UpdateThemeResources(currentTheme);
         }
 
         private async Task InitializeSupabase()
