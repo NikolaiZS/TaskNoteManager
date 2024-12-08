@@ -79,7 +79,7 @@ namespace TNM
 
             var response = await client
                 .From<Users>()
-                .Filter("username", Supabase.Postgrest.Constants.Operator.Equals, username)
+                .Filter("username", Op.Eq, username)
                 .Single();
             return response;
         }
@@ -88,8 +88,8 @@ namespace TNM
         {
             var response = await _client
             .From<Users>()
-            .Filter("username", Supabase.Postgrest.Constants.Operator.Equals, username)
-            .Filter("password", Supabase.Postgrest.Constants.Operator.Equals, password)
+            .Filter("username", Op.Eq, username)
+            .Filter("password", Op.Eq, password)
             .Single();
 
             return response;

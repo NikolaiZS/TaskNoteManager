@@ -50,7 +50,7 @@ namespace TNM.Pages
             {
                 var client = App.SupabaseService.GetClient();
                 var response = await client.From<Tasks>()
-                                    .Filter("projectid", Supabase.Postgrest.Constants.Operator.Equals, _project.projectid)
+                                    .Filter("projectid", Op.Eq, _project.projectid)
                                     .Select("taskid, title, description, createduserid, assigneduserid, tagsid, createdate, updatedate, status, priority")
                                     .Get();
 

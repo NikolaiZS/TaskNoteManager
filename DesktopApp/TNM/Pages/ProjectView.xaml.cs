@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using Supabase.Postgrest.Interfaces;
+using Supabase.Postgrest;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using TNM.Models;
@@ -19,8 +21,8 @@ namespace TNM.Pages
             InitializeComponent();
             Projects = new ObservableCollection<Projects>();
             DataContext = this;
-            LoadProjects();
             _userId = CurrentUser.CurrentUserId;
+            LoadProjects();
         }
 
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
@@ -33,17 +35,38 @@ namespace TNM.Pages
             try
             {
                 var client = App.SupabaseService.GetClient();
-                var response = await client.From<Projects>().Get();
+                await client.InitializeAsync();
 
+                // Получаем проекты, где пользователь является владельцем
+                var ownerProjects = await client.From<Projects>()
+                    .Filter("ownerid", Op.Eq, _userId)
+                    .Get();
+
+                // Получаем projectid, где пользователь является работником
+                var projectWorkers = await client.From<ProjectWorker>()
+                    .Filter("workerid", Op.Eq, _userId)
+                    .Get();
+
+                var projectIds = projectWorkers.Models.Select(pw => pw.projectid).ToList();
+
+                // Добавляем проекты, где пользователь является работником
+                var workerProjects = await client.From<Projects>()
+                    .Filter("projectid", Op.In, projectIds)
+                    .Get();
+
+                // Объединяем результаты
+                var finalProjects = ownerProjects.Models.Union(workerProjects.Models);
                 Projects.Clear();
-                foreach (var project in response.Models)
+
+                // Добавляем проекты в коллекцию
+                foreach (var project in finalProjects)
                 {
                     Projects.Add(project);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки проектов: {ex.Message}");
+                MessageBox.Show(ex.Message);
             }
         }
 
