@@ -15,6 +15,7 @@ namespace TNM.Menu
         public MainMenu()
         {
             InitializeComponent();
+            Loaded += (_, _) => NavigationMenu.Navigate(typeof(ProjectView));
         }
     }
 }
