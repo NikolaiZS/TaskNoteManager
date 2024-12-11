@@ -27,7 +27,6 @@ namespace TNM.Pages
 
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Test");
         }
 
         private async void LoadProjects()

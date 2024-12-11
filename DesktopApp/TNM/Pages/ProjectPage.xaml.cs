@@ -35,13 +35,13 @@ namespace TNM.Pages
             LoadTasks();
         }
 
-        private async void CreateNewTask_Click(object sender, RoutedEventArgs e)
+        private void CreateNewTask_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    var client = App.SupabaseService.GetClient();
-            //    var response = await client.
-            //}
+            if (sender is Wpf.Ui.Controls.Button)
+            {
+                var createTask = new CreateTask();
+                NavigationService?.Navigate(createTask);
+            }
         }
 
         private async void LoadTasks()
