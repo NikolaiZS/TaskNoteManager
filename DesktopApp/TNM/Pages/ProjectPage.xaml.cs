@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TNM.Models;
 
 namespace TNM.Pages
@@ -23,15 +14,14 @@ namespace TNM.Pages
     public partial class ProjectPage : Page
     {
         public ObservableCollection<Tasks> _Tasks { get; set; }
-        public int projectId = 1;
-        private readonly Projects _project;
+        public Projects SelectedProject { get; private set; }
 
         public ProjectPage(Projects project)
         {
             InitializeComponent();
             _Tasks = new ObservableCollection<Tasks>();
             DataContext = this;
-            _project = project;
+            SelectedProject = project;
             LoadTasks();
         }
 
@@ -50,14 +40,14 @@ namespace TNM.Pages
             {
                 var client = App.SupabaseService.GetClient();
                 var response = await client.From<Tasks>()
-                                    .Filter("projectid", Op.Eq, _project.ProjectId)
+                                    .Filter("projectid", Op.Eq, SelectedProject.ProjectId)
                                     .Select("taskid, title, description, createduserid, createdate, updatedate, taskstatusid, priority")
                                     .Get();
 
                 _Tasks.Clear();
                 if (response.Models.Count == 0)
                 {
-                    MessageBox.Show("None selected");
+                    MessageBox.Show("Задач нет.");
                 }
                 else
                 {
@@ -69,7 +59,7 @@ namespace TNM.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки задач: {ex.Message}");
+                MessageBox.Show($"Error loading tasks: {ex.Message}");
             }
         }
 
@@ -81,8 +71,8 @@ namespace TNM.Pages
 
                 if (task != null)
                 {
-                    var ViewTaskPage = new TaskEdit(/*task*/);
-                    NavigationService?.Navigate(ViewTaskPage);
+                    var viewTaskPage = new TaskEdit();
+                    NavigationService?.Navigate(viewTaskPage);
                 }
                 else
                 {

@@ -90,7 +90,7 @@
         <ui:Flyout x:Name="UserSelectionFlyout" Placement="Mouse" Width="300">
             <StackPanel>
                 <TextBlock Text="Выберите пользователя:" Margin="10" Foreground="{DynamicResource TextPrimaryBrush}" />
-                <ComboBox x:Name="UserSelectionComboBox" Width="250" Margin="10" />
+                <ui:ListView x:Name="UserSelectionListView" Margin="10" MaxHeight="200" SelectionMode="Single" />
                 <Button Content="Добавить" Width="100" Margin="10" HorizontalAlignment="Center" Click="ConfirmUserSelection_Click" />
             </StackPanel>
         </ui:Flyout>

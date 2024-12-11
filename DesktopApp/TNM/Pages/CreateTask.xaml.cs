@@ -30,6 +30,7 @@ namespace TNM.Pages
         public CreateTask()
         {
             InitializeComponent();
+            InitializeTaskEdit();
         }
 
         private async Task<List<string>> LoadUsersFromDatabaseAsync()
@@ -195,8 +196,8 @@ namespace TNM.Pages
                 return;
             }
 
-            // Заполняем ComboBox доступными пользователями
-            UserSelectionComboBox.ItemsSource = availableUsers;
+            // Заполняем ListView доступными пользователями
+            UserSelectionListView.ItemsSource = availableUsers;
 
             // Показываем Flyout
             UserSelectionFlyout.Show();
@@ -204,7 +205,7 @@ namespace TNM.Pages
 
         private void ConfirmUserSelection_Click(object sender, RoutedEventArgs e)
         {
-            if (UserSelectionComboBox.SelectedItem is string selectedUser)
+            if (UserSelectionListView.SelectedItem is string selectedUser)
             {
                 AddAssigned(selectedUser);
 
