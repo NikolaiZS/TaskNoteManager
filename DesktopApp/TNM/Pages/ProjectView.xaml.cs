@@ -51,7 +51,7 @@ namespace TNM.Pages
                     .Filter("workerid", Op.Eq, _userId)
                     .Get();
 
-                var projectIds = projectWorkers.Models.Select(pw => pw.projectid).ToList();
+                var projectIds = projectWorkers.Models.Select(pw => pw.ProjectId).ToList();
 
                 // Добавляем проекты, где пользователь является работником
                 var workerProjects = await client.From<Projects>()

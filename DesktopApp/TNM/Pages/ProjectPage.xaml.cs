@@ -50,8 +50,8 @@ namespace TNM.Pages
             {
                 var client = App.SupabaseService.GetClient();
                 var response = await client.From<Tasks>()
-                                    .Filter("projectid", Op.Eq, _project.projectid)
-                                    .Select("taskid, title, description, createduserid, assigneduserid, tagsid, createdate, updatedate, status, priority")
+                                    .Filter("projectid", Op.Eq, _project.ProjectId)
+                                    .Select("taskid, title, description, createduserid, createdate, updatedate, taskstatusid, priority")
                                     .Get();
 
                 _Tasks.Clear();

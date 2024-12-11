@@ -7,13 +7,13 @@ namespace TNM.Models
     public class Projects : BaseModel
     {
         [PrimaryKey("projectid", false)]
-        public int projectid { get; set; }
+        public int ProjectId { get; set; }
 
         [Column("projectname")]
-        public string projectname { get; set; }
+        public string Projectname { get; set; }
 
         [Column("description")]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [Column("createdat")]
         public DateTime CreatedAt { get; set; }
@@ -22,6 +22,6 @@ namespace TNM.Models
         public DateTime? UpdatedAt { get; set; }
 
         [Column("ownerid")]
-        public int ownerid { get; set; }
+        public int OwnerId { get; set; }
     }
 }

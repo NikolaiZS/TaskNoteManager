@@ -56,12 +56,12 @@
                                     <ui:TextBlock
                                         x:Name="ProjectTitle"
                                         FontTypography="BodyStrong"
-                                        Text="{Binding projectname}"
+                                        Text="{Binding Projectname}"
                                         TextWrapping="WrapWithOverflow" />
                                     <ui:TextBlock
                                     x:Name="ProjectDescription"
                                     Appearance="Secondary"
-                                    Text="{Binding description}"
+                                    Text="{Binding Description}"
                                     TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
                             </Grid>

@@ -46,12 +46,12 @@
                                     <ui:TextBlock
                                     x:Name="TaskTitle"
                                     FontTypography="BodyStrong"
-                                    Text="{Binding title}"
+                                    Text="{Binding Title}"
                                     TextWrapping="WrapWithOverflow" />
                                     <ui:TextBlock
                                     x:Name="TaskDescription"
                                     Appearance="Secondary"
-                                    Text="{Binding description}"
+                                    Text="{Binding Description}"
                                     TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
                             </Grid>

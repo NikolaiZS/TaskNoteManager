@@ -12,12 +12,12 @@ namespace TNM.Models
     public class ProjectWorker : BaseModel
     {
         [PrimaryKey("projectworkerid", false)]
-        public int projectworkerid { get; set; }
+        public int ProjectworkerId { get; set; }
 
         [Column("projectid")]
-        public int projectid { get; set; }
+        public int ProjectId { get; set; }
 
         [Column("workerid")]
-        public int workerid { get; set; }
+        public int WorkerId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TNM.Models;
@@ -15,7 +16,7 @@ namespace TNM.Pages
         private Projects _project;
 
         // Конструктор для передачи данных
-        public EditProject(/*Projects project*/)
+        public EditProject()
         {
             InitializeComponent();
             InitializeTaskView();
@@ -50,23 +51,26 @@ namespace TNM.Pages
             string projectDescription = ProjectDescriptionTextBox.Text.Trim();
 
             // Проверка на пустое название
-            if (string.IsNullOrWhiteSpace(projectName))
-            {
-                MessageBox.Show("Введите название проекта", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            StringBuilder errorMessages = new StringBuilder();
 
-            // Проверка длины названия
-            if (projectName.Length > 20)
+            if (string.IsNullOrWhiteSpace(projectName) || projectName.Length > 20 || projectDescription.Length > 100)
             {
-                MessageBox.Show("Название проекта не должно превышать 20 символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+                if (string.IsNullOrWhiteSpace(projectName))
+                {
+                    errorMessages.AppendLine("Введите название проекта.");
+                }
 
-            // Проверка длины описания
-            if (projectDescription.Length > 100)
-            {
-                MessageBox.Show("Описание проекта не должно превышать 100 символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (projectName.Length > 20)
+                {
+                    errorMessages.AppendLine("Название проекта не должно превышать 20 символов.");
+                }
+
+                if (projectDescription.Length > 100)
+                {
+                    errorMessages.AppendLine("Описание проекта не должно превышать 100 символов.");
+                }
+
+                MessageBox.Show(errorMessages.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

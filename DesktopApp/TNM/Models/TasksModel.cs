@@ -7,39 +7,33 @@ namespace TNM.Models
     public class Tasks : BaseModel
     {
         [PrimaryKey("taskid")]
-        public int taskid { get; set; }
+        public int TaskId { get; set; }
 
         [Column("projectid")]
-        public int projectid { get; set; }
+        public int ProjectId { get; set; }
 
         [Column("title")]
-        public string title { get; set; }
+        public string Title { get; set; }
 
         [Column("description")]
-        public string description { get; set; }
-
-        [Column("assigneduserid")]
-        public int assigneduserid { get; set; }
+        public string Description { get; set; }
 
         [Column("createduserid")]
-        public int createduserid { get; set; }
+        public int CreateduserId { get; set; }
 
-        [Column("status")]
-        public string status { get; set; }
+        [Column("taskstatusid")]
+        public string TaskStatusId { get; set; }
 
         [Column("priority")]
-        public string priority { get; set; }
+        public string Priority { get; set; }
 
         [Column("duedate")]
-        public DateTime duedate { get; set; }
+        public DateTime Duedate { get; set; }
 
         [Column("createdate")]
-        public DateTime createdate { get; set; }
+        public DateTime CreateDate { get; set; }
 
         [Column("updatedate")]
-        public DateTime updateddate { get; set; }
-
-        [Column("tagsid")]
-        public int tagsid { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

@@ -35,11 +35,11 @@ namespace TNM.Pages
                 var client = App.SupabaseService.GetClient();
                 var project = new Projects
                 {
-                    projectname = projectName,
-                    description = projectDescription,
+                    Projectname = projectName,
+                    Description = projectDescription,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                    ownerid = CurrentUser.CurrentUserId
+                    OwnerId = CurrentUser.CurrentUserId
                 };
                 var response = await client.From<Projects>().Insert(project);
                 MessageBox.Show($"{response.ResponseMessage}");
