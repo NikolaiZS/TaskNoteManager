@@ -20,5 +20,8 @@ namespace TNM.Models
 
         [Column("updatedat")]
         public DateTime? UpdatedAt { get; set; }
+
+        [Column("ownerid")]
+        public int ownerid { get; set; }
     }
 }

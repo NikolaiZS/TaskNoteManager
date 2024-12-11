@@ -63,7 +63,7 @@
             </ItemsControl>
 
             <!-- Кнопка создания нового проекта -->
-            <Button Content="Создать новый проект"
+            <ui:Button Content="Создать новый проект"
             Margin="8"
             Height="50"
             FontSize="16"

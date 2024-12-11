@@ -27,7 +27,11 @@ namespace TNM.Pages
 
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Test");
+            if (sender is Wpf.Ui.Controls.Button)
+            {
+                var createProject = new CreateProject();
+                NavigationService?.Navigate(createProject);
+            }
         }
 
         private async void LoadProjects()
