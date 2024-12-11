@@ -1,0 +1,237 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using TNM.Models;
+
+namespace TNM.Pages
+{
+    /// <summary>
+    /// Логика взаимодействия для CreateTask.xaml
+    /// </summary>
+    public partial class CreateTask : Page
+    {
+        private List<SolidColorBrush> tagColors;
+        private List<SolidColorBrush> assignedColors;
+        private int tagColorIndex = 0;
+        private int assignedColorIndex = 0;
+        private List<string> systemUsers;
+
+        public CreateTask()
+        {
+            InitializeComponent();
+        }
+
+        private async Task<List<string>> LoadUsersFromDatabaseAsync()
+        {
+            try
+            {
+                // Выполняем запрос к таблице "users"
+                var client = App.SupabaseService.GetClient();
+                var response = await client.From<Users>().Get();
+
+                if (response.Models != null)
+                {
+                    // Возвращаем список имен пользователей
+                    return response.Models
+                        .Select(user => user.Username)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке пользователей: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return new List<string>(); // Пустой список при ошибке
+        }
+
+        // Инициализация начальных данных
+        private void InitializeTaskEdit()
+        {
+            // Инициализация цветов
+            tagColors = new List<SolidColorBrush>
+            {
+                new SolidColorBrush(Color.FromRgb(0, 122, 204)), // Синий
+                new SolidColorBrush(Color.FromRgb(255, 165, 0)), // Оранжевый
+                new SolidColorBrush(Color.FromRgb(50, 205, 50)), // Зеленый
+                new SolidColorBrush(Color.FromRgb(255, 99, 71)),  // Красный
+            };
+
+            assignedColors = new List<SolidColorBrush>
+            {
+                new SolidColorBrush(Color.FromRgb(255, 99, 71)),   // Красный
+                new SolidColorBrush(Color.FromRgb(0, 122, 204)),  // Синий
+                new SolidColorBrush(Color.FromRgb(255, 165, 0)),  // Оранжевый
+                new SolidColorBrush(Color.FromRgb(50, 205, 50)),  // Зеленый
+            };
+            InitializeStatus();
+            LoadInitialTags();
+            LoadInitialAssigned();
+            LoadSystemUsers();
+        }
+
+        // Инициализация статуса задачи
+        private void InitializeStatus()
+        {
+            StatusComboBox.SelectedIndex = 0;
+            UpdateStatusBackground();
+        }
+
+        // Обновление цвета статуса
+        private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateStatusBackground();
+        }
+
+        private void UpdateStatusBackground()
+        {
+            if (StatusComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                var status = selectedItem.Content.ToString();
+                Brush background = status switch
+                {
+                    "В процессе" => new SolidColorBrush(Color.FromRgb(255, 165, 0)), // Оранжевый
+                    "Выполнено" => new SolidColorBrush(Color.FromRgb(50, 205, 50)),  // Зеленый
+                    "Отменено" => new SolidColorBrush(Color.FromRgb(255, 99, 71)),   // Красный
+                    _ => new SolidColorBrush(Color.FromRgb(51, 51, 51))             // По умолчанию
+                };
+                StatusComboBox.Background = background;
+            }
+        }
+
+        // Загрузка начальных тегов
+        private void LoadInitialTags()
+        {
+            var initialTags = new[] { "UI", "Backend", "Critical" };
+            foreach (var tag in initialTags)
+            {
+                AddTag(tag);
+            }
+        }
+
+        // Загрузка начальных назначенных
+        private void LoadInitialAssigned()
+        {
+            var initialAssigned = new[] { "Борис Петрович", "Аркадий Паровозов" };
+            foreach (var person in initialAssigned)
+            {
+                AddAssigned(person);
+            }
+        }
+
+        // Добавить новый тэг с уникальным цветом
+        private void AddTag(string tagName)
+        {
+            var tag = new Border
+            {
+                Background = tagColors[tagColorIndex % tagColors.Count], // Используем цвет по циклу
+                CornerRadius = new CornerRadius(10),
+                Padding = new Thickness(10, 5, 10, 5),
+                Margin = new Thickness(5),
+                Child = new TextBlock
+                {
+                    Text = tagName,
+                    Foreground = Brushes.White,
+                    FontSize = 14
+                }
+            };
+            TagsWrapPanel.Children.Add(tag);
+
+            tagColorIndex++; // Переходим к следующему цвету для следующего тега
+        }
+
+        private void AddTag_Click(object sender, RoutedEventArgs e)
+        {
+            AddTag("Новый тег");
+        }
+
+        // Добавить нового назначенного с уникальным цветом
+        private void AddAssigned(string name)
+        {
+            var assigned = new Border
+            {
+                Background = assignedColors[assignedColorIndex % assignedColors.Count], // Используем цвет по циклу
+                CornerRadius = new CornerRadius(10),
+                Padding = new Thickness(10, 5, 10, 5),
+                Margin = new Thickness(5),
+                Child = new TextBlock
+                {
+                    Text = name,
+                    Foreground = Brushes.White,
+                    FontSize = 14
+                }
+            };
+            AssignedWrapPanel.Children.Add(assigned);
+
+            assignedColorIndex++; // Переходим к следующему цвету для следующего назначенного
+        }
+
+        private async void LoadSystemUsers()
+        {
+            var users = await LoadUsersFromDatabaseAsync();
+            systemUsers = users;
+        }
+
+        private void AddAssigned_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем доступных для добавления пользователей
+            var availableUsers = systemUsers.Where(user => !IsUserAssigned(user)).ToList();
+
+            // Проверяем, есть ли доступные пользователи
+            if (!availableUsers.Any())
+            {
+                MessageBox.Show("Все пользователи уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            // Заполняем ComboBox доступными пользователями
+            UserSelectionComboBox.ItemsSource = availableUsers;
+
+            // Показываем Flyout
+            UserSelectionFlyout.Show();
+        }
+
+        private void ConfirmUserSelection_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserSelectionComboBox.SelectedItem is string selectedUser)
+            {
+                AddAssigned(selectedUser);
+
+                // Закрываем Flyout после добавления
+                UserSelectionFlyout.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите пользователя.", "Информация", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        // Метод проверки, добавлен ли пользователь
+        private bool IsUserAssigned(string userName)
+        {
+            foreach (var child in AssignedWrapPanel.Children)
+            {
+                if (child is Border border && border.Child is TextBlock textBlock && textBlock.Text == userName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void EditTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+    }
+}

@@ -62,6 +62,7 @@
 
             <!-- Кнопка создания новой задачи -->
             <ui:Button Content="Создать новую задачу"
+            x:Name="CreateTaskButton"
             Margin="8"
             Height="50"
             FontSize="16"
