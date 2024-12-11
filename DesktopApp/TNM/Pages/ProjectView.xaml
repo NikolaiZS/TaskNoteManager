@@ -12,6 +12,14 @@
         HorizontalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Vertical" Margin="10">
             <ui:SnackbarPresenter x:Name="SnackbarPresenter" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1" Margin="0,10,0,0" />
+            <!-- Кнопка создания нового проекта -->
+            <ui:Button Content="Создать новый проект"
+            Margin="8"
+            Height="50"
+            FontSize="16"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Click="CreateNewProject_Click" />
             <!-- Список проектов -->
             <ItemsControl Name="ProjectList" ItemsSource="{Binding Projects}">
                 <ItemsControl.ItemsPanel>
@@ -61,15 +69,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
-            <!-- Кнопка создания нового проекта -->
-            <ui:Button Content="Создать новый проект"
-            Margin="8"
-            Height="50"
-            FontSize="16"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom"
-            Click="CreateNewProject_Click" />
         </StackPanel>
     </ui:DynamicScrollViewer>
 </Page>
