@@ -8,29 +8,29 @@
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800"
     Title="ProjectView">
-    <ui:DynamicScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True"
+    <Grid>
+        <ui:DynamicScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True"
         HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Orientation="Vertical" Margin="10">
-            <ui:SnackbarPresenter x:Name="SnackbarPresenter" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1" Margin="0,10,0,0" />
-            <!-- Кнопка создания нового проекта -->
-            <ui:Button Content="Создать новый проект"
-            Margin="8"
-            Height="50"
-            FontSize="16"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom"
-            Click="CreateNewProject_Click" />
-            <!-- Список проектов -->
-            <ItemsControl Name="ProjectList" ItemsSource="{Binding Projects}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ui:CardAction
+            <StackPanel Orientation="Vertical" Margin="10">
+                <ui:SnackbarPresenter x:Name="SnackbarPresenter" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1" Margin="0,10,0,0" />
+                <!-- Кнопка создания нового проекта -->
+                <ui:Button Content="Создать новый проект"
+                Margin="8"
+                Height="50"
+                FontSize="16"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom"
+                Click="CreateNewProject_Click" />
+                <!-- Список проектов -->
+                <ItemsControl Name="ProjectList" ItemsSource="{Binding Projects}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ui:CardAction
                             x:Name="CardAction"
                             Margin="8"
                             Padding="8"
@@ -38,37 +38,38 @@
                             CommandParameter="{Binding}"
                             Click="CardAction_Click"
                             IsChevronVisible="False">
-                            <Grid x:Name="CardGrid">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Image
+                                <Grid x:Name="CardGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
                                     x:Name="ProjectIcon"
                                     Width="60"
                                     Margin="24,0,0,0"
                                     Source="{Binding IconPath}" />
-                                <StackPanel
+                                    <StackPanel
                                     x:Name="TextContainer"
                                     Grid.Column="1"
                                     Margin="24"
                                     VerticalAlignment="Center">
-                                    <ui:TextBlock
+                                        <ui:TextBlock
                                         x:Name="ProjectTitle"
                                         FontTypography="BodyStrong"
                                         Text="{Binding projectname}"
                                         TextWrapping="WrapWithOverflow" />
-                                    <ui:TextBlock
+                                        <ui:TextBlock
                                     x:Name="ProjectDescription"
                                     Appearance="Secondary"
                                     Text="{Binding description}"
                                     TextWrapping="WrapWithOverflow" />
-                                </StackPanel>
-                            </Grid>
-                        </ui:CardAction>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-    </ui:DynamicScrollViewer>
+                                    </StackPanel>
+                                </Grid>
+                            </ui:CardAction>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ui:DynamicScrollViewer>
+    </Grid>
 </Page>

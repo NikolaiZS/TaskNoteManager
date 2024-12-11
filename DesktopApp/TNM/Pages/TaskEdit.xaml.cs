@@ -186,17 +186,15 @@ namespace TNM.Pages
                 MessageBox.Show("Все пользователи уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
-            // Заполняем ComboBox доступными пользователями
-            UserSelectionComboBox.ItemsSource = availableUsers;
-
+            // Заполняем ListView доступными пользователями
+            UserSelectionListView.ItemsSource = availableUsers;
             // Показываем Flyout
             UserSelectionFlyout.Show();
         }
 
         private void ConfirmUserSelection_Click(object sender, RoutedEventArgs e)
         {
-            if (UserSelectionComboBox.SelectedItem is string selectedUser)
+            if (UserSelectionListView.SelectedItem is string selectedUser)
             {
                 AddAssigned(selectedUser);
 
