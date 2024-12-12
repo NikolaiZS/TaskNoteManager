@@ -29,6 +29,7 @@
                         <ui:TextBlock
                         FontTypography="BodyStrong"
                         FontSize="18"
+                        FontWeight="Bold"
                         Text="{Binding SelectedProject.Projectname}"
                         Foreground="{DynamicResource TextPrimaryBrush}" />
                         <ui:TextBlock

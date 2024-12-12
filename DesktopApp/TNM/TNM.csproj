@@ -6,11 +6,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\iconAppTasks.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\DarkThemeBackground.png" />
     <None Remove="Resources\LightThemeBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\iconAppTasks.ico" />
   </ItemGroup>
 
   <ItemGroup>

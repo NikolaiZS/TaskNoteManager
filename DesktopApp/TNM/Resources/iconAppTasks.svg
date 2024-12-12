@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="iconAppTasks.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="1.4183568"
+     inkscape:cx="188.95105"
+     inkscape:cy="334.18954"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="664"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none"
+       id="rect234"
+       width="534.9328"
+       height="531.94159"
+       x="-15.454722"
+       y="-7.4780917" />
+    <rect
+       style="fill:none"
+       id="rect236"
+       width="19.443037"
+       height="7.9766312"
+       x="291.14703"
+       y="404.81403" />
+    <rect
+       style="fill:none"
+       id="rect238"
+       width="514.49268"
+       height="514.99121"
+       x="-1.9941578"
+       y="-2.4926972" />
+    <rect
+       style="fill:#ffffff;stroke-width:0.975424"
+       id="rect431"
+       width="512"
+       height="512"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#000000;stroke-width:0.971614"
+       id="rect431-8"
+       width="510"
+       height="510"
+       x="1"
+       y="1" />
+    <circle
+       style="fill:#ffffff"
+       id="path537"
+       cx="256"
+       cy="256"
+       r="224" />
+    <circle
+       style="fill:#000000;stroke-width:0.982143"
+       id="path537-8"
+       cx="256"
+       cy="256"
+       r="220" />
+    <circle
+       style="fill:#ffffff;stroke-width:0.223214"
+       id="path537-8-9"
+       cx="256"
+       cy="256"
+       r="50" />
+    <circle
+       style="fill:#000000;stroke-width:0.212053"
+       id="path537-8-9-1"
+       cx="256"
+       cy="256"
+       r="47.5" />
+    <circle
+       style="fill:#ffffff;stroke-width:0.111607"
+       id="path537-8-9-1-6"
+       cx="477"
+       cy="35"
+       r="25" />
+    <circle
+       style="fill:#ffffff;stroke-width:0.111607"
+       id="path537-8-9-1-6-2"
+       cx="35"
+       cy="35"
+       r="25" />
+    <circle
+       style="fill:#ffffff;stroke-width:0.111607"
+       id="path537-8-9-1-6-2-4"
+       cx="35"
+       cy="477"
+       r="25" />
+    <circle
+       style="fill:#ffffff;stroke-width:0.111607"
+       id="path537-8-9-1-6-2-4-1"
+       cx="477"
+       cy="477"
+       r="25" />
+    <rect
+       style="fill:#ffffff;stroke-width:1.00293"
+       id="rect820"
+       width="30"
+       height="46.499996"
+       x="240.5"
+       y="418" />
+    <rect
+       style="fill:#ffffff;stroke-width:1.00293"
+       id="rect820-8"
+       width="30"
+       height="46.499996"
+       x="240.5"
+       y="48" />
+    <rect
+       style="fill:#ffffff;stroke-width:1.00293"
+       id="rect820-8-5"
+       width="30"
+       height="46.499996"
+       x="240"
+       y="-464.5"
+       transform="rotate(90)" />
+    <rect
+       style="fill:#ffffff;stroke-width:1.00293"
+       id="rect820-8-5-1"
+       width="30"
+       height="46.499996"
+       x="240"
+       y="-94.5"
+       transform="rotate(90)" />
+    <ellipse
+       style="fill:#ffffff;stroke-width:1.00382"
+       id="path1447"
+       cx="360.62445"
+       cy="-132.93607"
+       rx="10.509341"
+       ry="77.068497"
+       transform="rotate(45)" />
+    <ellipse
+       style="fill:#ffffff;stroke-width:0.618689"
+       id="path1447-8"
+       cx="256.83319"
+       cy="-358.99472"
+       rx="6.477273"
+       ry="47.5"
+       transform="scale(1,-1)" />
+  </g>
+</svg>
