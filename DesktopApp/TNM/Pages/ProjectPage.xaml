@@ -29,11 +29,11 @@
                         <ui:TextBlock
                         FontTypography="BodyStrong"
                         FontSize="18"
-                        Text="{Binding SelectedProject.projectname}"
+                        Text="{Binding SelectedProject.Projectname}"
                         Foreground="{DynamicResource TextPrimaryBrush}" />
                         <ui:TextBlock
                         Appearance="Secondary"
-                        Text="{Binding SelectedProject.description}"
+                        Text="{Binding SelectedProject.Description}"
                         TextWrapping="Wrap"
                         Foreground="{DynamicResource TextPrimaryBrush}" />
                     </StackPanel>
@@ -84,12 +84,12 @@
                                         <ui:TextBlock
                                             x:Name="TaskTitle"
                                             FontTypography="BodyStrong"
-                                            Text="{Binding title}"
+                                            Text="{Binding Title}"
                                             TextWrapping="WrapWithOverflow" />
                                         <ui:TextBlock
                                             x:Name="TaskDescription"
                                             Appearance="Secondary"
-                                            Text="{Binding description}"
+                                            Text="{Binding Description}"
                                             TextWrapping="WrapWithOverflow" />
                                     </StackPanel>
                                 </Grid>

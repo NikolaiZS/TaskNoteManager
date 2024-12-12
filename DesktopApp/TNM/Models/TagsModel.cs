@@ -9,7 +9,7 @@ namespace TNM.Models
         [PrimaryKey("tagid")]
         public int TagId { get; set; }
 
-        [Column("taskid")]
-        public int TaskId { get; set; }
+        [Column("tagname")]
+        public string TagName { get; set; }
     }
 }

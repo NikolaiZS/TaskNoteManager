@@ -22,10 +22,8 @@ namespace TNM.Pages
     public partial class CreateTask : Page
     {
         private List<SolidColorBrush> tagColors;
-        private List<SolidColorBrush> assignedColors;
+        private List<string> availableTags;
         private int tagColorIndex = 0;
-        private int assignedColorIndex = 0;
-        private List<string> systemUsers;
 
         public CreateTask()
         {
@@ -33,28 +31,26 @@ namespace TNM.Pages
             InitializeTaskEdit();
         }
 
-        private async Task<List<string>> LoadUsersFromDatabaseAsync()
+        private async Task<List<string>> LoadTagsFromDatabaseAsync()
         {
             try
             {
-                // Выполняем запрос к таблице "users"
                 var client = App.SupabaseService.GetClient();
-                var response = await client.From<Users>().Get();
+                var response = await client.From<Tags>().Get();
 
                 if (response.Models != null)
                 {
-                    // Возвращаем список имен пользователей
                     return response.Models
-                        .Select(user => user.Username)
+                        .Select(tag => tag.TagName)
                         .ToList();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке пользователей: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при загрузке тегов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            return new List<string>(); // Пустой список при ошибке
+            return new List<string>();
         }
 
         // Инициализация начальных данных
@@ -69,17 +65,9 @@ namespace TNM.Pages
                 new SolidColorBrush(Color.FromRgb(255, 99, 71)),  // Красный
             };
 
-            assignedColors = new List<SolidColorBrush>
-            {
-                new SolidColorBrush(Color.FromRgb(255, 99, 71)),   // Красный
-                new SolidColorBrush(Color.FromRgb(0, 122, 204)),  // Синий
-                new SolidColorBrush(Color.FromRgb(255, 165, 0)),  // Оранжевый
-                new SolidColorBrush(Color.FromRgb(50, 205, 50)),  // Зеленый
-            };
             InitializeStatus();
             LoadInitialTags();
-            LoadInitialAssigned();
-            LoadSystemUsers();
+            LoadAvailableTags();
         }
 
         // Инициализация статуса задачи
@@ -111,7 +99,15 @@ namespace TNM.Pages
             }
         }
 
-        // Загрузка начальных тегов
+        private void EditTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private async void LoadAvailableTags()
+        {
+            availableTags = await LoadTagsFromDatabaseAsync();
+        }
+
         private void LoadInitialTags()
         {
             var initialTags = new[] { "UI", "Backend", "Critical" };
@@ -121,22 +117,11 @@ namespace TNM.Pages
             }
         }
 
-        // Загрузка начальных назначенных
-        private void LoadInitialAssigned()
-        {
-            var initialAssigned = new[] { "Борис Петрович", "Аркадий Паровозов" };
-            foreach (var person in initialAssigned)
-            {
-                AddAssigned(person);
-            }
-        }
-
-        // Добавить новый тэг с уникальным цветом
         private void AddTag(string tagName)
         {
             var tag = new Border
             {
-                Background = tagColors[tagColorIndex % tagColors.Count], // Используем цвет по циклу
+                Background = tagColors[tagColorIndex % tagColors.Count],
                 CornerRadius = new CornerRadius(10),
                 Padding = new Thickness(10, 5, 10, 5),
                 Margin = new Thickness(5),
@@ -148,91 +133,46 @@ namespace TNM.Pages
                 }
             };
             TagsWrapPanel.Children.Add(tag);
-
-            tagColorIndex++; // Переходим к следующему цвету для следующего тега
+            tagColorIndex++;
         }
 
         private void AddTag_Click(object sender, RoutedEventArgs e)
         {
-            AddTag("Новый тег");
-        }
-
-        // Добавить нового назначенного с уникальным цветом
-        private void AddAssigned(string name)
-        {
-            var assigned = new Border
+            if (availableTags == null || !availableTags.Any())
             {
-                Background = assignedColors[assignedColorIndex % assignedColors.Count], // Используем цвет по циклу
-                CornerRadius = new CornerRadius(10),
-                Padding = new Thickness(10, 5, 10, 5),
-                Margin = new Thickness(5),
-                Child = new TextBlock
-                {
-                    Text = name,
-                    Foreground = Brushes.White,
-                    FontSize = 14
-                }
-            };
-            AssignedWrapPanel.Children.Add(assigned);
-
-            assignedColorIndex++; // Переходим к следующему цвету для следующего назначенного
-        }
-
-        private async void LoadSystemUsers()
-        {
-            var users = await LoadUsersFromDatabaseAsync();
-            systemUsers = users;
-        }
-
-        private void AddAssigned_Click(object sender, RoutedEventArgs e)
-        {
-            // Получаем доступных для добавления пользователей
-            var availableUsers = systemUsers.Where(user => !IsUserAssigned(user)).ToList();
-
-            // Проверяем, есть ли доступные пользователи
-            if (!availableUsers.Any())
-            {
-                MessageBox.Show("Все пользователи уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Нет доступных тегов для добавления.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            // Заполняем ListView доступными пользователями
-            UserSelectionListView.ItemsSource = availableUsers;
+            var availableTagsToShow = availableTags.Where(tag => !IsTagAdded(tag)).ToList();
 
-            // Показываем Flyout
-            UserSelectionFlyout.Show();
+            if (!availableTagsToShow.Any())
+            {
+                MessageBox.Show("Все теги уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            TagSelectionListView.ItemsSource = availableTagsToShow;
+            TagSelectionFlyout.Show();
         }
 
-        private void ConfirmUserSelection_Click(object sender, RoutedEventArgs e)
+        private void ConfirmTagSelection_Click(object sender, RoutedEventArgs e)
         {
-            if (UserSelectionListView.SelectedItem is string selectedUser)
+            if (TagSelectionListView.SelectedItem is string selectedTag)
             {
-                AddAssigned(selectedUser);
-
-                // Закрываем Flyout после добавления
-                UserSelectionFlyout.Hide();
+                AddTag(selectedTag);
+                TagSelectionFlyout.Hide();
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите пользователя.", "Информация", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Пожалуйста, выберите тег.", "Информация", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        // Метод проверки, добавлен ли пользователь
-        private bool IsUserAssigned(string userName)
+        private bool IsTagAdded(string tagName)
         {
-            foreach (var child in AssignedWrapPanel.Children)
-            {
-                if (child is Border border && border.Child is TextBlock textBlock && textBlock.Text == userName)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void EditTaskButton_Click(object sender, RoutedEventArgs e)
-        {
+            return TagsWrapPanel.Children.OfType<Border>().Any(border =>
+                border.Child is TextBlock textBlock && textBlock.Text == tagName);
         }
     }
 }
