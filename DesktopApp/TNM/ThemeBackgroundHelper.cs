@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media;
 using System.Windows;
 using Wpf.Ui.Appearance;
+using System.Windows.Media.Imaging;
 
 namespace TNM
 {
@@ -31,10 +32,20 @@ namespace TNM
             if (theme == "Dark")
             {
                 resources["TextPrimaryBrush"] = new SolidColorBrush(Colors.White);
+                resources["BackgroundImageBrush"] = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/DarkThemeBackground.png")),
+                    Stretch = Stretch.UniformToFill
+                };
             }
             else
             {
                 resources["TextPrimaryBrush"] = new SolidColorBrush(Colors.Black);
+                resources["BackgroundImageBrush"] = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/LightThemeBackground.png")),
+                    Stretch = Stretch.UniformToFill
+                };
             }
         }
 

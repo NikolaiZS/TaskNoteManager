@@ -9,9 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DarkThemeBackground.png" />
+    <None Remove="Resources\LightThemeBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="Supabase" Version="1.1.1" />
     <PackageReference Include="WPF-UI" Version="3.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\DarkThemeBackground.png" />
+    <Resource Include="Resources\LightThemeBackground.png" />
   </ItemGroup>
 
 </Project>
