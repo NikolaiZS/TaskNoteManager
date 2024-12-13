@@ -52,5 +52,9 @@ namespace TNM.Pages
             ProjectNameTextBox.Clear();
             ProjectDescriptionTextBox.Clear();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

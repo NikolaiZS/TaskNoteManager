@@ -163,5 +163,9 @@ namespace TNM.Pages
             return TagsWrapPanel.Children.OfType<Border>().Any(border =>
                 border.Child is TextBlock textBlock && textBlock.Text == tagName);
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

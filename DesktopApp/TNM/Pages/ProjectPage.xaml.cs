@@ -77,5 +77,13 @@ namespace TNM.Pages
                 }
             }
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void EditProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

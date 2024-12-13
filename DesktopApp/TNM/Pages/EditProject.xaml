@@ -19,7 +19,14 @@
             Margin="20,20,0,0"
             HorizontalAlignment="Left"
             Foreground="{DynamicResource TextPrimaryBrush}" />
-
+        <Button
+        Content="↩"
+        Height="40"
+        Click="BackButton_Click"
+        VerticalAlignment="Top"
+        Width="50"
+        HorizontalAlignment="Right"
+        Margin="0,20,20,0" />
         <!-- Основная форма -->
         <Grid Margin="20,80,20,20">
             <Grid.RowDefinitions>

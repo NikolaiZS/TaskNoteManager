@@ -105,5 +105,9 @@ namespace TNM.Pages
         {
             AddAssigned("Новый человек");
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

@@ -151,5 +151,9 @@ namespace TNM.Pages
         private void SubmitTaskButton_Click(object sender, RoutedEventArgs e)
         {
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

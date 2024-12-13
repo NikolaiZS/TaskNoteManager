@@ -223,5 +223,9 @@ namespace TNM.Pages
         {
             MessageBox.Show("Редактирование задачи!");
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

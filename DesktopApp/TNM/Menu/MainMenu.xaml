@@ -20,12 +20,8 @@
         </Grid.RowDefinitions>
         <!-- Верхняя панель с кнопками -->
         <ui:TitleBar Panel.ZIndex="1" />
-        <Button
-        Content="↩"
-        Height="35"
-        Click="BackButton_Click" Grid.Row="1" VerticalAlignment="Top" Width="49" Panel.ZIndex="2" Background="{DynamicResource BackgroundImageBrush}" Margin="0,8,0,0" />
         <!-- NavigationView с кнопками и областью отображения контента -->
-        <ui:NavigationView x:Name="NavigationMenu" Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Visible">
+        <ui:NavigationView x:Name="NavigationMenu" Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem x:Name="ProjectListDashboardButton" Content="Проекты" Icon="{ui:SymbolIcon Home24}" TargetPageType="{x:Type pages:ProjectView}" />
                 <ui:NavigationViewItem x:Name="CreateProjectDashboardButton" Content="Создать проект (WIP, НЕ ЗАБЫТЬ УБРАТЬ)" Icon="{ui:SymbolIcon Add24}" TargetPageType="{x:Type pages:CreateProject}" Cursor="Hand" />
