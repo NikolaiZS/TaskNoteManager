@@ -81,7 +81,7 @@ namespace TNM.Pages
         // Загрузка начальных тегов
         private void LoadInitialTags()
         {
-            var initialTags = new[] { "UI", "Backend", "Critical" };
+            var initialTags = new[] { "WIP" };
             foreach (var tag in initialTags)
             {
                 AddTag(tag);
@@ -97,7 +97,7 @@ namespace TNM.Pages
                 CornerRadius = new CornerRadius(10),
                 Padding = new Thickness(10, 5, 10, 5),
                 Margin = new Thickness(5),
-                Child = new TextBlock
+                Child = new Wpf.Ui.Controls.TextBlock
                 {
                     Text = tagName,
                     Foreground = Brushes.White,

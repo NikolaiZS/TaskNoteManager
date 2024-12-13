@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TNM.Models;
+using Wpf.Ui.Controls;
 
 namespace TNM.Pages
 {
@@ -25,9 +27,11 @@ namespace TNM.Pages
             InitializeTaskEdit();
             _Selectedtask = Selectedtask;
             _Selectedprojects = SelectedProject;
+            TaskNameTextBlock.Text = _Selectedtask.Title;
+            TaskDescriptionTextBlock.Text = _Selectedtask.Description;
         }
 
-        private async Task<List<string>> LoadUsersFromDatabaseAsync() // я так понимаю это тут не нужно?
+        private async Task<List<string>> LoadUsersFromDatabaseAsync() // я так понимаю это тут не нужно? Правильно понимаешь)
         {
             try
             {
@@ -45,7 +49,12 @@ namespace TNM.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке пользователей: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка: {ex.Message}",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
 
             return new List<string>(); // Пустой список при ошибке
@@ -107,7 +116,7 @@ namespace TNM.Pages
         // Загрузка начальных тегов
         private void LoadInitialTags()
         {
-            var initialTags = new[] { "UI", "Backend", "Critical" };
+            var initialTags = new[] { "WIP" };
             foreach (var tag in initialTags)
             {
                 AddTag(tag);
@@ -123,7 +132,7 @@ namespace TNM.Pages
                 CornerRadius = new CornerRadius(10),
                 Padding = new Thickness(10, 5, 10, 5),
                 Margin = new Thickness(5),
-                Child = new TextBlock
+                Child = new Wpf.Ui.Controls.TextBlock
                 {
                     Text = tagName,
                     Foreground = Brushes.White,
@@ -153,8 +162,33 @@ namespace TNM.Pages
             NavigationService?.Navigate(taskEdit);
         }
 
-        private void SubmitTaskButton_Click(object sender, RoutedEventArgs e)
+        private async void SubmitTaskButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var client = App.SupabaseService.GetClient();
+                var response = await client
+                    .From<Tasks>()
+                    .Where(x => x.TaskId == _Selectedtask.TaskId)
+                    .Set(x => x.isCompleted, true)
+                    .Set(x => x.UpdatedDate, DateTime.Now)
+                    .Update();
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Задача выполнена!",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
+            }
+            catch (Exception ex)
+            {
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка: {ex.Message}",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

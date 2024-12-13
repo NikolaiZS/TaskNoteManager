@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using TNM.Models;
+using Wpf.Ui.Controls;
 
 namespace TNM.Pages
 {
@@ -25,7 +26,12 @@ namespace TNM.Pages
                 projectName.Length > 20 ||
                 projectDescription.Length > 100)
             {
-                MessageBox.Show("Введите название проекта и или описание. Название проекта не должно превышать 20 смиволов, описание не должно превышать 100 символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Введите название проекта и или описание. Название проекта не должно превышать 20 смиволов, описание не должно превышать 100 символов",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
                 return;
             }
 
@@ -42,11 +48,21 @@ namespace TNM.Pages
                     OwnerId = CurrentUser.CurrentUserId
                 };
                 var response = await client.From<Projects>().Insert(project);
-                MessageBox.Show($"{response.ResponseMessage}");
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Проект успешно создан",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка: {ex.Message}",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
             // Очистить поля после создания
             ProjectNameTextBox.Clear();

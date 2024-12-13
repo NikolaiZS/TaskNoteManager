@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TNM.Models;
+using Wpf.Ui.Controls;
 
 namespace TNM.Pages
 {
@@ -70,13 +71,22 @@ namespace TNM.Pages
                 {
                     errorMessages.AppendLine("Описание проекта не должно превышать 100 символов.");
                 }
-
-                MessageBox.Show(errorMessages.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                var snackbarErr = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка при сохранении",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbarErr.Show();
                 return;
             }
 
             // Логика сохранения изменений (РАБОТАТЬ ФЫР)
-            MessageBox.Show($"Изменения для проекта '{projectName}' успешно сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            var snackbar = new Snackbar(SnackbarPresenter)
+            {
+                Title = $"Изменения для проекта {projectName} успешно сохранены!",
+                Timeout = TimeSpan.FromSeconds(3)
+            };
+            snackbar.Show();
 
             // Вернуться на страницу списка проектов (пример)
             NavigationService?.GoBack();
@@ -91,7 +101,7 @@ namespace TNM.Pages
                 CornerRadius = new CornerRadius(10),
                 Padding = new Thickness(10, 5, 10, 5),
                 Margin = new Thickness(5),
-                Child = new TextBlock
+                Child = new Wpf.Ui.Controls.TextBlock
                 {
                     Text = name,
                     Foreground = Brushes.White,

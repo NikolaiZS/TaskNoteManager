@@ -35,5 +35,8 @@ namespace TNM.Models
 
         [Column("updatedate")]
         public DateTime UpdatedDate { get; set; }
+
+        [Column("iscompleted")]
+        public bool isCompleted { get; set; }
     }
 }

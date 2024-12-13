@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using TNM.Models;
+using Wpf.Ui.Controls;
 
 namespace TNM.Pages
 {
@@ -38,7 +39,12 @@ namespace TNM.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке тегов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка при загузке тегов: {ex.Message}",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
 
             return new List<string>();
@@ -101,7 +107,7 @@ namespace TNM.Pages
 
         private void LoadInitialTags()
         {
-            var initialTags = new[] { "UI", "Backend", "Critical" };
+            var initialTags = new[] { "WIP" };
             foreach (var tag in initialTags)
             {
                 AddTag(tag);
@@ -116,7 +122,7 @@ namespace TNM.Pages
                 CornerRadius = new CornerRadius(10),
                 Padding = new Thickness(10, 5, 10, 5),
                 Margin = new Thickness(5),
-                Child = new TextBlock
+                Child = new Wpf.Ui.Controls.TextBlock
                 {
                     Text = tagName,
                     Foreground = Brushes.White,
@@ -131,7 +137,12 @@ namespace TNM.Pages
         {
             if (availableTags == null || !availableTags.Any())
             {
-                MessageBox.Show("Нет доступных тегов для добавления.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Нет доступных тегов для добавления",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
                 return;
             }
 
@@ -139,7 +150,12 @@ namespace TNM.Pages
 
             if (!availableTagsToShow.Any())
             {
-                MessageBox.Show("Все теги уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Все теги уже добавлены",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
                 return;
             }
 
@@ -156,14 +172,19 @@ namespace TNM.Pages
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите тег.", "Информация", MessageBoxButton.OK, MessageBoxImage.Warning);
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Пожалуйста выберите тег",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
         }
 
         private bool IsTagAdded(string tagName)
         {
             return TagsWrapPanel.Children.OfType<Border>().Any(border =>
-                border.Child is TextBlock textBlock && textBlock.Text == tagName);
+                border.Child is Wpf.Ui.Controls.TextBlock textBlock && textBlock.Text == tagName);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

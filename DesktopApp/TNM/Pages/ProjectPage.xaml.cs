@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using TNM.Models;
+using Wpf.Ui.Controls;
 
 namespace TNM.Pages
 {
@@ -44,7 +45,12 @@ namespace TNM.Pages
                 _Tasks.Clear();
                 if (response.Models.Count == 0)
                 {
-                    MessageBox.Show("Задач нет.");
+                    var snackbar = new Snackbar(SnackbarPresenter)
+                    {
+                        Title = $"Задачи не найдены",
+                        Timeout = TimeSpan.FromSeconds(3)
+                    };
+                    snackbar.Show();
                 }
                 else
                 {
@@ -56,7 +62,12 @@ namespace TNM.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading tasks: {ex.Message}");
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка при загрузке задач: {ex.Message}",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
         }
 
@@ -73,7 +84,12 @@ namespace TNM.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Не удалось получить данные задачи.");
+                    var snackbar = new Snackbar(SnackbarPresenter)
+                    {
+                        Title = $"Ошибка",
+                        Timeout = TimeSpan.FromSeconds(3)
+                    };
+                    snackbar.Show();
                 }
             }
         }

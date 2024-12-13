@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using TNM.Models;
+using Wpf.Ui.Controls;
 
 namespace TNM.Pages
 {
@@ -67,7 +68,12 @@ namespace TNM.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Ошибка: {ex.Message}",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
         }
 
@@ -85,7 +91,12 @@ namespace TNM.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Не удалось получить данные проекта.");
+                    var snackbar = new Snackbar(SnackbarPresenter)
+                    {
+                        Title = $"Не удалось получить данные проекта",
+                        Timeout = TimeSpan.FromSeconds(3)
+                    };
+                    snackbar.Show();
                 }
             }
         }
