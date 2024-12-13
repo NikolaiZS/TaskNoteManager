@@ -13,13 +13,14 @@ namespace TNM.Pages
     {
         private List<SolidColorBrush> assignedColors;
         private int assignedColorIndex = 0;
-        private Projects _project;
+        private Projects _Selectedproject;
 
         // Конструктор для передачи данных
-        public EditProject()
+        public EditProject(Projects SelectedProject)
         {
             InitializeComponent();
             InitializeTaskView();
+            _Selectedproject = SelectedProject;
         }
 
         private void InitializeTaskView()
@@ -108,6 +109,8 @@ namespace TNM.Pages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            var projectPage = new ProjectPage(_Selectedproject);
+            NavigationService?.Navigate(projectPage);
         }
     }
 }

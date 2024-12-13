@@ -16,11 +16,15 @@ namespace TNM.Pages
         private List<SolidColorBrush> assignedColors;
         private int tagColorIndex = 0;
         private List<string> systemUsers; // ?
+        private Tasks _Selectedtask;
+        private Projects _Selectedprojects;
 
-        public TaskView(/*Tasks Task*/)
+        public TaskView(Tasks Selectedtask, Projects SelectedProject)
         {
             InitializeComponent();
             InitializeTaskEdit();
+            _Selectedtask = Selectedtask;
+            _Selectedprojects = SelectedProject;
         }
 
         private async Task<List<string>> LoadUsersFromDatabaseAsync() // я так понимаю это тут не нужно?
@@ -145,7 +149,8 @@ namespace TNM.Pages
         // Обработка кнопки "Редактировать"
         private void EditTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Редактирование задачи!");
+            var taskEdit = new TaskEdit(_Selectedtask, _Selectedprojects);
+            NavigationService?.Navigate(taskEdit);
         }
 
         private void SubmitTaskButton_Click(object sender, RoutedEventArgs e)
@@ -154,6 +159,8 @@ namespace TNM.Pages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            var projectPage = new ProjectPage(_Selectedprojects);
+            NavigationService?.Navigate(projectPage);
         }
     }
 }

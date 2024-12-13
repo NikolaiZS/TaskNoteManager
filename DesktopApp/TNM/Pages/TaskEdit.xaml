@@ -72,18 +72,6 @@
             <Button Content="+" Width="35" Height="35" Click="AddTag_Click" Margin="0,5,0,0" />
         </StackPanel>
 
-        <!-- Отвечающие за задачу -->
-        <StackPanel Grid.Row="3" Orientation="Vertical">
-            <ui:TextBlock
-            Text="Отвечает за задачу:"
-            FontSize="18"
-            FontWeight="Bold"
-            Margin="0,0,0,10"
-            Foreground="{DynamicResource TextPrimaryBrush}" />
-            <WrapPanel x:Name="AssignedWrapPanel" />
-            <Button Content="+" Width="35" Height="35" Click="AddAssigned_Click" Margin="0,5,0,0" />
-        </StackPanel>
-
         <!-- Кнопка редактировать -->
         <Button
         x:Name="EditTaskButton"
@@ -95,11 +83,11 @@
         Margin="0,20,0,0"
         FontSize="16"
         Click="EditTaskButton_Click" />
-        <ui:Flyout x:Name="UserSelectionFlyout" Placement="Mouse" Width="300">
+        <ui:Flyout x:Name="TagSelectionFlyout" Placement="Mouse" Width="300">
             <StackPanel>
-                <TextBlock Text="Выберите пользователя:" Margin="10" Foreground="{DynamicResource TextPrimaryBrush}" />
-                <ui:ListView x:Name="UserSelectionListView" Margin="10" MaxHeight="200" SelectionMode="Single" />
-                <Button Content="Добавить" Width="100" Margin="10" HorizontalAlignment="Center" Click="ConfirmUserSelection_Click" />
+                <TextBlock Text="Выберите тег:" Margin="10" Foreground="{DynamicResource TextPrimaryBrush}" />
+                <ui:ListView x:Name="TagSelectionListView" Margin="10" MaxHeight="200" SelectionMode="Single" />
+                <Button Content="Добавить" Width="100" Margin="10" HorizontalAlignment="Center" Click="ConfirmTagSelection_Click" />
             </StackPanel>
         </ui:Flyout>
     </Grid>

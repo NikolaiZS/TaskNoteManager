@@ -15,35 +15,15 @@ namespace TNM.Pages
         private int tagColorIndex = 0;
         private int assignedColorIndex = 0;
         private List<string> systemUsers;
+        private Tasks _SelectedTask;
+        private Projects _Projects;
 
-        public TaskEdit(/*Tasks Task*/)
+        public TaskEdit(Tasks SelectedTask, Projects SelectedProject)
         {
             InitializeComponent();
             InitializeTaskEdit();
-        }
-
-        private async Task<List<string>> LoadUsersFromDatabaseAsync()
-        {
-            try
-            {
-                // Выполняем запрос к таблице "users"
-                var client = App.SupabaseService.GetClient();
-                var response = await client.From<Users>().Get();
-
-                if (response.Models != null)
-                {
-                    // Возвращаем список имен пользователей
-                    return response.Models
-                        .Select(user => user.Username)
-                        .ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при загрузке пользователей: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            return new List<string>(); // Пустой список при ошибке
+            _SelectedTask = SelectedTask;
+            _Projects = SelectedProject;
         }
 
         // Инициализация начальных данных
@@ -67,8 +47,6 @@ namespace TNM.Pages
             };
             InitializeStatus();
             LoadInitialTags();
-            LoadInitialAssigned();
-            LoadSystemUsers();
         }
 
         // Инициализация статуса задачи
@@ -110,16 +88,6 @@ namespace TNM.Pages
             }
         }
 
-        // Загрузка начальных назначенных
-        private void LoadInitialAssigned()
-        {
-            var initialAssigned = new[] { "Борис Петрович", "Аркадий Паровозов" };
-            foreach (var person in initialAssigned)
-            {
-                AddAssigned(person);
-            }
-        }
-
         // Добавить новый тэг с уникальным цветом
         private void AddTag(string tagName)
         {
@@ -146,78 +114,6 @@ namespace TNM.Pages
             AddTag("Новый тег");
         }
 
-        // Добавить нового назначенного с уникальным цветом
-        private void AddAssigned(string name)
-        {
-            var assigned = new Border
-            {
-                Background = assignedColors[assignedColorIndex % assignedColors.Count], // Используем цвет по циклу
-                CornerRadius = new CornerRadius(10),
-                Padding = new Thickness(10, 5, 10, 5),
-                Margin = new Thickness(5),
-                Child = new TextBlock
-                {
-                    Text = name,
-                    Foreground = Brushes.White,
-                    FontSize = 14
-                }
-            };
-            AssignedWrapPanel.Children.Add(assigned);
-
-            assignedColorIndex++; // Переходим к следующему цвету для следующего назначенного
-        }
-
-        private async void LoadSystemUsers()
-        {
-            var users = await LoadUsersFromDatabaseAsync();
-            systemUsers = users;
-        }
-
-        private void AddAssigned_Click(object sender, RoutedEventArgs e)
-        {
-            // Получаем доступных для добавления пользователей
-            var availableUsers = systemUsers.Where(user => !IsUserAssigned(user)).ToList();
-
-            // Проверяем, есть ли доступные пользователи
-            if (!availableUsers.Any())
-            {
-                MessageBox.Show("Все пользователи уже добавлены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            // Заполняем ListView доступными пользователями
-            UserSelectionListView.ItemsSource = availableUsers;
-            // Показываем Flyout
-            UserSelectionFlyout.Show();
-        }
-
-        private void ConfirmUserSelection_Click(object sender, RoutedEventArgs e)
-        {
-            if (UserSelectionListView.SelectedItem is string selectedUser)
-            {
-                AddAssigned(selectedUser);
-
-                // Закрываем Flyout после добавления
-                UserSelectionFlyout.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите пользователя.", "Информация", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        // Метод проверки, добавлен ли пользователь
-        private bool IsUserAssigned(string userName)
-        {
-            foreach (var child in AssignedWrapPanel.Children)
-            {
-                if (child is Border border && border.Child is TextBlock textBlock && textBlock.Text == userName)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         // Обработка кнопки "Редактировать"
         private void EditTaskButton_Click(object sender, RoutedEventArgs e)
         {
@@ -225,6 +121,12 @@ namespace TNM.Pages
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var taskView = new TaskView(_SelectedTask, _Projects);
+            NavigationService?.Navigate(taskView);
+        }
+
+        private void ConfirmTagSelection_Click(object sender, RoutedEventArgs e)
         {
         }
     }

@@ -26,7 +26,7 @@ namespace TNM.Pages
         {
             if (sender is Wpf.Ui.Controls.Button)
             {
-                var createTask = new CreateTask();
+                var createTask = new CreateTask(SelectedProject);
                 NavigationService?.Navigate(createTask);
             }
         }
@@ -64,11 +64,11 @@ namespace TNM.Pages
         {
             if (sender is Wpf.Ui.Controls.CardAction cardAction)
             {
-                var task = cardAction.DataContext as Tasks;
+                var Selectedtask = cardAction.DataContext as Tasks;
 
-                if (task != null)
+                if (Selectedtask != null)
                 {
-                    var viewTaskPage = new TaskEdit();
+                    var viewTaskPage = new TaskView(Selectedtask, SelectedProject);
                     NavigationService?.Navigate(viewTaskPage);
                 }
                 else
@@ -80,10 +80,14 @@ namespace TNM.Pages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            var projectView = new ProjectView();
+            NavigationService?.Navigate(projectView);
         }
 
         private void EditProjectButton_Click(object sender, RoutedEventArgs e)
         {
+            var editProject = new EditProject(SelectedProject);
+            NavigationService?.Navigate(editProject);
         }
     }
 }

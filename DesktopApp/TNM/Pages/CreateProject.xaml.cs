@@ -55,6 +55,8 @@ namespace TNM.Pages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            var projectView = new ProjectView();
+            NavigationService?.Navigate(projectView);
         }
     }
 }

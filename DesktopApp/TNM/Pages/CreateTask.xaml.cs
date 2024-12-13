@@ -13,11 +13,13 @@ namespace TNM.Pages
         private List<SolidColorBrush> tagColors;
         private List<string> availableTags;
         private int tagColorIndex = 0;
+        private Projects _SelectedProject;
 
-        public CreateTask()
+        public CreateTask(Projects SelectedProject)
         {
             InitializeComponent();
             InitializeTaskEdit();
+            _SelectedProject = SelectedProject;
         }
 
         private async Task<List<string>> LoadTagsFromDatabaseAsync()
@@ -166,6 +168,8 @@ namespace TNM.Pages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            var projectPage = new ProjectPage(_SelectedProject);
+            NavigationService?.Navigate(projectPage);
         }
     }
 }
