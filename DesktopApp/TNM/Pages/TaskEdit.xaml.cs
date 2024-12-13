@@ -1,9 +1,7 @@
-﻿using Supabase.Interfaces;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TNM.Models;
-using Wpf.Ui;
 
 namespace TNM.Pages
 {

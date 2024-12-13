@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Supabase.Postgrest.Attributes;
+﻿using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 
 namespace TNM.Models

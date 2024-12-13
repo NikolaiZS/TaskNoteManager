@@ -1,10 +1,5 @@
-﻿using System.Windows.Controls;
-using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls;
-using System.Configuration;
-using System.Windows;
-using Wpf.Ui.Input;
-using System.Windows.Controls.Primitives;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TNM.Pages
 {

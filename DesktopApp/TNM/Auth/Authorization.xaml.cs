@@ -1,9 +1,7 @@
-﻿using System.Configuration;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using TNM.Menu;
 using Wpf.Ui.Controls;
 

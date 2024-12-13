@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using System.Windows;
-using System.Windows.Controls.Primitives;
-using Wpf.Ui.Appearance;
+﻿using System.Windows;
 
 namespace TNM
 {

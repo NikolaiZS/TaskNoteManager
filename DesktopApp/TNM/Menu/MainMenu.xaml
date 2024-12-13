@@ -1,11 +1,11 @@
 ﻿<ui:FluentWindow x:Class="TNM.Menu.MainMenu"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pages="clr-namespace:TNM.Pages"
-    mc:Ignorable="d"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:pages="clr-namespace:TNM.Pages"
+                 mc:Ignorable="d"
     Height="650"
     Width="1000"
     MinHeight="500"
@@ -19,9 +19,13 @@
             <RowDefinition Name="BodyRow" Height="1.5*" />
         </Grid.RowDefinitions>
         <!-- Верхняя панель с кнопками -->
-        <ui:TitleBar />
+        <ui:TitleBar Panel.ZIndex="1" />
+        <Button
+        Content="↩"
+        Height="35"
+        Click="BackButton_Click" Grid.Row="1" VerticalAlignment="Top" Width="49" Panel.ZIndex="2" Background="{DynamicResource BackgroundImageBrush}" Margin="0,8,0,0" />
         <!-- NavigationView с кнопками и областью отображения контента -->
-        <ui:NavigationView x:Name="NavigationMenu" Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Collapsed">
+        <ui:NavigationView x:Name="NavigationMenu" Grid.Row="1" IsPaneOpen="False" IsBackButtonVisible="Visible">
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem x:Name="ProjectListDashboardButton" Content="Проекты" Icon="{ui:SymbolIcon Home24}" TargetPageType="{x:Type pages:ProjectView}" />
                 <ui:NavigationViewItem x:Name="CreateProjectDashboardButton" Content="Создать проект (WIP, НЕ ЗАБЫТЬ УБРАТЬ)" Icon="{ui:SymbolIcon Add24}" TargetPageType="{x:Type pages:CreateProject}" Cursor="Hand" />

@@ -1,10 +1,7 @@
-﻿using Supabase.Postgrest.Interfaces;
-using Supabase.Postgrest;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using TNM.Models;
-using Wpf.Ui;
 
 namespace TNM.Pages
 {

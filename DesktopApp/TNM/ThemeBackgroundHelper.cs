@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
-using System.Windows.Media;
+﻿using System.Configuration;
 using System.Windows;
-using Wpf.Ui.Appearance;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+
+using Wpf.Ui.Appearance;
 
 namespace TNM
 {
