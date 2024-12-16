@@ -289,6 +289,12 @@ namespace TNM.Pages
                         .Filter("taskid", Op.Eq, _SelectedTask.TaskId)
                         .Delete();
                 }
+                var snackbar = new Snackbar(SnackbarPresenter)
+                {
+                    Title = $"Задача успешно отредактирована!",
+                    Timeout = TimeSpan.FromSeconds(3)
+                };
+                snackbar.Show();
             }
             catch (Exception ex)
             {
