@@ -3,8 +3,8 @@ using Supabase.Postgrest.Models;
 
 namespace TNM.Models
 {
-    [Table("taskstatuses")]
-    public class TaskStatuses : BaseModel
+    [Table("statuses")]
+    public class Statuses : BaseModel
     {
         [PrimaryKey("statusid")]
         public int StatusId { get; set; }

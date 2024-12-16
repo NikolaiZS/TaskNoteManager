@@ -32,7 +32,7 @@
         <!-- Название задачи и статус -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,20">
             <ui:TextBlock
-            x:Name="TaskNameTextBlock"
+            x:Name="TaskTitleTextBox"
             Text="Название задачи"
             FontSize="22"
             FontWeight="Bold"
@@ -45,9 +45,6 @@
             Width="150"
             FontSize="16"
             IsEditable="False">
-                <ComboBoxItem Content="В процессе" />
-                <ComboBoxItem Content="Выполнено" />
-                <ComboBoxItem Content="Отменено" />
             </ComboBox>
         </StackPanel>
         <Button
@@ -73,6 +70,7 @@
         <!-- Категории (теги) -->
         <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,0,0,20">
             <ui:TextBlock
+            x:Name="CurrentTagsTextBlock"
             Text="Теги:"
             FontSize="18"
             FontWeight="Bold"

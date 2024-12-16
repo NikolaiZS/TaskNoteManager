@@ -29,7 +29,8 @@
         Margin="0,0,5,0" />
         <!-- Название задачи и статус -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,20">
-            <ui:TextBlock
+            <ui:TextBox
+            x:Name="TaskTitleTextBox"
             Text="Название задачи"
             FontSize="22"
             FontWeight="Bold"
@@ -42,14 +43,11 @@
             Margin="20,0,0,0"
             Width="150"
             FontSize="16">
-                <ComboBoxItem Content="В процессе" />
-                <ComboBoxItem Content="Выполнено" />
-                <ComboBoxItem Content="Отменено" />
             </ComboBox>
         </StackPanel>
 
         <!-- Описание задачи -->
-        <ui:TextBlock
+        <ui:TextBox
         x:Name="TaskDescriptionTextBlock"
         Grid.Row="1"
         Text="Описание задачи: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod sapien a magna gravida, ac aliquet lectus venenatis."
@@ -80,7 +78,7 @@
         Height="50"
         Margin="0,20,0,0"
         FontSize="16"
-        Click="EditTaskButton_Click" />
+        Click="CreateTaskButton_Click" />
         <ui:Flyout x:Name="TagSelectionFlyout" Placement="Mouse" Width="300">
             <StackPanel>
                 <TextBlock Text="Выберите тег:" Margin="10" Foreground="{DynamicResource TextPrimaryBrush}" />

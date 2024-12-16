@@ -21,11 +21,8 @@ namespace TNM.Models
         [Column("createduserid")]
         public int CreateduserId { get; set; }
 
-        [Column("taskstatusid")]
-        public string TaskStatusId { get; set; }
-
-        [Column("priority")]
-        public string Priority { get; set; }
+        [Column("statusid")]
+        public int TaskStatusId { get; set; }
 
         [Column("duedate")]
         public DateTime Duedate { get; set; }
